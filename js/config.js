@@ -8,6 +8,9 @@ window.IELTS_CONFIG = {
 
   // Test content: the copy in content/, served by server.js (audio and pictures under /media).
   contentApi: '/content-api',
+  // 'local': the student's plan is built here from content/programmes.json (js/core/plan-local.js);
+  // 'backend': the ai-tutor backend's plan.
+  planSource: 'local',
 
   // Staff API (server/, started with docker compose; server.js forwards this path to it).
   staffApi: '/staff-api',

@@ -142,7 +142,8 @@
             h('span', { class: 'small muted' }, ui === 'wait' ? t('ieltsToday.control.opens', { date: Hub.fmtDate(c.date) }) : t('ieltsToday.control.text'))))),
       c.status !== 'completed' && h('div', null, ui === 'wait'
         ? h('button', { class: 'btn btn--primary', type: 'button', disabled: true }, t('ieltsToday.control.start'))
-        : h('a', { class: 'btn btn--primary', href: Hub.routeHref(Hub.taskRoute(c)) }, c.status === 'in_progress' ? t('ieltsPlan.continue') : t('ieltsToday.control.start'))),
+        : h('div', { class: 'row' }, h('a', { class: 'btn btn--primary', href: Hub.routeHref(Hub.taskRoute(c)) }, c.status === 'in_progress' ? t('ieltsPlan.continue') : t('ieltsToday.control.start')),
+          c.completionRule === 'self_report' && h('button', { class: 'btn btn--secondary', type: 'button', onclick: async () => { await Api.markPlanTask(c.id, true).catch(() => null); App.render({ keepScroll: true }); } }, t('ieltsPlan.markDone')))),
       h('p', { class: 'small muted' }, t('ieltsToday.control.note')));
   }
 

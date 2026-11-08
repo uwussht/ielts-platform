@@ -136,7 +136,7 @@
         h('a', { class: 'btn btn--primary', href: Hub.routeHref(Hub.taskRoute(selected)) }, selected.status === 'in_progress' ? t('ieltsPlan.continue') : t('ieltsPlan.start')),
         move && (picker
           ? h('input', { class: 'input', type: 'date', style: { width: 'auto' }, min: today, value: selected.date, 'aria-label': t('ieltsPlan.moveTo'), autofocus: true,
-            onchange: async (e) => { picker = false; await Api.put(`/mobile/ielts/plan/tasks/${selected.id}/date`, { date: e.target.value }).catch(() => null); Api.clearCache(); App.render({ keepScroll: true }); },
+            onchange: async (e) => { picker = false; await (Api.movePlanTask ? Api.movePlanTask(selected.id, e.target.value) : Api.put(`/mobile/ielts/plan/tasks/${selected.id}/date`, { date: e.target.value })).catch(() => null); Api.clearCache(); App.render({ keepScroll: true }); },
             onblur: () => { picker = false; paintActions(); } })
           : h('button', { class: 'btn btn--secondary', type: 'button', onclick: () => { picker = true; paintActions(); actions.querySelector('input')?.focus(); } }, icon('calendar'), t('ieltsPlanV.moveTask'))),
         move && h('small', { class: 'muted' }, t('ieltsPlanV.moveNote')));

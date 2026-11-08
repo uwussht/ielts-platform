@@ -1,4 +1,6 @@
 // IELTS platform dev/prod server. No dependencies: `node server.js`.
+// Live mode (`node --watch server.js --live`, or LIVE=1): the open pages reload when a
+// file of the app changes, styles are swapped in place; --watch restarts on server.js edits.
 // Serves the static app, the test content (content/, under /content-api) and its
 // audio and pictures (content/media, under /media). Still proxied to ai-tutor: the
 // same-origin AI routes (/api/*) and its /ielts/*, /practice/* assets.
@@ -21,6 +23,7 @@ const MEDIA_HOST = 'https://files.justtostudy.kz';
 // Until scripts/fetch-media.js has run, a missing file is fetched from here.
 // Set MEDIA_FALLBACK= (empty) to answer 404 instead.
 const MEDIA_FALLBACK = (process.env.MEDIA_FALLBACK ?? MEDIA_HOST).replace(/\/+$/, '');
+const LIVE = process.argv.includes('--live') || process.env.LIVE === '1';
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
@@ -56,6 +59,9 @@ function serveStatic(req, res) {
     // Unknown paths fall back to the SPA entry so deep links work.
     const f = !err && st.isFile() ? file : path.join(ROOT, 'index.html');
     res.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream', 'cache-control': 'no-cache' });
+    if (LIVE && path.extname(f) === '.html') {
+      return fs.readFile(f, 'utf8', (e, html) => res.end(e ? '' : html.replace('</body>', LIVE_CLIENT + '</body>')));
+    }
     fs.createReadStream(f).pipe(res);
   });
 }
@@ -185,7 +191,39 @@ function media(req, res) {
   });
 }
 
+// ---- live reload: /__live is an event stream; a change sends "css" (swap styles) or "reload" ----
+const liveClients = new Set();
+const LIVE_CLIENT = `<script>(function () {
+  var es = new EventSource('/__live');
+  es.onmessage = function (e) {
+    if (e.data === 'css') {
+      document.querySelectorAll('link[rel=stylesheet]').forEach(function (l) {
+        if (l.href.indexOf(location.origin) !== 0) return;
+        var u = new URL(l.href); u.searchParams.set('v', Date.now()); l.href = u.href;
+      });
+    } else if (e.data === 'reload') location.reload();
+  };
+})();</script>`;
+function startLive() {
+  // app files only: not the content bank, the API, git or editor files
+  const SKIP = /^(content|server|node_modules|scripts|\.git|\.claude)([\\/]|$)|(^|[\\/])\.|~$|\.(swp|tmp)$/;
+  let timer = null, kind = null;
+  fs.watch(ROOT, { recursive: true }, (_, name) => {
+    if (!name || SKIP.test(name) || name === 'server.js') return;
+    kind = kind === 'reload' || !name.endsWith('.css') ? 'reload' : 'css';
+    clearTimeout(timer);
+    timer = setTimeout(() => { for (const c of liveClients) c.write(`data: ${kind}\n\n`); kind = null; }, 120);
+  });
+}
+function liveStream(req, res) {
+  res.writeHead(200, { 'content-type': 'text/event-stream', 'cache-control': 'no-cache', connection: 'keep-alive' });
+  res.write('retry: 1000\n\n');
+  liveClients.add(res);
+  req.on('close', () => liveClients.delete(res));
+}
+
 http.createServer((req, res) => {
+  if (LIVE && req.url === '/__live') return liveStream(req, res);
   if (req.url.startsWith('/content-api/')) return content(req, res, req.url.slice('/content-api'.length));
   if (req.url.startsWith('/media/')) return media(req, res);
   if (req.url.startsWith('/staff-api/')) {
@@ -196,4 +234,7 @@ http.createServer((req, res) => {
   const local = PROXY_PREFIXES.some((p) => req.url.startsWith(p)) && !fs.existsSync(path.join(ROOT, decodeURIComponent(req.url.split('?')[0])));
   if (local) return proxy(req, res);
   serveStatic(req, res);
-}).listen(PORT, () => console.log(`IELTS platform → http://localhost:${PORT}  (proxy ${UPSTREAM})`));
+}).listen(PORT, () => {
+  if (LIVE) startLive();
+  console.log(`IELTS platform → http://localhost:${PORT}  (proxy ${UPSTREAM})${LIVE ? '  · live reload on' : ''}`);
+});

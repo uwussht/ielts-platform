@@ -1,0 +1,52 @@
+# The site, the staff API and its database.
+#   cp .env.example .env    (fill it in)
+#   docker compose up -d --build      then open http://localhost:5173
+# Without Docker, `node server.js` still runs the whole student app; only the
+# staff area needs the API.
+name: ielts-platform
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ielts
+      POSTGRES_USER: ielts
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ielts -d ielts"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: ./server
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://ielts:${POSTGRES_PASSWORD}@db:5432/ielts
+      # The backend whose /user/me identifies the caller (the same one js/config.js uses).
+      AI_TUTOR_API: ${AI_TUTOR_API:-https://prod-server.justtostudy.kz}
+      # Phones that become admins on their first visit (comma-separated).
+      ADMIN_PHONES: ${ADMIN_PHONES:-}
+      # Plan ids (as in js/config.js) and the ones a new student starts with.
+      PLANS: ${PLANS:-self,coach,intensive}
+      DEFAULT_PLANS: ${DEFAULT_PLANS:-self}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: .
+    restart: unless-stopped
+    environment:
+      STAFF_API_ORIGIN: http://api:3000
+      AI_TUTOR_ORIGIN: ${AI_TUTOR_ORIGIN:-https://ai-tutor.justtostudy.kz}
+    ports:
+      - "${WEB_PORT:-5173}:5173"
+    depends_on:
+      - api
+
+volumes:
+  db-data:

@@ -570,7 +570,8 @@
               const an = m?.analysis || {};
               return h('div', { class: 'sanswer stack-sm' }, h('b', { lang: 'en' }, it.question),
                 h('div', { class: 'chips' }, h('span', { class: 'badge' }, icon('clock', 'ic12'), ' ', HY(x.durationSec)), x.wpm != null && h('span', { class: 'badge' }, t('ieltsSpeaking.wpm', { n: x.wpm }))),
-                h('p', { class: 'sanswer__text', lang: 'en' }, x.transcript || t('ieltsSpeaking.noSpeech')),
+                x.transcript ? h('p', { class: 'sanswer__text', lang: 'en' }, x.transcript)
+                  : h('p', { class: 'sanswer__text muted' }, t(r.demo || Demo.on ? 'ieltsSpeaking.demoNoTranscript' : 'ieltsSpeaking.noSpeech')),
                 x.skipped && h('p', { class: 'small muted' }, t('ieltsSpeaking.skippedAnswer')),
                 m?.text?.length > 0 && h('details', { class: 'sanswer__model' }, h('summary', null, t('ieltsSpeaking.modelAnswer') + (m.band != null ? ` · band ${m.band}` : '')),
                   m.text.map((y) => h('p', { lang: 'en' }, y)),

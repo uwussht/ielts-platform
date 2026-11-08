@@ -204,7 +204,8 @@
       answers: {}, result: { status: 'done', criteria: { fluencyCoherence: band, lexicalResource: band - 0.5, grammaticalRange: band - 0.5, pronunciation: null },
         feedback: 'Демо-оценка по длительности ответов. Стенограмму и балл по четырём критериям даёт ИИ после входа.',
         strengths: ['Ответы без долгих пауз'], improvements: ['Добавляйте причину и пример к каждому ответу'],
-        items: items.map((x) => ({ itemId: x.itemId, durationSec: x.durationSec, wpm: null, transcript: '', skipped: false })) } };
+        demo: true, // speech isn't recognised in demo mode: no transcript
+        items: items.map((x) => ({ itemId: x.itemId, durationSec: x.durationSec, wpm: null, transcript: null, skipped: false })) } };
     meta.attemptCount = (meta.attemptCount || 0) + 1; meta.lastAttempt = { id, band, status: 'done', finishedAt: attempts[id].attempt.finishedAt };
     persist();
     return { attempt: attempts[id].attempt };

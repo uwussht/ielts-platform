@@ -3,6 +3,7 @@
 // IELTS pricing, error messages. t() checks these first, then the exported dictionary.
 window.I18N_APP = {
   ru: {
+      "ieltsSpeaking.demoNoTranscript": "Запись сохранена. В демо-режиме речь не распознаётся — текст ответа и оценку ИИ вы увидите после входа.",
       "app.nav.programmes": "Программы",
       "prog.title": "Программы подготовки",
       "prog.sub": "Все ступени курса по неделям: что делать, сколько минут и где контрольные.",
@@ -300,6 +301,7 @@ window.I18N_APP = {
       "ielts.term.chart.columns": "Columns: {list}",
   },
   en: {
+      "ieltsSpeaking.demoNoTranscript": "Your recording is saved. Speech isn’t recognised in demo mode — sign in to see the transcript and the AI score.",
       "app.nav.programmes": "Programmes",
       "prog.title": "Study programmes",
       "prog.sub": "Every stage of the course week by week: what to do, how many minutes and where the checks are.",
@@ -524,6 +526,7 @@ window.I18N_APP = {
       "ieltsOb.route.waText": "Hello! I’d like to study for IELTS: {name}",
   },
   kk: {
+      "ieltsSpeaking.demoNoTranscript": "Жазба сақталды. Демо режимде сөз танылмайды — жауап мәтіні мен ЖИ бағасын кіргеннен кейін көресіз.",
       "app.nav.programmes": "Бағдарламалар",
       "prog.title": "Дайындық бағдарламалары",
       "prog.sub": "Курстың барлық сатысы апта бойынша: не істеу керек, қанша минут және бақылау қай жерде.",

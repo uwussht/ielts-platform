@@ -43,6 +43,7 @@
     { tab: 'progress', key: 'app.nav.progress', icon: 'progress' },
     { tab: 'vocab', key: 'app.nav.vocab', icon: 'vocab' },
     { tab: 'info', key: 'app.nav.about', icon: 'about' },
+    { screen: 'programmes', key: 'app.nav.programmes', icon: 'plan' },
   ];
   const TABBAR = [
     { tab: 'today', key: 'app.nav.today', icon: 'today' },

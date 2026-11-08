@@ -167,6 +167,8 @@
     submitDiagnostic: (body) => mut(post('/mobile/ielts/diagnostic', body)),
     lastDiagnostic: () => get('/mobile/ielts/diagnostic/last'),
     diagnosticPath: (body) => post('/mobile/ielts/diagnostic/path', body),
+    // the course programmes (content/programmes.json); plain fetch so demo mode reads the same file
+    programmes: () => cached('programmes', 6e5, () => fetch(CONTENT.base + '/mobile/ielts/programmes').then((r) => { if (!r.ok) throw new Error(t('err.server', { status: r.status })); return r.json(); })),
     mocks: (module) => cached('mocks|' + (module || ''), 3e4, () => cget('/mobile/ielts/mocks' + (module ? `?module=${enc(module)}` : ''))),
     startMock: (id) => mut(post(`/mobile/ielts/mocks/${enc(id)}/sessions`, {})),
     mockSession: (sid) => get(`/mobile/ielts/mocks/sessions/${sid}`),

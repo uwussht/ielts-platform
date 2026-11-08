@@ -26,7 +26,7 @@
 
   // ---------- plan task title AJ ----------
   const term = (group) => (id) => { const k = `ielts.term.${group}.${id}`; return I18n.has(k) ? t(k) : ''; };
-  const AG = term('genre'), AY = term('visual'), AK = term('letter'), AX = term('guide');
+  const AG = term('genre'), AY = term('visual'), AK = term('letter'), AX = term('guide'), AC = term('card'), AP = term('spart'), AS = term('gsub');
   const AZ = (s) => cap(String(s || '').replace(/[_-]+/g, ' ').trim());
   function subLabel(kind, sub) {
     if (!sub) return '';
@@ -35,7 +35,9 @@
       case 'drill': { const k = [sub, sub + 'ning', sub + 'ming'].map((x) => `ieltsReading.drill.${x}.name`).find((k) => I18n.has(k)); return k ? t(k) : AZ(sub); }
       case 't2': case 'pair': return AG(sub) || AZ(sub);
       case 't1': return sub.split('/').map((x) => AY(x) || AK(x) || AZ(x)).join(' · ');
-      case 'guide': { const [a, b] = sub.split('.'); return [AX(a) || AZ(a), b && (AG(b) || AY(b) || AK(b) || AZ(b))].filter(Boolean).join(' · '); }
+      case 'guide': { const [a, b] = sub.split('.'); return [AX(a) || AZ(a), b && (AG(b) || AY(b) || AK(b) || AS(b) || AZ(b))].filter(Boolean).join(' · '); }
+      case 'p2': return AC(sub) || AZ(sub);
+      case 'sg': return AP(sub) || AZ(sub);
       case 'vocab': return /^awl-\d+$/i.test(sub) ? t('ielts.term.awl', { n: sub.split('-')[1] }) : AZ(sub);
       default: return AZ(sub);
     }
@@ -64,7 +66,7 @@
   const L = (view) => ({ tab: 'learn', view });
   const AB = { type: L('types'), demo: L('types'), mini: L('types'), weak: L('types'), drill: L('drills'), pm: L('texts'), full: { tab: 'mocks' }, guide: L('writing-guide'), ideas: L('writing-guide'),
     t1: L('writing-task1'), t2: L('writing-task2'), pair: L('writing-task2'), p1: L('speaking-part1'), run: L('speaking-part1'), p2: L('speaking-part2'), sg: L('speaking-guide'), sh: L('speaking-shadowing'),
-    dc: L('listening-dictation'), spl: L('listening-spelling'), listen: L('listening-tasks'), vocab: { screen: 'vocab' } };
+    dc: L('listening-dictation'), spl: L('listening-spelling'), listen: L('listening-tasks'), fmt: L('listening-tasks'), vocab: { screen: 'vocab' } };
   const AW = {
     reading: (k) => (k === 'test' ? 'reading-full' : k === 'types' ? 'types' : k === 'drill' ? 'drills' : 'texts'),
     listening: (k) => (k === 'dictation' ? 'listening-dictation' : k === 'spelling' ? 'listening-spelling' : 'listening-tasks'),

@@ -8,7 +8,7 @@ COPY assets ./assets
 COPY css ./css
 COPY js ./js
 COPY scripts ./scripts
-COPY content/index.json content/media.txt ./content/
+COPY content/index.json content/media.txt content/programmes.json ./content/
 COPY content/tests ./content/tests
 COPY content/transcripts ./content/transcripts
 COPY content/models ./content/models

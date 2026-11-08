@@ -88,6 +88,9 @@ function content(req, res, rest) {
     if (seg[0] === 'tests' && seg.length === 2) return sendFile(res, 'tests', seg[1]);
     if (seg[0] === 'tests' && seg[2] === 'transcript') return sendFile(res, 'transcripts', seg[1]);
     if (seg[0] === 'tests' && seg[2] === 'model') return sendFile(res, 'models', seg[1]);
+    if (seg[0] === 'programmes' && seg.length === 1) {
+      return fs.readFile(path.join(CONTENT, 'programmes.json'), 'utf8', (err, txt) => (err ? sendJson(res, 404, { message: 'Not found' }) : sendJson(res, 200, txt)));
+    }
     if (seg[0] === 'mocks' && seg.length === 1) {
       const mod = url.searchParams.get('module');
       return sendJson(res, 200, { mocks: index().mocks.filter((m) => !mod || m.module === mod), history: [] });

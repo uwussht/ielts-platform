@@ -1,0 +1,5912 @@
+{
+ "programmes": [
+  {
+   "id": "P55",
+   "name": "IELTS 5.5",
+   "band": "5.5",
+   "weeks": 14,
+   "durations": null,
+   "weekList": [
+    {
+     "n": 1,
+     "month": 1,
+     "themes": [
+      "Формат экзамена и TFNG",
+      "NOT GIVEN: TFNG и YNNG"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "tfng",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "tfng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "tfng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.opinion",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "linking.addition",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "sg",
+        "sub": "part1",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "education",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "1",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ]
+     ]
+    },
+    {
+     "n": 2,
+     "month": 1,
+     "themes": [
+      "Sentence completion и ключевые слова",
+      "Note / table / flow-chart"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "sentence_completion",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "sentence_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "sentence_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.line",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1gt.informal",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "line",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "education",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "note_table_flow_chart",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "note_table_flow_chart",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "note_table_flow_chart",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.discussion",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "sg",
+        "sub": "part2",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "person",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "month": 1,
+     "themes": [
+      "Summary completion",
+      "Short answer"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.bar",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1gt.semi_formal",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "bar",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "place",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "2",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "environment",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "short_answer",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "short_answer",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "short_answer",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "ideas",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "environment",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ]
+     ]
+    },
+    {
+     "n": 4,
+     "month": 1,
+     "themes": [
+      "Повторение",
+      "Multiple choice"
+     ],
+     "milestone": "monthTest",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "mini",
+        "sub": "tfng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "tfng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "linking.contrast",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "linking.cause",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "pie",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "object",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "technology",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "multiple_choice",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "multiple_choice",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "multiple_choice",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.adv_disadv",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "sg",
+        "sub": "part3",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "event",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "technology",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 5,
+     "month": 2,
+     "themes": [
+      "Matching information",
+      "Matching features"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "matching_information",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_information",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_information",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "drill",
+        "sub": "scan",
+        "n": 1,
+        "minutes": 12
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.table",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1gt.formal",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "table",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "3",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "matching_features",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_features",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_features",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "habit",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "health",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 6,
+     "month": 2,
+     "themes": [
+      "Diagram label",
+      "Повторение"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "diagram_label",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "diagram_label",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "diagram_label",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.process",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "process",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "ideas",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "media",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "health",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "linking.result",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "plan",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "work",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 7,
+     "month": 2,
+     "themes": [
+      "Выбор и сопоставление",
+      "Один текст за 20 минут"
+     ],
+     "milestone": "midMock",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "multiple_choice",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_information",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "sentence_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "bar",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "work",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.problem_solution",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "person",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "4",
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    },
+    {
+     "n": 8,
+     "month": 2,
+     "themes": [
+      "Matching headings",
+      "Matching sentence endings"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "drill",
+        "sub": "headings",
+        "n": 1,
+        "minutes": 12
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.map",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "map",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "place",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "society",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.two_part",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "object",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "society",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 9,
+     "month": 3,
+     "themes": [
+      "Сложные типы вместе",
+      "Текст на время и редкие типы"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2Lex.opinion",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "culture",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_features",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "diagram_label",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "short_answer",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.multi",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "multi",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "event",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "5",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "culture",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 10,
+     "month": 3,
+     "themes": [
+      "Повторение",
+      "Первый полный Reading"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "multiple_choice",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "experience",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "travel",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "line",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "travel",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 11,
+     "month": 3,
+     "themes": [
+      "Один текст за 20 минут",
+      "Текст на время и слабые типы"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "drill",
+        "sub": "timing",
+        "n": 1,
+        "minutes": 12
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "habit",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-1",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "pie",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "media",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-2",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 12,
+     "month": 3,
+     "themes": [
+      "Текст и тест на время",
+      "Слабые места"
+     ],
+     "milestone": "monthTest",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-3",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "table",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "plan",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    },
+    {
+     "n": 13,
+     "month": 4,
+     "themes": [
+      "Слабые типы и пара Writing",
+      "Темп: полный Reading"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "person",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 14,
+     "month": 4,
+     "themes": [
+      "Генеральная репетиция",
+      "Итоговый mock программы и разбор"
+     ],
+     "milestone": "finalMock",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P65",
+   "name": "IELTS 6.0–6.5",
+   "band": "6.0–6.5",
+   "weeks": 10,
+   "durations": null,
+   "weekList": [
+    {
+     "n": 1,
+     "month": 1,
+     "themes": [
+      "TFNG, YNNG и NOT GIVEN",
+      "Sentence и note / table completion"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "tfng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "tfng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.opinion",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "sg",
+        "sub": "part1",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "sentence_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "note_table_flow_chart",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "sentence_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.line",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1gt.informal",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "line",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "sg",
+        "sub": "part2",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "person",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "1",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "education",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 2,
+     "month": 1,
+     "themes": [
+      "Summary и short answer",
+      "Multiple choice"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "short_answer",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.discussion",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "place",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "education",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "multiple_choice",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "multiple_choice",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.bar",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1gt.semi_formal",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "bar",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "sg",
+        "sub": "part3",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "event",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "environment",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "month": 1,
+     "themes": [
+      "Matching information и features",
+      "Повторение"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_information",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_features",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_information",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.adv_disadv",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "experience",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "2",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "environment",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "mini",
+        "sub": "tfng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.pie",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1gt.formal",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "pie",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "ideas",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "technology",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 4,
+     "month": 1,
+     "themes": [
+      "Diagram label",
+      "Matching headings"
+     ],
+     "milestone": "monthTest",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "diagram_label",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "diagram_label",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.problem_solution",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "object",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "technology",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "drill",
+        "sub": "headings",
+        "n": 1,
+        "minutes": 12
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.table",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "table",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "habit",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "health",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 5,
+     "month": 2,
+     "themes": [
+      "Matching sentence endings",
+      "Сложные типы вместе"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "demo",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.two_part",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "media",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "3",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "health",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.process",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "process",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-1",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 6,
+     "month": 2,
+     "themes": [
+      "Повторение",
+      "Первый полный Reading"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_features",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2Lex.concession",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "plan",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-2",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "map",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "person",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-3",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 7,
+     "month": 2,
+     "themes": [
+      "Один текст за 20 минут",
+      "Текст на время и слабые типы"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "drill",
+        "sub": "timing",
+        "n": 1,
+        "minutes": 12
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-4",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "multi",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "place",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-5",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 8,
+     "month": 2,
+     "themes": [
+      "Текст и тест на время",
+      "Слабые типы на время"
+     ],
+     "milestone": "monthTest",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-6",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "bar",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "event",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "4",
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    },
+    {
+     "n": 9,
+     "month": 3,
+     "themes": [
+      "Слабые типы и пара Writing",
+      "Темп: полный Reading"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "experience",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 10,
+     "month": 3,
+     "themes": [
+      "Генеральная репетиция",
+      "Итоговый mock программы и разбор"
+     ],
+     "milestone": "finalMock",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "5",
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P75",
+   "name": "IELTS 7.0–7.5",
+   "band": "7.0–7.5",
+   "weeks": 10,
+   "durations": {
+    "self": 10,
+    "2x30": 10,
+    "3x30": 7,
+    "2x60": 10,
+    "3x60": 7
+   },
+   "weekList": [
+    {
+     "n": 1,
+     "month": 1,
+     "themes": [
+      "Headings и YNNG на точность",
+      "Endings, features, summary"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2Lex.hedging",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-1",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_features",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.multi",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1gt.formal",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "multi",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "person",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-2",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ]
+     ]
+    },
+    {
+     "n": 2,
+     "month": 1,
+     "themes": [
+      "Information, diagram, MC",
+      "NOT GIVEN: TFNG и YNNG"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_information",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "multiple_choice",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "diagram_label",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.discussion",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "experience",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "1",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-3",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "tfng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.map",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "map",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "ideas",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "plan",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-4",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "month": 1,
+     "themes": [
+      "Note, summary и short answer",
+      "Первый полный Reading"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "sentence_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "note_table_flow_chart",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "short_answer",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.problem_solution",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-5",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "process",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "object",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "2",
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    },
+    {
+     "n": 4,
+     "month": 1,
+     "themes": [
+      "Headings и текст на время",
+      "Endings, features и YNNG"
+     ],
+     "milestone": "monthTest",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.two_part",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-6",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_features",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "table",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "event",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-7",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ]
+     ]
+    },
+    {
+     "n": 5,
+     "month": 2,
+     "themes": [
+      "Слабые типы на время",
+      "Темп: полный Reading"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "place",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "3",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-8",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "drill",
+        "sub": "timing",
+        "n": 1,
+        "minutes": 12
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "pie",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-9",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 6,
+     "month": 2,
+     "themes": [
+      "Текст и тест на время",
+      "Повторение"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "media",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-10",
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "line",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 7,
+     "month": 2,
+     "themes": [
+      "Два полных Reading",
+      "Слабые типы и пара Writing"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "bar",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "habit",
+        "n": 1,
+        "minutes": 15
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 8,
+     "month": 2,
+     "themes": [
+      "Темп: полный Reading",
+      "Слабые типы и пара Writing"
+     ],
+     "milestone": "monthTest",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "person",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "4",
+        "n": 1,
+        "minutes": 10
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 9,
+     "month": 3,
+     "themes": [
+      "Текст и тест на время",
+      "Слабые типы и пара Writing"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "experience",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 10,
+     "month": 3,
+     "themes": [
+      "Генеральная репетиция",
+      "Итоговый mock программы и разбор"
+     ],
+     "milestone": "finalMock",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "5",
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P85",
+   "name": "IELTS 8.0–8.5",
+   "band": "8.0–8.5",
+   "weeks": 10,
+   "durations": {
+    "self": 10,
+    "2x30": 10,
+    "3x30": 7,
+    "2x60": 10,
+    "3x60": 7
+   },
+   "weekList": [
+    {
+     "n": 1,
+     "month": 1,
+     "themes": [
+      "Ловушки band 8: YNNG и headings",
+      "Endings, features, summary"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "ynng",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2Lex.hedging",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-1",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "multi",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "media",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "plan",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-2",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 2,
+     "month": 1,
+     "themes": [
+      "Information, diagram, MC",
+      "Темп: полный Reading"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_features",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.two_part",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-3",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "map",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "experience",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 2,
+        "minutes": 20
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-4",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "month": 1,
+     "themes": [
+      "Слабые типы на время",
+      "Текст и тест на время"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-5",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "process",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "person",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-6",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 4,
+     "month": 1,
+     "themes": [
+      "Writing 8+: аргумент и точность",
+      "Speaking 8+: рассуждение в Part 3"
+     ],
+     "milestone": "monthTest",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2Lex.concession",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "ideas",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-7",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "table",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "event",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "habit",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-8",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 5,
+     "month": 2,
+     "themes": [
+      "Слабые типы и пара Writing",
+      "Слабые места"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-9",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "object",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "4",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-10",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 6,
+     "month": 2,
+     "themes": [
+      "Текст и тест на время",
+      "Повторение"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "place",
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 7,
+     "month": 2,
+     "themes": [
+      "Два полных Reading",
+      "Слабые типы и пара Writing"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "person",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 8,
+     "month": 2,
+     "themes": [
+      "Темп: полный Reading",
+      "Слабые типы и пара Writing"
+     ],
+     "milestone": "monthTest",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "experience",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 9,
+     "month": 3,
+     "themes": [
+      "Текст и тест на время",
+      "Слабые типы и пара Writing"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "media",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 10,
+     "month": 3,
+     "themes": [
+      "Генеральная репетиция",
+      "Итоговый mock программы и разбор"
+     ],
+     "milestone": "finalMock",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "P90",
+   "name": "IELTS 9.0",
+   "band": "9.0",
+   "weeks": 6,
+   "durations": {
+    "self": 6,
+    "2x30": 6,
+    "3x30": 4,
+    "2x60": 6,
+    "3x60": 4
+   },
+   "weekList": [
+    {
+     "n": 1,
+     "month": 1,
+     "themes": [
+      "Reading без ошибок",
+      "Writing 9: каждое предложение"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2Lex.hedging",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-1",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "media",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 2,
+        "minutes": 20
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-2",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 2,
+     "month": 1,
+     "themes": [
+      "Слабые типы на время",
+      "Темп: полный Reading"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "map",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-3",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "plan",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-4",
+        "n": 1,
+        "minutes": 20
+       }
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "month": 1,
+     "themes": [
+      "Speaking 9: беглость и точность",
+      "Текст и тест на время"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "experience",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "habit",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "vocab",
+        "kind": "vocab",
+        "sub": "awl-5",
+        "n": 1,
+        "minutes": 20
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 4,
+     "month": 1,
+     "themes": [
+      "Два полных Reading",
+      "Слабые типы и пара Writing"
+     ],
+     "milestone": "monthTest",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "object",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 5,
+     "month": 2,
+     "themes": [
+      "Темп: полный Reading",
+      "Слабые типы и пара Writing"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "event",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ],
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 6,
+     "month": 2,
+     "themes": [
+      "Генеральная репетиция",
+      "Итоговый mock программы и разбор"
+     ],
+     "milestone": "finalMock",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "full",
+        "sub": null,
+        "n": 1,
+        "minutes": 60
+       },
+       {
+        "sec": "writing",
+        "kind": "pair",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 75
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "R",
+   "name": "IELTS Exam Ready",
+   "band": null,
+   "weeks": 3,
+   "durations": {
+    "self": 3,
+    "2x30": 3,
+    "3x30": 3,
+    "2x60": 3,
+    "3x60": 3
+   },
+   "weekList": [
+    {
+     "n": 1,
+     "month": 1,
+     "themes": [
+      "Формат и правила ответов"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 3,
+        "minutes": 45
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "listening",
+        "kind": "fmt",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    },
+    {
+     "n": 2,
+     "month": 1,
+     "themes": [
+      "Полный mock и разбор"
+     ],
+     "milestone": "finalMock",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 2,
+        "minutes": 30
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "bar",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "month": 1,
+     "themes": [
+      "Последние дни"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 2,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "SS",
+   "name": "Speaking Sprint",
+   "band": null,
+   "weeks": 4,
+   "durations": {
+    "self": 4,
+    "2x30": 4,
+    "3x30": 4,
+    "2x60": 4,
+    "3x60": 4
+   },
+   "weekList": [
+    {
+     "n": 1,
+     "month": 1,
+     "themes": [
+      "Part 1: прямой ответ и развитие"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "speaking",
+        "kind": "sg",
+        "sub": "part1",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 6,
+        "minutes": 60
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "1",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "2",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "3",
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    },
+    {
+     "n": 2,
+     "month": 1,
+     "themes": [
+      "Part 2: план за минуту и полные 2 минуты"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "speaking",
+        "kind": "sg",
+        "sub": "part2",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "person",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "place",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "object",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "event",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "4",
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "month": 1,
+     "themes": [
+      "Part 3: рассуждение"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "speaking",
+        "kind": "sg",
+        "sub": "part3",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "experience",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "habit",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "media",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "p2",
+        "sub": "plan",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       }
+      ]
+     ]
+    },
+    {
+     "n": 4,
+     "month": 1,
+     "themes": [
+      "Новые темы и тест"
+     ],
+     "milestone": "control.speaking",
+     "sessions": [
+      [
+       {
+        "sec": "speaking",
+        "kind": "run",
+        "sub": null,
+        "n": 2,
+        "minutes": 30
+       },
+       {
+        "sec": "speaking",
+        "kind": "p1",
+        "sub": null,
+        "n": 2,
+        "minutes": 20
+       },
+       {
+        "sec": "speaking",
+        "kind": "sh",
+        "sub": "5",
+        "n": 1,
+        "minutes": 10
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "SLR",
+   "name": "Reading & Listening Sprint",
+   "band": null,
+   "weeks": 4,
+   "durations": {
+    "self": 4,
+    "2x30": 4,
+    "3x30": 4,
+    "2x60": 4,
+    "3x60": 4
+   },
+   "weekList": [
+    {
+     "n": 1,
+     "month": 1,
+     "themes": [
+      "Not Given и перефраз"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "tfng",
+        "n": 2,
+        "minutes": 30
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "ynng",
+        "n": 2,
+        "minutes": 30
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "reading",
+        "kind": "drill",
+        "sub": "ng",
+        "n": 1,
+        "minutes": 12
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ]
+     ]
+    },
+    {
+     "n": 2,
+     "month": 1,
+     "themes": [
+      "Completion и ключевые слова"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "sentence_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "note_table_flow_chart",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "summary_completion",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "short_answer",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "month": 1,
+     "themes": [
+      "Matching и headings на время"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_headings",
+        "n": 2,
+        "minutes": 30
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_information",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_features",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "type",
+        "sub": "matching_sentence_endings",
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 2,
+        "minutes": 40
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ]
+     ]
+    },
+    {
+     "n": 4,
+     "month": 1,
+     "themes": [
+      "Слабые типы и контрольный тест"
+     ],
+     "milestone": "control.reading",
+     "sessions": [
+      [
+       {
+        "sec": "reading",
+        "kind": "weak",
+        "sub": null,
+        "n": 3,
+        "minutes": 45
+       },
+       {
+        "sec": "reading",
+        "kind": "pm",
+        "sub": null,
+        "n": 1,
+        "minutes": 20
+       },
+       {
+        "sec": "listening",
+        "kind": "dc",
+        "sub": null,
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "listening",
+        "kind": "spl",
+        "sub": null,
+        "n": 1,
+        "minutes": 8
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "SW",
+   "name": "Writing Sprint",
+   "band": null,
+   "weeks": 4,
+   "durations": {
+    "self": 4,
+    "2x30": 4,
+    "3x30": 4,
+    "2x60": 4,
+    "3x60": 4
+   },
+   "weekList": [
+    {
+     "n": 1,
+     "month": 1,
+     "themes": [
+      "Task 2: позиция и все части вопроса"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.opinion",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.discussion",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.paraphrase",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "ideas",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "discussion",
+        "n": 1,
+        "minutes": 50
+       }
+      ]
+     ]
+    },
+    {
+     "n": 2,
+     "month": 1,
+     "themes": [
+      "Связность и лексика эссе"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "linking.addition",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "linking.contrast",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2Lex.opinion",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2Lex.hedging",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "ideas",
+        "sub": null,
+        "n": 1,
+        "minutes": 15
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "adv_disadv",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "problem_solution",
+        "n": 1,
+        "minutes": 50
+       }
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "month": 1,
+     "themes": [
+      "Task 1: overview и сравнения"
+     ],
+     "milestone": null,
+     "sessions": [
+      [
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.line",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.bar",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1ac.process",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1gt.formal",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1gt.semi_formal",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t1gt.informal",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "line",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "bar",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "process",
+        "n": 1,
+        "minutes": 25
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "two_part",
+        "n": 1,
+        "minutes": 50
+       }
+      ]
+     ]
+    },
+    {
+     "n": 4,
+     "month": 1,
+     "themes": [
+      "Свои ошибки и тест"
+     ],
+     "milestone": "control.writing",
+     "sessions": [
+      [
+       {
+        "sec": "writing",
+        "kind": "guide",
+        "sub": "t2.functions",
+        "n": 1,
+        "minutes": 10
+       },
+       {
+        "sec": "writing",
+        "kind": "t2",
+        "sub": "opinion",
+        "n": 1,
+        "minutes": 50
+       },
+       {
+        "sec": "writing",
+        "kind": "t1",
+        "sub": "map",
+        "n": 1,
+        "minutes": 25
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -103,3 +103,34 @@ html[data-theme="light"] .auth .eyebrow { color: var(--eyebrow); }
 .staff-delete { color: var(--danger); justify-content: flex-start; padding-inline: 4px; }
 .staff-delete svg { width: 15px; height: 15px; }
 .staff-dlg__actions { justify-content: flex-end; gap: 8px; }
+
+/* ---------- programmes ---------- */
+.prg .chips .chip { text-decoration: none; }
+.prg-sum__name { margin: 0; }
+.prg-sum__facts { flex-wrap: wrap; gap: 8px; }
+.prg-sum__h { margin: var(--s-3) 0 0; font-size: 15px; }
+.prg-modes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.prg-mode { display: grid; gap: 2px; padding: 10px 12px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); }
+.prg-tools { gap: 8px; justify-content: flex-end; }
+.prg-week { padding: 0; overflow: hidden; }
+.prg-week__head { width: 100%; display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: none; border: 0; color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+.prg-week__head:hover { background: var(--surface-2); }
+.prg-week__head[aria-expanded="true"] .acc__chev { transform: rotate(180deg); }
+.prg-week__num { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; font-family: var(--font-display); font-weight: 800; background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--eyebrow); }
+.prg-week__text { display: grid; gap: 2px; min-width: 0; }
+.prg-week__kicker { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.prg-week__title { font-size: 15px; line-height: 1.3; }
+.prg-week__meta { flex: none; }
+.prg-week__body { padding: 4px 18px 16px; border-top: 1px solid var(--border); display: grid; gap: 12px; }
+.prg-session__title { margin: 10px 0 4px; font-size: 13px; color: var(--muted); }
+.prg-tasks { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.prg-task { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+.prg-task__title { flex: 1; min-width: 0; color: var(--ink); text-decoration: none; font-weight: 600; }
+.prg-task__title:hover { color: var(--eyebrow); }
+.prg-task__min { flex: none; }
+@media (max-width: 720px) {
+  .prg-modes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .prg-week__head { flex-wrap: wrap; padding: 12px 14px; }
+  .prg-week__text { flex-basis: calc(100% - 100px); }
+  .prg-week__body { padding: 4px 14px 14px; }
+}

@@ -6,6 +6,9 @@ window.IELTS_CONFIG = {
   // Backend (Bearer token). AI routes (/api/*) go through server.js → AI_TUTOR_ORIGIN.
   apiBase: 'https://prod-server.justtostudy.kz',
 
+  // Test content: the copy in content/, served by server.js (audio and pictures under /media).
+  contentApi: '/content-api',
+
   // Staff API (server/, started with docker compose; server.js forwards this path to it).
   staffApi: '/staff-api',
   staffRoles: ['student', 'teacher', 'curator', 'manager', 'admin'],

@@ -4,3 +4,5 @@ node_modules/
 *.log
 .DS_Store
 Thumbs.db
+# test audio and pictures: downloaded by scripts/fetch-media.js (Docker: the media service)
+content/media/

@@ -43,10 +43,25 @@ services:
     environment:
       STAFF_API_ORIGIN: http://api:3000
       AI_TUTOR_ORIGIN: ${AI_TUTOR_ORIGIN:-https://ai-tutor.justtostudy.kz}
+      # While media is still downloading, missing files come from the original host.
+      # Set MEDIA_FALLBACK= (empty) to serve only what is on disk.
+      MEDIA_FALLBACK: ${MEDIA_FALLBACK-https://files.justtostudy.kz}
+    volumes:
+      - media:/app/content/media
     ports:
       - "${WEB_PORT:-5173}:5173"
     depends_on:
       - api
 
+  # One-off: downloads the test audio and pictures (content/media.txt, about 1.3 GB)
+  # into the media volume, skipping files already there, then exits.
+  media:
+    build: .
+    command: ["node", "scripts/fetch-media.js"]
+    restart: "no"
+    volumes:
+      - media:/app/content/media
+
 volumes:
   db-data:
+  media:

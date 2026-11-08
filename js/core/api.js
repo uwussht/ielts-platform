@@ -3,6 +3,10 @@
 // are ai-tutor's Next.js routes, reached through server.js's same-origin proxy.
 (function () {
   const API_BASE = IELTS_CONFIG.apiBase.replace(/\/+$/, '');
+  // Test content (lists, documents, transcripts, model answers, mocks) comes from the
+  // platform's own copy in content/, served by server.js on the backend's paths.
+  const CONTENT = { base: IELTS_CONFIG.contentApi.replace(/\/+$/, ''), auth: false };
+  const cget = (p) => get(p, CONTENT);
   const TOKEN_KEY = 'ielts_token';
 
   const Auth = {
@@ -126,7 +130,7 @@
     setPassword: (password) => post('/user/set-password', { password }),
     quotaUsage: () => get('/mobile/content-quota/usage?area=IELTS'),
     // vocabulary (IELTS sets + spaced repetition + the user's own words)
-    vocabSets: () => cached('vocabSets', 12e4, () => get('/mobile/ielts/tests?skill=vocab')),
+    vocabSets: () => cached('vocabSets', 12e4, () => cget('/mobile/ielts/tests?skill=vocab')),
     vocabProgress: (scopes) => get('/mobile/vocab-progress?scopes=' + scopes.map(enc).join(',')),
     vocabStates: (scope) => get(`/mobile/vocab-progress/${enc(scope)}`),
     vocabSave: (scope, results) => post(`/mobile/vocab-progress/${enc(scope)}`, { results }),
@@ -148,10 +152,10 @@
     saveProfile: (body) => mut(put('/mobile/ielts/profile', body)),
     setRoute: (route) => mut(put('/mobile/ielts/profile/route', { route })),
     progress: () => get('/mobile/ielts/progress'),
-    tests: (skill = 'reading') => cached('tests|' + skill, 12e4, () => get(`/mobile/ielts/tests?skill=${enc(skill)}`)),
-    test: (id) => get(`/mobile/ielts/tests/${enc(id)}`),
-    transcript: (id) => get(`/mobile/ielts/tests/${enc(id)}/transcript`),
-    writingModel: (id) => get(`/mobile/ielts/tests/${enc(id)}/model`),
+    tests: (skill = 'reading') => cached('tests|' + skill, 12e4, () => cget(`/mobile/ielts/tests?skill=${enc(skill)}`)),
+    test: (id) => cget(`/mobile/ielts/tests/${enc(id)}`),
+    transcript: (id) => cget(`/mobile/ielts/tests/${enc(id)}/transcript`),
+    writingModel: (id) => cget(`/mobile/ielts/tests/${enc(id)}/model`),
     check: (id, body) => post(`/mobile/ielts/tests/${enc(id)}/check`, body),
     submitAttempt: (id, body) => mut(post(`/mobile/ielts/tests/${enc(id)}/attempts`, body)),
     submitWriting: (id, body) => mut(post(`/mobile/ielts/tests/${enc(id)}/writing`, body)),
@@ -163,7 +167,7 @@
     submitDiagnostic: (body) => mut(post('/mobile/ielts/diagnostic', body)),
     lastDiagnostic: () => get('/mobile/ielts/diagnostic/last'),
     diagnosticPath: (body) => post('/mobile/ielts/diagnostic/path', body),
-    mocks: (module) => cached('mocks|' + (module || ''), 3e4, () => get('/mobile/ielts/mocks' + (module ? `?module=${enc(module)}` : ''))),
+    mocks: (module) => cached('mocks|' + (module || ''), 3e4, () => cget('/mobile/ielts/mocks' + (module ? `?module=${enc(module)}` : ''))),
     startMock: (id) => mut(post(`/mobile/ielts/mocks/${enc(id)}/sessions`, {})),
     mockSession: (sid) => get(`/mobile/ielts/mocks/sessions/${sid}`),
     startMockSection: (sid, sec) => post(`/mobile/ielts/mocks/sessions/${sid}/sections/${sec}/start`, {}),

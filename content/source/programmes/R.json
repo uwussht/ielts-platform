@@ -1,0 +1,212 @@
+{
+ "key": "R",
+ "name": "IELTS Exam Ready",
+ "version": "3.0.0",
+ "programmeWeeks": 3,
+ "lessons": 0,
+ "calendarWeeks": {
+  "self_study": 3,
+  "2x30": 3,
+  "2x60": 3,
+  "3x30": 3,
+  "3x60": 3
+ },
+ "sessions": {
+  "2": 0,
+  "3": 0
+ },
+ "parts": [
+  {
+   "name": "IELTS Exam Ready",
+   "to": 3,
+   "from": 1
+  }
+ ],
+ "checkpoints": [
+  {
+   "key": "final",
+   "kind": "final",
+   "week": 2,
+   "month": 1
+  }
+ ],
+ "weeks": [
+  {
+   "n": 1,
+   "month": 1,
+   "stage": "R",
+   "title": {
+    "ru": "Формат и правила ответов",
+    "kk": "Формат және жауап беру ережелері",
+    "en": "Format and answer rules"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "1:0:weak",
+     "week": 1,
+     "sec": "reading",
+     "kind": "weak",
+     "sub": null,
+     "n": 3,
+     "min": 45,
+     "extra": {}
+    },
+    {
+     "id": "1:1:pm",
+     "week": 1,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {}
+    },
+    {
+     "id": "1:2:t2:opinion",
+     "week": 1,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "opinion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "timed": true
+     }
+    },
+    {
+     "id": "1:3:run",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "1:4:fmt",
+     "week": 1,
+     "sec": "listening",
+     "kind": "fmt",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "1:5:spl",
+     "week": 1,
+     "sec": "listening",
+     "kind": "spl",
+     "sub": null,
+     "n": 1,
+     "min": 8,
+     "extra": {}
+    },
+    {
+     "id": "1:6:dc",
+     "week": 1,
+     "sec": "listening",
+     "kind": "dc",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "month": 1,
+   "stage": "R",
+   "title": {
+    "ru": "Полный mock и разбор",
+    "kk": "Толық mock және талдау",
+    "en": "Full mock and review"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "2:0:weak",
+     "week": 2,
+     "sec": "reading",
+     "kind": "weak",
+     "sub": null,
+     "n": 2,
+     "min": 30,
+     "extra": {}
+    },
+    {
+     "id": "2:1:t1:bar",
+     "week": 2,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "bar",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "gt": "formal",
+      "timed": true
+     }
+    },
+    {
+     "id": "2:2:run",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "month": 1,
+   "stage": "R",
+   "title": {
+    "ru": "Последние дни",
+    "kk": "Соңғы күндер",
+    "en": "The last days"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "3:0:pm",
+     "week": 3,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {}
+    },
+    {
+     "id": "3:1:p1",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 2,
+     "min": 20,
+     "extra": {}
+    },
+    {
+     "id": "3:2:spl",
+     "week": 3,
+     "sec": "listening",
+     "kind": "spl",
+     "sub": null,
+     "n": 1,
+     "min": 8,
+     "extra": {}
+    }
+   ]
+  }
+ ]
+}

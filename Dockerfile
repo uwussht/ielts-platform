@@ -12,6 +12,7 @@ COPY content/index.json content/media.txt content/programmes.json ./content/
 COPY content/tests ./content/tests
 COPY content/transcripts ./content/transcripts
 COPY content/models ./content/models
+COPY content/keys ./content/keys
 RUN mkdir -p content/media && chown node:node content/media
 USER node
 EXPOSE 5173

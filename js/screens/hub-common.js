@@ -38,6 +38,7 @@
       case 'guide': { const [a, b] = sub.split('.'); return [AX(a) || AZ(a), b && (AG(b) || AY(b) || AK(b) || AS(b) || AZ(b))].filter(Boolean).join(' · '); }
       case 'p2': return AC(sub) || AZ(sub);
       case 'sg': return AP(sub) || AZ(sub);
+      case 'sh': return String(sub).replace(/^SH-0*/i, '');
       case 'vocab': return /^awl-\d+$/i.test(sub) ? t('ielts.term.awl', { n: sub.split('-')[1] }) : AZ(sub);
       default: return AZ(sub);
     }

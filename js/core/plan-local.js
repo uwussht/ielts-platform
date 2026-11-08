@@ -72,7 +72,7 @@
       p.weekList.forEach((w, i) => {
         const c = Math.min(cal - 1, Math.floor((i * cal) / p.weeks));
         const pw = progBase + w.n;
-        weekTitles[pw] = { ru: w.themes.join(' · ') };
+        weekTitles[pw] = w.title || {};
         weeks[c].pw.push(pw);
         if (w.milestone) weeks[c].milestone = w.milestone;
         w.sessions.flat().forEach((x, j) => weeks[c].list.push({ ...x, key: `${p.id}-w${w.n}-${j + 1}`, programmeWeek: pw, programme: p.id }));

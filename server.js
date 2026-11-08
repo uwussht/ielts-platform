@@ -76,10 +76,72 @@ function sendFile(res, dir, id) {
     sendJson(res, 200, localMedia(txt));
   });
 }
-function content(req, res, rest) {
-  if (req.method !== 'GET') return sendJson(res, 405, { message: 'Read-only' });
+// ---- answer check from content/keys (built by scripts/build-content.py) ----
+// Same result shape as the backend's POST /mobile/ielts/tests/:id/check.
+const KEY_CACHE = new Map();
+function keysOf(id) {
+  if (!KEY_CACHE.has(id)) {
+    let k = null;
+    try { k = JSON.parse(fs.readFileSync(path.join(CONTENT, 'keys', safeId(id) + '.json'), 'utf8')); } catch {}
+    KEY_CACHE.set(id, k);
+  }
+  return KEY_CACHE.get(id);
+}
+const norm = (s) => String(s ?? '').toLowerCase().replace(/[‘’`]/g, "'").replace(/[“”]/g, '"').replace(/[.,!?;:"]/g, '').replace(/\s+/g, ' ').trim();
+// one letter wrong, swapped or missing in a word longer than 3 letters
+function nearMiss(a, b) {
+  if (a.length < 4 || Math.abs(a.length - b.length) > 1) return false;
+  let i = 0, j = 0, edits = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) { i++; j++; continue; }
+    if (++edits > 1) return false;
+    if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; }
+  }
+  return edits + (a.length - i) + (b.length - j) <= 1;
+}
+function words(answer, given) {
+  const want = norm(answer).split(' ').filter(Boolean), got = norm(given).split(' ').filter(Boolean);
+  const units = want.map((w, i) => ({ text: w, given: got[i], status: got[i] === w ? 'ok' : got[i] && nearMiss(w, got[i]) ? 'spelling' : got[i] ? 'wrong' : 'missing' }));
+  const ok = units.filter((u) => u.status === 'ok').length;
+  return { units, extra: got.slice(want.length), accuracy: want.length ? ok / want.length : 0, ok, total: want.length };
+}
+function checkItem(testId, itemId, given) {
+  const keys = keysOf(testId);
+  const k = keys?.[itemId];
+  if (!k) return null;
+  const reveal = { answer: k.answer, acceptable: k.acceptable, explanation: k.explanation, quote: k.quote, textAnchor: k.textAnchor, spoken: k.spoken, line: k.line, audioStart: k.audioStart, audioEnd: k.audioEnd };
+  if (/^(DC|SPL)-/.test(testId) && typeof given === 'string') {
+    const best = [...(k.answer || []), ...(k.acceptable || [])].map((a) => words(a, given)).sort((a, b) => b.accuracy - a.accuracy)[0] || words('', given);
+    return { itemId, correct: best.ok === best.total && !best.extra.length, words: best, reveal: { ...reveal, spoken: k.spoken || k.answer?.[0] } };
+  }
+  const ok = [...(k.answer || []), ...(k.acceptable || [])].map(norm);
+  const list = (Array.isArray(given) ? given : [given]).map(norm).filter(Boolean);
+  let correct = list.some((g) => ok.includes(g));
+  // "choose two": either order counts, so a letter from the other item of the pair is right too
+  if (!correct && k.pairGroup != null) {
+    const other = Object.entries(keys).filter(([id, x]) => id !== itemId && x.pairGroup === k.pairGroup).flatMap(([, x]) => (x.answer || []).map(norm));
+    correct = list.some((g) => other.includes(g));
+  }
+  const spellingOnly = !correct && list.some((g) => ok.some((a) => nearMiss(a, g)));
+  return { itemId, correct, spellingOnly, trap: correct ? null : k.trap || null, reveal };
+}
+function readBody(req) {
+  return new Promise((resolve) => {
+    let s = '';
+    req.on('data', (c) => { s += c; if (s.length > 1e5) req.destroy(); });
+    req.on('end', () => { try { resolve(JSON.parse(s || '{}')); } catch { resolve(null); } });
+  });
+}
+
+async function content(req, res, rest) {
   const url = new URL(rest, 'http://x');
   const seg = url.pathname.replace(/^\/mobile\/ielts\//, '').split('/').map(decodeURIComponent);
+  if (req.method === 'POST' && seg[0] === 'tests' && seg[2] === 'check' && seg.length === 3) {
+    const body = await readBody(req);
+    const r = body && checkItem(seg[1], String(body.itemId || ''), body.given);
+    return r ? sendJson(res, 200, r) : sendJson(res, 404, { message: 'No key' });
+  }
+  if (req.method !== 'GET') return sendJson(res, 405, { message: 'Read-only' });
   try {
     if (seg[0] === 'tests' && seg.length === 1) {
       const list = index().lists[url.searchParams.get('skill') || 'reading'] || [];

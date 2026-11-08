@@ -1,0 +1,375 @@
+{
+ "key": "SW",
+ "name": "Writing Sprint",
+ "version": "3.0.0",
+ "programmeWeeks": 4,
+ "lessons": 0,
+ "calendarWeeks": {
+  "self_study": 4,
+  "2x30": 4,
+  "2x60": 4,
+  "3x30": 4,
+  "3x60": 4
+ },
+ "sessions": {
+  "2": 0,
+  "3": 0
+ },
+ "parts": [
+  {
+   "name": "Writing Sprint",
+   "to": 4,
+   "from": 1
+  }
+ ],
+ "checkpoints": [
+  {
+   "key": "final",
+   "kind": "writing",
+   "week": 4,
+   "month": 1
+  }
+ ],
+ "weeks": [
+  {
+   "n": 1,
+   "month": 1,
+   "stage": "SW",
+   "title": {
+    "ru": "Task 2: позиция и все части вопроса",
+    "kk": "Task 2: позиция және сұрақтың барлық бөлігі",
+    "en": "Task 2: position and every part of the question"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "1:0:guide:t2.opinion",
+     "week": 1,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2.opinion",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "1:1:guide:t2.discussion",
+     "week": 1,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2.discussion",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "1:2:guide:t2.paraphrase",
+     "week": 1,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2.paraphrase",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "1:3:ideas",
+     "week": 1,
+     "sec": "writing",
+     "kind": "ideas",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "1:4:t2:opinion",
+     "week": 1,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "opinion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "timed": false
+     }
+    },
+    {
+     "id": "1:5:t2:discussion",
+     "week": 1,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "discussion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "timed": false
+     }
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "month": 1,
+   "stage": "SW",
+   "title": {
+    "ru": "Связность и лексика эссе",
+    "kk": "Эссенің байланыстылығы мен лексикасы",
+    "en": "Cohesion and vocabulary in the essay"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "2:0:guide:linking.addition",
+     "week": 2,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "linking.addition",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "2:1:guide:linking.contrast",
+     "week": 2,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "linking.contrast",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "2:2:guide:t2Lex.opinion",
+     "week": 2,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2Lex.opinion",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "2:3:guide:t2Lex.hedging",
+     "week": 2,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2Lex.hedging",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "2:4:ideas",
+     "week": 2,
+     "sec": "writing",
+     "kind": "ideas",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "2:5:t2:adv_disadv",
+     "week": 2,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "adv_disadv",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "timed": false
+     }
+    },
+    {
+     "id": "2:6:t2:problem_solution",
+     "week": 2,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "problem_solution",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "timed": false
+     }
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "month": 1,
+   "stage": "SW",
+   "title": {
+    "ru": "Task 1: overview и сравнения",
+    "kk": "Task 1: overview және салыстыру",
+    "en": "Task 1: overview and comparisons"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "3:0:guide:t1ac.line",
+     "week": 3,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1ac.line",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "3:1:guide:t1ac.bar",
+     "week": 3,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1ac.bar",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "3:2:guide:t1ac.process",
+     "week": 3,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1ac.process",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "3:3:guide:t1gt.formal",
+     "week": 3,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1gt.formal",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "3:4:guide:t1gt.semi_formal",
+     "week": 3,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1gt.semi_formal",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "3:5:guide:t1gt.informal",
+     "week": 3,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1gt.informal",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "3:6:t1:line",
+     "week": 3,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "line",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "gt": "formal",
+      "timed": false
+     }
+    },
+    {
+     "id": "3:7:t1:bar",
+     "week": 3,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "bar",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "gt": "semi_formal",
+      "timed": false
+     }
+    },
+    {
+     "id": "3:8:t1:process",
+     "week": 3,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "process",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "gt": "informal",
+      "timed": false
+     }
+    },
+    {
+     "id": "3:9:t2:two_part",
+     "week": 3,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "two_part",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "timed": true
+     }
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "month": 1,
+   "stage": "SW",
+   "title": {
+    "ru": "Свои ошибки и тест",
+    "kk": "Өз қателеріңіз және тест",
+    "en": "Your own mistakes and the test"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "4:0:guide:t2.functions",
+     "week": 4,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2.functions",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "4:1:t2:opinion",
+     "week": 4,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "opinion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "timed": true
+     }
+    },
+    {
+     "id": "4:2:t1:map",
+     "week": 4,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "map",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "gt": "formal",
+      "timed": false
+     }
+    }
+   ]
+  }
+ ]
+}

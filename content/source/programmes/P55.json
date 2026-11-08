@@ -1,0 +1,2769 @@
+{
+ "key": "P55",
+ "name": "IELTS 5.5",
+ "version": "3.0.0",
+ "programmeWeeks": 14,
+ "lessons": 28,
+ "calendarWeeks": {
+  "self_study": 14,
+  "2x30": 14,
+  "2x60": 14,
+  "3x30": 10,
+  "3x60": 10
+ },
+ "sessions": {
+  "2": 42,
+  "3": 22
+ },
+ "parts": [
+  {
+   "name": "IELTS 5.5",
+   "to": 14,
+   "from": 1
+  }
+ ],
+ "checkpoints": [
+  {
+   "key": "m1",
+   "kind": "month",
+   "week": 4,
+   "month": 1
+  },
+  {
+   "key": "mid",
+   "kind": "mid",
+   "week": 7,
+   "month": 2
+  },
+  {
+   "key": "m3",
+   "kind": "month",
+   "week": 12,
+   "month": 3
+  },
+  {
+   "key": "final",
+   "kind": "final",
+   "week": 14,
+   "month": 4
+  }
+ ],
+ "weeks": [
+  {
+   "n": 1,
+   "month": 1,
+   "stage": "P55",
+   "title": {
+    "ru": "Формат экзамена и TFNG · NOT GIVEN: TFNG и YNNG",
+    "kk": "Емтихан форматы және TFNG · NOT GIVEN: TFNG және YNNG",
+    "en": "Exam format and TFNG · NOT GIVEN: TFNG and YNNG"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "1:0:demo:tfng",
+     "week": 1,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "tfng",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "1:1:type:tfng",
+     "week": 1,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "tfng",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "1:2:type:tfng",
+     "week": 1,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "tfng",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "1:3:guide:t2.opinion",
+     "week": 1,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2.opinion",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "1:4:guide:linking.addition",
+     "week": 1,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "linking.addition",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "1:5:sg:p1",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "sg",
+     "sub": "p1",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "1:6:p1",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "1:7:p1",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "1:8:vocab:education",
+     "week": 1,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "education",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 1
+     }
+    },
+    {
+     "id": "1:9:dc",
+     "week": 1,
+     "sec": "listening",
+     "kind": "dc",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "1:10:demo:ynng",
+     "week": 1,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "ynng",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "1:11:type:ynng",
+     "week": 1,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "ynng",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "1:12:type:ynng",
+     "week": 1,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "ynng",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "1:13:t2:opinion",
+     "week": 1,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "opinion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 2,
+      "timed": false
+     }
+    },
+    {
+     "id": "1:14:p1",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "1:15:sh:SH-01",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "sh",
+     "sub": "SH-01",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "1:16:spl",
+     "week": 1,
+     "sec": "listening",
+     "kind": "spl",
+     "sub": null,
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "month": 1,
+   "stage": "P55",
+   "title": {
+    "ru": "Sentence completion и ключевые слова · Note / table / flow-chart",
+    "kk": "Sentence completion және тірек сөздер · Note / table / flow-chart",
+    "en": "Sentence completion and keywords · Note / table / flow-chart"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "2:0:demo:sentence_completion",
+     "week": 2,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "sentence_completion",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "2:1:type:sentence_completion",
+     "week": 2,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "sentence_completion",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "2:2:type:sentence_completion",
+     "week": 2,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "sentence_completion",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "2:3:guide:t1ac.line",
+     "week": 2,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1ac.line",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "2:4:guide:t1gt.informal",
+     "week": 2,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1gt.informal",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "2:5:t1:line",
+     "week": 2,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "line",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 1,
+      "gt": "informal",
+      "timed": false
+     }
+    },
+    {
+     "id": "2:6:p1",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "2:7:p1",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "2:8:vocab:education",
+     "week": 2,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "education",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 2
+     }
+    },
+    {
+     "id": "2:9:demo:note_table_flow_chart",
+     "week": 2,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "note_table_flow_chart",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "2:10:type:note_table_flow_chart",
+     "week": 2,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "note_table_flow_chart",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "2:11:type:note_table_flow_chart",
+     "week": 2,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "note_table_flow_chart",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "2:12:guide:t2.discussion",
+     "week": 2,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2.discussion",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "2:13:t2:discussion",
+     "week": 2,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "discussion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 2,
+      "timed": false
+     }
+    },
+    {
+     "id": "2:14:sg:p2",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "sg",
+     "sub": "p2",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "2:15:p2:person",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "person",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "2:16:dc",
+     "week": 2,
+     "sec": "listening",
+     "kind": "dc",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "month": 1,
+   "stage": "P55",
+   "title": {
+    "ru": "Summary completion · Short answer",
+    "kk": "Summary completion · Short answer",
+    "en": "Summary completion · Short answer"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "3:0:demo:summary_completion",
+     "week": 3,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "summary_completion",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "3:1:type:summary_completion",
+     "week": 3,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "summary_completion",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "3:2:type:summary_completion",
+     "week": 3,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "summary_completion",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "3:3:guide:t1ac.bar",
+     "week": 3,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1ac.bar",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "3:4:guide:t1gt.semi_formal",
+     "week": 3,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1gt.semi_formal",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "3:5:t1:bar",
+     "week": 3,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "bar",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 1,
+      "gt": "semi_formal",
+      "timed": false
+     }
+    },
+    {
+     "id": "3:6:p2:place",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "place",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "3:7:sh:SH-02",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "sh",
+     "sub": "SH-02",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "3:8:vocab:environment",
+     "week": 3,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "environment",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 1
+     }
+    },
+    {
+     "id": "3:9:demo:short_answer",
+     "week": 3,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "short_answer",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "3:10:type:short_answer",
+     "week": 3,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "short_answer",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "3:11:type:short_answer",
+     "week": 3,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "short_answer",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "3:12:ideas",
+     "week": 3,
+     "sec": "writing",
+     "kind": "ideas",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "3:13:t2:opinion",
+     "week": 3,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "opinion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "timed": false
+     }
+    },
+    {
+     "id": "3:14:p1",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "3:15:p1",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "3:16:vocab:environment",
+     "week": 3,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "environment",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "part": 2
+     }
+    },
+    {
+     "id": "3:17:spl",
+     "week": 3,
+     "sec": "listening",
+     "kind": "spl",
+     "sub": null,
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "month": 1,
+   "stage": "P55",
+   "title": {
+    "ru": "Повторение · Multiple choice",
+    "kk": "Қайталау · Multiple choice",
+    "en": "Review · Multiple choice"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "4:0:mini:tfng",
+     "week": 4,
+     "sec": "reading",
+     "kind": "mini",
+     "sub": "tfng",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "4:1:type:tfng",
+     "week": 4,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "tfng",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "4:2:pm",
+     "week": 4,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "4:3:guide:linking.contrast",
+     "week": 4,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "linking.contrast",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "4:4:guide:linking.reason",
+     "week": 4,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "linking.reason",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "4:5:t1:pie",
+     "week": 4,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "pie",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "gt": "informal",
+      "timed": false
+     }
+    },
+    {
+     "id": "4:6:p2:object",
+     "week": 4,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "object",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "4:7:vocab:technology",
+     "week": 4,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "technology",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 1
+     }
+    },
+    {
+     "id": "4:8:dc",
+     "week": 4,
+     "sec": "listening",
+     "kind": "dc",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "4:9:demo:multiple_choice",
+     "week": 4,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "multiple_choice",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "4:10:type:multiple_choice",
+     "week": 4,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "multiple_choice",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "4:11:type:multiple_choice",
+     "week": 4,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "multiple_choice",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "4:12:guide:t2.adv_disadv",
+     "week": 4,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2.adv_disadv",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "4:13:t2:adv_disadv",
+     "week": 4,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "adv_disadv",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 2,
+      "timed": false
+     }
+    },
+    {
+     "id": "4:14:sg:p3",
+     "week": 4,
+     "sec": "speaking",
+     "kind": "sg",
+     "sub": "p3",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "4:15:p2:event",
+     "week": 4,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "event",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "4:16:vocab:technology",
+     "week": 4,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "technology",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "part": 2
+     }
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "month": 2,
+   "stage": "P55",
+   "title": {
+    "ru": "Matching information · Matching features",
+    "kk": "Matching information · Matching features",
+    "en": "Matching information · Matching features"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "5:0:demo:matching_information",
+     "week": 5,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "matching_information",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "5:1:type:matching_information",
+     "week": 5,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_information",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "5:2:type:matching_information",
+     "week": 5,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_information",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "5:3:drill:scanning",
+     "week": 5,
+     "sec": "reading",
+     "kind": "drill",
+     "sub": "scanning",
+     "n": 1,
+     "min": 12,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "5:4:guide:t1ac.table",
+     "week": 5,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1ac.table",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "5:5:guide:t1gt.formal",
+     "week": 5,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1gt.formal",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "5:6:t1:table",
+     "week": 5,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "table",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 1,
+      "gt": "formal",
+      "timed": false
+     }
+    },
+    {
+     "id": "5:7:p1",
+     "week": 5,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "5:8:sh:SH-03",
+     "week": 5,
+     "sec": "speaking",
+     "kind": "sh",
+     "sub": "SH-03",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "5:9:spl",
+     "week": 5,
+     "sec": "listening",
+     "kind": "spl",
+     "sub": null,
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "5:10:demo:matching_features",
+     "week": 5,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "matching_features",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "5:11:type:matching_features",
+     "week": 5,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_features",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "5:12:type:matching_features",
+     "week": 5,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_features",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "5:13:t2:discussion",
+     "week": 5,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "discussion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 2,
+      "timed": false
+     }
+    },
+    {
+     "id": "5:14:p2:habit",
+     "week": 5,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "habit",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "5:15:p1",
+     "week": 5,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "5:16:vocab:health",
+     "week": 5,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "health",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "part": 1
+     }
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "month": 2,
+   "stage": "P55",
+   "title": {
+    "ru": "Diagram label · Повторение",
+    "kk": "Diagram label · Қайталау",
+    "en": "Diagram label · Review"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "6:0:demo:diagram_label",
+     "week": 6,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "diagram_label",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "6:1:type:diagram_label",
+     "week": 6,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "diagram_label",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "6:2:type:diagram_label",
+     "week": 6,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "diagram_label",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "6:3:guide:t1ac.process",
+     "week": 6,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1ac.process",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "6:4:t1:process",
+     "week": 6,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "process",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 1,
+      "gt": "formal",
+      "timed": false
+     }
+    },
+    {
+     "id": "6:5:ideas",
+     "week": 6,
+     "sec": "writing",
+     "kind": "ideas",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "6:6:p2:media",
+     "week": 6,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "media",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "6:7:vocab:health",
+     "week": 6,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "health",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 2
+     }
+    },
+    {
+     "id": "6:8:dc",
+     "week": 6,
+     "sec": "listening",
+     "kind": "dc",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "6:9:type:ynng",
+     "week": 6,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "ynng",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "6:10:pm",
+     "week": 6,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "6:11:guide:linking.result",
+     "week": 6,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "linking.result",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "6:12:t2:opinion",
+     "week": 6,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "opinion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 2,
+      "timed": false
+     }
+    },
+    {
+     "id": "6:13:p2:plan",
+     "week": 6,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "plan",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "6:14:p1",
+     "week": 6,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "6:15:vocab:careers",
+     "week": 6,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "careers",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "part": 1
+     }
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "month": 2,
+   "stage": "P55",
+   "title": {
+    "ru": "Выбор и сопоставление · Один текст за 20 минут",
+    "kk": "Таңдау және сәйкестендіру · Бір мәтін 20 минутта",
+    "en": "Choice and matching · One passage in 20 minutes"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "7:0:type:multiple_choice",
+     "week": 7,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "multiple_choice",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "7:1:type:matching_information",
+     "week": 7,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_information",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "7:2:type:sentence_completion",
+     "week": 7,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "sentence_completion",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "7:3:t1:bar",
+     "week": 7,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "bar",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "gt": "informal",
+      "timed": false
+     }
+    },
+    {
+     "id": "7:4:run",
+     "week": 7,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "7:5:vocab:careers",
+     "week": 7,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "careers",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 2
+     }
+    },
+    {
+     "id": "7:6:spl",
+     "week": 7,
+     "sec": "listening",
+     "kind": "spl",
+     "sub": null,
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "7:7:pm",
+     "week": 7,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "7:8:pm",
+     "week": 7,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "7:9:guide:t2.problem_solution",
+     "week": 7,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2.problem_solution",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "7:10:t2:problem_solution",
+     "week": 7,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "problem_solution",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 2,
+      "timed": false
+     }
+    },
+    {
+     "id": "7:11:p2:person",
+     "week": 7,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "person",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "7:12:sh:SH-04",
+     "week": 7,
+     "sec": "speaking",
+     "kind": "sh",
+     "sub": "SH-04",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "month": 2,
+   "stage": "P55",
+   "title": {
+    "ru": "Matching headings · Matching sentence endings",
+    "kk": "Matching headings · Matching sentence endings",
+    "en": "Matching headings · Matching sentence endings"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "8:0:demo:matching_headings",
+     "week": 8,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "matching_headings",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "8:1:type:matching_headings",
+     "week": 8,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_headings",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "8:2:type:matching_headings",
+     "week": 8,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_headings",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "8:3:drill:headings",
+     "week": 8,
+     "sec": "reading",
+     "kind": "drill",
+     "sub": "headings",
+     "n": 1,
+     "min": 12,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "8:4:guide:t1ac.map",
+     "week": 8,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1ac.map",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "8:5:t1:map",
+     "week": 8,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "map",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 1,
+      "gt": "semi_formal",
+      "timed": false
+     }
+    },
+    {
+     "id": "8:6:p2:place",
+     "week": 8,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "place",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "8:7:vocab:society",
+     "week": 8,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "society",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 1
+     }
+    },
+    {
+     "id": "8:8:dc",
+     "week": 8,
+     "sec": "listening",
+     "kind": "dc",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "8:9:demo:matching_sentence_endings",
+     "week": 8,
+     "sec": "reading",
+     "kind": "demo",
+     "sub": "matching_sentence_endings",
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "8:10:type:matching_sentence_endings",
+     "week": 8,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_sentence_endings",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "8:11:type:matching_sentence_endings",
+     "week": 8,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_sentence_endings",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "8:12:guide:t2.two_part",
+     "week": 8,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2.two_part",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "8:13:t2:two_part",
+     "week": 8,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "two_part",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 2,
+      "timed": false
+     }
+    },
+    {
+     "id": "8:14:p2:object",
+     "week": 8,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "object",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "8:15:p1",
+     "week": 8,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "8:16:vocab:society",
+     "week": 8,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "society",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "part": 2
+     }
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "month": 3,
+   "stage": "P55",
+   "title": {
+    "ru": "Сложные типы вместе · Текст на время и редкие типы",
+    "kk": "Күрделі түрлер бірге · Уақытқа мәтін және сирек түрлер",
+    "en": "Hard types together · A timed passage and rarer types"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "9:0:type:matching_headings",
+     "week": 9,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_headings",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "9:1:type:matching_sentence_endings",
+     "week": 9,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_sentence_endings",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "9:2:pm",
+     "week": 9,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "9:3:guide:t2Lex.opinion",
+     "week": 9,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t2Lex.opinion",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "9:4:t2:adv_disadv",
+     "week": 9,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "adv_disadv",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "timed": false
+     }
+    },
+    {
+     "id": "9:5:run",
+     "week": 9,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "9:6:vocab:culture",
+     "week": 9,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "culture",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 1
+     }
+    },
+    {
+     "id": "9:7:spl",
+     "week": 9,
+     "sec": "listening",
+     "kind": "spl",
+     "sub": null,
+     "n": 1,
+     "min": 8,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "9:8:pm",
+     "week": 9,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "9:9:type:matching_features",
+     "week": 9,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "matching_features",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "9:10:type:diagram_label",
+     "week": 9,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "diagram_label",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "9:11:type:short_answer",
+     "week": 9,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "short_answer",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "9:12:guide:t1ac.multi",
+     "week": 9,
+     "sec": "writing",
+     "kind": "guide",
+     "sub": "t1ac.multi",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "9:13:t1:multi",
+     "week": 9,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "multi",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 2,
+      "gt": "formal",
+      "timed": false
+     }
+    },
+    {
+     "id": "9:14:p2:event",
+     "week": 9,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "event",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "9:15:sh:SH-05",
+     "week": 9,
+     "sec": "speaking",
+     "kind": "sh",
+     "sub": "SH-05",
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "9:16:vocab:culture",
+     "week": 9,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "culture",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "part": 2
+     }
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "month": 3,
+   "stage": "P55",
+   "title": {
+    "ru": "Повторение · Первый полный Reading",
+    "kk": "Қайталау · Алғашқы толық Reading тест",
+    "en": "Review · First full Reading test"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "10:0:type:ynng",
+     "week": 10,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "ynng",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "10:1:type:multiple_choice",
+     "week": 10,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "multiple_choice",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "10:2:type:summary_completion",
+     "week": 10,
+     "sec": "reading",
+     "kind": "type",
+     "sub": "summary_completion",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "10:3:t2:opinion",
+     "week": 10,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "opinion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 1,
+      "timed": true
+     }
+    },
+    {
+     "id": "10:4:p2:experience",
+     "week": 10,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "experience",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "10:5:vocab:travel",
+     "week": 10,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "travel",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 1
+     }
+    },
+    {
+     "id": "10:6:dc",
+     "week": 10,
+     "sec": "listening",
+     "kind": "dc",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "10:7:full",
+     "week": 10,
+     "sec": "reading",
+     "kind": "full",
+     "sub": null,
+     "n": 1,
+     "min": 60,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "10:8:t1:line",
+     "week": 10,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "line",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "gt": "formal",
+      "timed": false
+     }
+    },
+    {
+     "id": "10:9:run",
+     "week": 10,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "10:10:vocab:travel",
+     "week": 10,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "travel",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "part": 2
+     }
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "month": 3,
+   "stage": "P55",
+   "title": {
+    "ru": "Один текст за 20 минут · Текст на время и слабые типы",
+    "kk": "Бір мәтін 20 минутта · Уақытқа мәтін және әлсіз түрлер",
+    "en": "One passage in 20 minutes · A timed passage and weak types"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "11:0:pm",
+     "week": 11,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "11:1:pm",
+     "week": 11,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "11:2:drill:timing",
+     "week": 11,
+     "sec": "reading",
+     "kind": "drill",
+     "sub": "timing",
+     "n": 1,
+     "min": 12,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "11:3:t2:discussion",
+     "week": 11,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "discussion",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 1,
+      "timed": true
+     }
+    },
+    {
+     "id": "11:4:p2:habit",
+     "week": 11,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "habit",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "11:5:p1",
+     "week": 11,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "11:6:vocab:awl-1",
+     "week": 11,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "awl-1",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 0
+     }
+    },
+    {
+     "id": "11:7:pm",
+     "week": 11,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "11:8:weak",
+     "week": 11,
+     "sec": "reading",
+     "kind": "weak",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "11:9:weak",
+     "week": 11,
+     "sec": "reading",
+     "kind": "weak",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "11:10:t1:pie",
+     "week": 11,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "pie",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 2,
+      "gt": "formal",
+      "timed": true
+     }
+    },
+    {
+     "id": "11:11:t2:problem_solution",
+     "week": 11,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "problem_solution",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "timed": true
+     }
+    },
+    {
+     "id": "11:12:p2:media",
+     "week": 11,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "media",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "11:13:vocab:awl-2",
+     "week": 11,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "awl-2",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "part": 0
+     }
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "month": 3,
+   "stage": "P55",
+   "title": {
+    "ru": "Текст и тест на время · Слабые места",
+    "kk": "Мәтін мен тест уақытқа · Әлсіз тұстар",
+    "en": "A passage and a test on time · Weak spots"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "12:0:full",
+     "week": 12,
+     "sec": "reading",
+     "kind": "full",
+     "sub": null,
+     "n": 1,
+     "min": 60,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "12:1:pm",
+     "week": 12,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "12:2:t2:two_part",
+     "week": 12,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "two_part",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "timed": true
+     }
+    },
+    {
+     "id": "12:3:run",
+     "week": 12,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "12:4:vocab:awl-3",
+     "week": 12,
+     "sec": "vocab",
+     "kind": "vocab",
+     "sub": "awl-3",
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1,
+      "plus": true,
+      "part": 0
+     }
+    },
+    {
+     "id": "12:5:weak",
+     "week": 12,
+     "sec": "reading",
+     "kind": "weak",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "12:6:pm",
+     "week": 12,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "12:7:weak",
+     "week": 12,
+     "sec": "reading",
+     "kind": "weak",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "12:8:t1:table",
+     "week": 12,
+     "sec": "writing",
+     "kind": "t1",
+     "sub": "table",
+     "n": 1,
+     "min": 25,
+     "extra": {
+      "lesson": 2,
+      "gt": "semi_formal",
+      "timed": true
+     }
+    },
+    {
+     "id": "12:9:t2:adv_disadv",
+     "week": 12,
+     "sec": "writing",
+     "kind": "t2",
+     "sub": "adv_disadv",
+     "n": 1,
+     "min": 50,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "timed": true
+     }
+    },
+    {
+     "id": "12:10:p2:plan",
+     "week": 12,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "plan",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "12:11:p1",
+     "week": 12,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 1,
+     "min": 10,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    }
+   ]
+  },
+  {
+   "n": 13,
+   "month": 4,
+   "stage": "P55",
+   "title": {
+    "ru": "Слабые типы и пара Writing · Темп: полный Reading",
+    "kk": "Әлсіз түрлер және Writing жұбы · Қарқын: толық Reading тест",
+    "en": "Weak types and a Writing pair · Pace: full Reading test"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "13:0:pm",
+     "week": 13,
+     "sec": "reading",
+     "kind": "pm",
+     "sub": null,
+     "n": 1,
+     "min": 20,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "13:1:full",
+     "week": 13,
+     "sec": "reading",
+     "kind": "full",
+     "sub": null,
+     "n": 1,
+     "min": 60,
+     "extra": {
+      "lesson": 1,
+      "plus": true
+     }
+    },
+    {
+     "id": "13:2:pair:opinion",
+     "week": 13,
+     "sec": "writing",
+     "kind": "pair",
+     "sub": "opinion",
+     "n": 1,
+     "min": 75,
+     "extra": {
+      "lesson": 1,
+      "ac": "bar",
+      "gt": "formal"
+     }
+    },
+    {
+     "id": "13:3:run",
+     "week": 13,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "13:4:full",
+     "week": 13,
+     "sec": "reading",
+     "kind": "full",
+     "sub": null,
+     "n": 1,
+     "min": 60,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "13:5:weak",
+     "week": 13,
+     "sec": "reading",
+     "kind": "weak",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    },
+    {
+     "id": "13:6:pair:discussion",
+     "week": 13,
+     "sec": "writing",
+     "kind": "pair",
+     "sub": "discussion",
+     "n": 1,
+     "min": 75,
+     "extra": {
+      "lesson": 2,
+      "plus": true,
+      "ac": "line",
+      "gt": "informal"
+     }
+    },
+    {
+     "id": "13:7:p2:person",
+     "week": 13,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "person",
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2
+     }
+    },
+    {
+     "id": "13:8:run",
+     "week": 13,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 2,
+      "plus": true
+     }
+    }
+   ]
+  },
+  {
+   "n": 14,
+   "month": 4,
+   "stage": "P55",
+   "title": {
+    "ru": "Генеральная репетиция · Итоговый mock программы и разбор",
+    "kk": "Бас дайындық · Бағдарламаның қорытынды mock-ы және талдау",
+    "en": "Dress rehearsal · Programme final mock and review"
+   },
+   "lessons": 2,
+   "sessions": 3,
+   "items": [
+    {
+     "id": "14:0:full",
+     "week": 14,
+     "sec": "reading",
+     "kind": "full",
+     "sub": null,
+     "n": 1,
+     "min": 60,
+     "extra": {
+      "lesson": 1
+     }
+    },
+    {
+     "id": "14:1:pair:problem_solution",
+     "week": 14,
+     "sec": "writing",
+     "kind": "pair",
+     "sub": "problem_solution",
+     "n": 1,
+     "min": 75,
+     "extra": {
+      "lesson": 1,
+      "ac": "process",
+      "gt": "semi_formal"
+     }
+    },
+    {
+     "id": "14:2:run",
+     "week": 14,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {
+      "lesson": 1
+     }
+    }
+   ]
+  }
+ ]
+}

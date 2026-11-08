@@ -156,7 +156,9 @@
     test: (id) => cget(`/mobile/ielts/tests/${enc(id)}`),
     transcript: (id) => cget(`/mobile/ielts/tests/${enc(id)}/transcript`),
     writingModel: (id) => cget(`/mobile/ielts/tests/${enc(id)}/model`),
-    check: (id, body) => post(`/mobile/ielts/tests/${enc(id)}/check`, body),
+    // answers are checked on the platform (content/keys); tests without a key fall back to the backend
+    check: (id, body) => Api.request('POST', `/mobile/ielts/tests/${enc(id)}/check`, body, CONTENT)
+      .catch((e) => (e.status === 404 ? post(`/mobile/ielts/tests/${enc(id)}/check`, body) : Promise.reject(e))),
     submitAttempt: (id, body) => mut(post(`/mobile/ielts/tests/${enc(id)}/attempts`, body)),
     submitWriting: (id, body) => mut(post(`/mobile/ielts/tests/${enc(id)}/writing`, body)),
     attempt: (id) => get(`/mobile/ielts/attempts/${enc(id)}`),

@@ -1,0 +1,291 @@
+{
+ "key": "SS",
+ "name": "Speaking Sprint",
+ "version": "3.0.0",
+ "programmeWeeks": 4,
+ "lessons": 0,
+ "calendarWeeks": {
+  "self_study": 4,
+  "2x30": 4,
+  "2x60": 4,
+  "3x30": 4,
+  "3x60": 4
+ },
+ "sessions": {
+  "2": 0,
+  "3": 0
+ },
+ "parts": [
+  {
+   "name": "Speaking Sprint",
+   "to": 4,
+   "from": 1
+  }
+ ],
+ "checkpoints": [
+  {
+   "key": "final",
+   "kind": "speaking",
+   "week": 4,
+   "month": 1
+  }
+ ],
+ "weeks": [
+  {
+   "n": 1,
+   "month": 1,
+   "stage": "SS",
+   "title": {
+    "ru": "Part 1: прямой ответ и развитие",
+    "kk": "Part 1: тікелей жауап және оны дамыту",
+    "en": "Part 1: a direct answer and extension"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "1:0:sg:p1",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "sg",
+     "sub": "p1",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "1:1:p1",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 6,
+     "min": 60,
+     "extra": {}
+    },
+    {
+     "id": "1:2:sh:SH-01",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "sh",
+     "sub": "SH-01",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "1:3:sh:SH-02",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "sh",
+     "sub": "SH-02",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "1:4:sh:SH-03",
+     "week": 1,
+     "sec": "speaking",
+     "kind": "sh",
+     "sub": "SH-03",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "month": 1,
+   "stage": "SS",
+   "title": {
+    "ru": "Part 2: план за минуту и полные 2 минуты",
+    "kk": "Part 2: бір минуттық жоспар және толық 2 минут",
+    "en": "Part 2: a one-minute plan and the full 2 minutes"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "2:0:sg:p2",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "sg",
+     "sub": "p2",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "2:1:p2:person",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "person",
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "2:2:p2:place",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "place",
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "2:3:p2:object",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "object",
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "2:4:p2:event",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "event",
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "2:5:sh:SH-04",
+     "week": 2,
+     "sec": "speaking",
+     "kind": "sh",
+     "sub": "SH-04",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "month": 1,
+   "stage": "SS",
+   "title": {
+    "ru": "Part 3: рассуждение",
+    "kk": "Part 3: пайымдау",
+    "en": "Part 3: reasoning"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "3:0:sg:p3",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "sg",
+     "sub": "p3",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    },
+    {
+     "id": "3:1:p2:experience",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "experience",
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "3:2:p2:habit",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "habit",
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "3:3:p2:media",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "media",
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "3:4:p2:plan",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "p2",
+     "sub": "plan",
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    },
+    {
+     "id": "3:5:run",
+     "week": 3,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 1,
+     "min": 15,
+     "extra": {}
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "month": 1,
+   "stage": "SS",
+   "title": {
+    "ru": "Новые темы и тест",
+    "kk": "Жаңа тақырыптар және тест",
+    "en": "New topics and the test"
+   },
+   "lessons": 0,
+   "sessions": 0,
+   "items": [
+    {
+     "id": "4:0:run",
+     "week": 4,
+     "sec": "speaking",
+     "kind": "run",
+     "sub": null,
+     "n": 2,
+     "min": 30,
+     "extra": {}
+    },
+    {
+     "id": "4:1:p1",
+     "week": 4,
+     "sec": "speaking",
+     "kind": "p1",
+     "sub": null,
+     "n": 2,
+     "min": 20,
+     "extra": {}
+    },
+    {
+     "id": "4:2:sh:SH-05",
+     "week": 4,
+     "sec": "speaking",
+     "kind": "sh",
+     "sub": "SH-05",
+     "n": 1,
+     "min": 10,
+     "extra": {}
+    }
+   ]
+  }
+ ]
+}

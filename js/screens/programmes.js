@@ -30,7 +30,7 @@
       h('span', { class: 'prg-week__num' }, w.n),
       h('span', { class: 'grow prg-week__text' },
         h('span', { class: 'prg-week__kicker' }, t('prog.week', { n: w.n }), ' · ', t('prog.month', { n: w.month })),
-        h('b', { class: 'prg-week__title' }, w.themes.join(' · '))),
+        h('b', { class: 'prg-week__title' }, w.title?.[I18n.lang] || w.title?.ru || '')),
       w.milestone && h('span', { class: 'badge badge--warn' }, t('prog.ms.' + w.milestone)),
       h('span', { class: 'small muted prg-week__meta' }, Hub.minutes(totalMin(list))),
       icon('chevronD', 'acc__chev'));

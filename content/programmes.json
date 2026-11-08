@@ -3,17 +3,25 @@
   {
    "id": "P55",
    "name": "IELTS 5.5",
+   "version": "3.0.0",
    "band": "5.5",
    "weeks": 14,
-   "durations": null,
+   "durations": {
+    "self": 14,
+    "2x30": 14,
+    "3x30": 10,
+    "2x60": 14,
+    "3x60": 10
+   },
    "weekList": [
     {
      "n": 1,
      "month": 1,
-     "themes": [
-      "Формат экзамена и TFNG",
-      "NOT GIVEN: TFNG и YNNG"
-     ],
+     "title": {
+      "ru": "Формат экзамена и TFNG · NOT GIVEN: TFNG и YNNG",
+      "kk": "Емтихан форматы және TFNG · NOT GIVEN: TFNG және YNNG",
+      "en": "Exam format and TFNG · NOT GIVEN: TFNG and YNNG"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -22,70 +30,105 @@
         "kind": "demo",
         "sub": "tfng",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "tfng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "tfng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.opinion",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "linking.addition",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "sg",
-        "sub": "part1",
+        "sub": "p1",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "education",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 1
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -94,49 +137,74 @@
         "kind": "demo",
         "sub": "ynng",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "ynng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "ynng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "1",
+        "sub": "SH-01",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "listening",
         "kind": "spl",
         "sub": null,
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -144,10 +212,11 @@
     {
      "n": 2,
      "month": 1,
-     "themes": [
-      "Sentence completion и ключевые слова",
-      "Note / table / flow-chart"
-     ],
+     "title": {
+      "ru": "Sentence completion и ключевые слова · Note / table / flow-chart",
+      "kk": "Sentence completion және тірек сөздер · Note / table / flow-chart",
+      "en": "Sentence completion and keywords · Note / table / flow-chart"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -156,63 +225,96 @@
         "kind": "demo",
         "sub": "sentence_completion",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "sentence_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "sentence_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.line",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1gt.informal",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "line",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 1,
+         "gt": "informal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "education",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 2
+        }
        }
       ],
       [
@@ -221,56 +323,83 @@
         "kind": "demo",
         "sub": "note_table_flow_chart",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "note_table_flow_chart",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "note_table_flow_chart",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.discussion",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "sg",
-        "sub": "part2",
+        "sub": "p2",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "person",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -278,10 +407,11 @@
     {
      "n": 3,
      "month": 1,
-     "themes": [
-      "Summary completion",
-      "Short answer"
-     ],
+     "title": {
+      "ru": "Summary completion · Short answer",
+      "kk": "Summary completion · Short answer",
+      "en": "Summary completion · Short answer"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -290,63 +420,96 @@
         "kind": "demo",
         "sub": "summary_completion",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "summary_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "summary_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.bar",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1gt.semi_formal",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "bar",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 1,
+         "gt": "semi_formal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "place",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "2",
+        "sub": "SH-02",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "environment",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 1
+        }
        }
       ],
       [
@@ -355,63 +518,97 @@
         "kind": "demo",
         "sub": "short_answer",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "short_answer",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "short_answer",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "ideas",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "environment",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 2
+        }
        },
        {
         "sec": "listening",
         "kind": "spl",
         "sub": null,
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -419,10 +616,11 @@
     {
      "n": 4,
      "month": 1,
-     "themes": [
-      "Повторение",
-      "Multiple choice"
-     ],
+     "title": {
+      "ru": "Повторение · Multiple choice",
+      "kk": "Қайталау · Multiple choice",
+      "en": "Review · Multiple choice"
+     },
      "milestone": "monthTest",
      "sessions": [
       [
@@ -431,63 +629,97 @@
         "kind": "mini",
         "sub": "tfng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "tfng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "linking.contrast",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
-        "sub": "linking.cause",
+        "sub": "linking.reason",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "pie",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "gt": "informal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "object",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "technology",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 1
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -496,56 +728,84 @@
         "kind": "demo",
         "sub": "multiple_choice",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "multiple_choice",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "multiple_choice",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.adv_disadv",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "sg",
-        "sub": "part3",
+        "sub": "p3",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "event",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "technology",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 2
+        }
        }
       ]
      ]
@@ -553,10 +813,11 @@
     {
      "n": 5,
      "month": 2,
-     "themes": [
-      "Matching information",
-      "Matching features"
-     ],
+     "title": {
+      "ru": "Matching information · Matching features",
+      "kk": "Matching information · Matching features",
+      "en": "Matching information · Matching features"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -565,70 +826,106 @@
         "kind": "demo",
         "sub": "matching_information",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_information",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_information",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "reading",
         "kind": "drill",
-        "sub": "scan",
+        "sub": "scanning",
         "n": 1,
-        "minutes": 12
+        "minutes": 12,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.table",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1gt.formal",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "table",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 1,
+         "gt": "formal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "3",
+        "sub": "SH-03",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "listening",
         "kind": "spl",
         "sub": null,
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -637,49 +934,75 @@
         "kind": "demo",
         "sub": "matching_features",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_features",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_features",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "habit",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "health",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 1
+        }
        }
       ]
      ]
@@ -687,10 +1010,11 @@
     {
      "n": 6,
      "month": 2,
-     "themes": [
-      "Diagram label",
-      "Повторение"
-     ],
+     "title": {
+      "ru": "Diagram label · Повторение",
+      "kk": "Diagram label · Қайталау",
+      "en": "Diagram label · Review"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -699,63 +1023,97 @@
         "kind": "demo",
         "sub": "diagram_label",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "diagram_label",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "diagram_label",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.process",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "process",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 1,
+         "gt": "formal",
+         "timed": false
+        }
        },
        {
         "sec": "writing",
         "kind": "ideas",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "media",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "health",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 2
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -764,49 +1122,75 @@
         "kind": "type",
         "sub": "ynng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "linking.result",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "plan",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
-        "sub": "work",
+        "sub": "careers",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 1
+        }
        }
       ]
      ]
@@ -814,10 +1198,11 @@
     {
      "n": 7,
      "month": 2,
-     "themes": [
-      "Выбор и сопоставление",
-      "Один текст за 20 минут"
-     ],
+     "title": {
+      "ru": "Выбор и сопоставление · Один текст за 20 минут",
+      "kk": "Таңдау және сәйкестендіру · Бір мәтін 20 минутта",
+      "en": "Choice and matching · One passage in 20 minutes"
+     },
      "milestone": "midMock",
      "sessions": [
       [
@@ -826,49 +1211,77 @@
         "kind": "type",
         "sub": "multiple_choice",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_information",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "sentence_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "bar",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "gt": "informal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
-        "sub": "work",
+        "sub": "careers",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 2
+        }
        },
        {
         "sec": "listening",
         "kind": "spl",
         "sub": null,
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -877,42 +1290,63 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.problem_solution",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "person",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "4",
+        "sub": "SH-04",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -920,10 +1354,11 @@
     {
      "n": 8,
      "month": 2,
-     "themes": [
-      "Matching headings",
-      "Matching sentence endings"
-     ],
+     "title": {
+      "ru": "Matching headings · Matching sentence endings",
+      "kk": "Matching headings · Matching sentence endings",
+      "en": "Matching headings · Matching sentence endings"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -932,63 +1367,97 @@
         "kind": "demo",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "reading",
         "kind": "drill",
         "sub": "headings",
         "n": 1,
-        "minutes": 12
+        "minutes": 12,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.map",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "map",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 1,
+         "gt": "semi_formal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "place",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "society",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 1
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -997,56 +1466,85 @@
         "kind": "demo",
         "sub": "matching_sentence_endings",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_sentence_endings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_sentence_endings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.two_part",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "two_part",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "object",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "society",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 2
+        }
        }
       ]
      ]
@@ -1054,10 +1552,11 @@
     {
      "n": 9,
      "month": 3,
-     "themes": [
-      "Сложные типы вместе",
-      "Текст на время и редкие типы"
-     ],
+     "title": {
+      "ru": "Сложные типы вместе · Текст на время и редкие типы",
+      "kk": "Күрделі түрлер бірге · Уақытқа мәтін және сирек түрлер",
+      "en": "Hard types together · A timed passage and rarer types"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -1066,56 +1565,86 @@
         "kind": "type",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_sentence_endings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2Lex.opinion",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "culture",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 1
+        }
        },
        {
         "sec": "listening",
         "kind": "spl",
         "sub": null,
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -1124,63 +1653,97 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_features",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "diagram_label",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "short_answer",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.multi",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "multi",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "formal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "event",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "5",
+        "sub": "SH-05",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "culture",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 2
+        }
        }
       ]
      ]
@@ -1188,10 +1751,11 @@
     {
      "n": 10,
      "month": 3,
-     "themes": [
-      "Повторение",
-      "Первый полный Reading"
-     ],
+     "title": {
+      "ru": "Повторение · Первый полный Reading",
+      "kk": "Қайталау · Алғашқы толық Reading тест",
+      "en": "Review · First full Reading test"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -1200,49 +1764,75 @@
         "kind": "type",
         "sub": "ynng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "multiple_choice",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "summary_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "experience",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "travel",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 1
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -1251,28 +1841,45 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "line",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "gt": "formal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "travel",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 2
+        }
        }
       ]
      ]
@@ -1280,10 +1887,11 @@
     {
      "n": 11,
      "month": 3,
-     "themes": [
-      "Один текст за 20 минут",
-      "Текст на время и слабые типы"
-     ],
+     "title": {
+      "ru": "Один текст за 20 минут · Текст на время и слабые типы",
+      "kk": "Бір мәтін 20 минутта · Уақытқа мәтін және әлсіз түрлер",
+      "en": "One passage in 20 minutes · A timed passage and weak types"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -1292,49 +1900,76 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "reading",
         "kind": "drill",
         "sub": "timing",
         "n": 1,
-        "minutes": 12
+        "minutes": 12,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "habit",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-1",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -1343,49 +1978,77 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "pie",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "formal",
+         "timed": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "media",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-2",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -1393,10 +2056,11 @@
     {
      "n": 12,
      "month": 3,
-     "themes": [
-      "Текст и тест на время",
-      "Слабые места"
-     ],
+     "title": {
+      "ru": "Текст и тест на время · Слабые места",
+      "kk": "Мәтін мен тест уақытқа · Әлсіз тұстар",
+      "en": "A passage and a test on time · Weak spots"
+     },
      "milestone": "monthTest",
      "sessions": [
       [
@@ -1405,35 +2069,55 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "two_part",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-3",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -1442,49 +2126,76 @@
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "table",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "semi_formal",
+         "timed": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "plan",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -1492,10 +2203,11 @@
     {
      "n": 13,
      "month": 4,
-     "themes": [
-      "Слабые типы и пара Writing",
-      "Темп: полный Reading"
-     ],
+     "title": {
+      "ru": "Слабые типы и пара Writing · Темп: полный Reading",
+      "kk": "Әлсіз түрлер және Writing жұбы · Қарқын: толық Reading тест",
+      "en": "Weak types and a Writing pair · Pace: full Reading test"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -1504,28 +2216,43 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "opinion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "ac": "bar",
+         "gt": "formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ],
       [
@@ -1534,35 +2261,55 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "discussion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "ac": "line",
+         "gt": "informal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "person",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -1570,10 +2317,11 @@
     {
      "n": 14,
      "month": 4,
-     "themes": [
-      "Генеральная репетиция",
-      "Итоговый mock программы и разбор"
-     ],
+     "title": {
+      "ru": "Генеральная репетиция · Итоговый mock программы и разбор",
+      "kk": "Бас дайындық · Бағдарламаның қорытынды mock-ы және талдау",
+      "en": "Dress rehearsal · Programme final mock and review"
+     },
      "milestone": "finalMock",
      "sessions": [
       [
@@ -1582,21 +2330,32 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "ac": "process",
+         "gt": "semi_formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ]
      ]
@@ -1606,17 +2365,25 @@
   {
    "id": "P65",
    "name": "IELTS 6.0–6.5",
+   "version": "3.0.0",
    "band": "6.0–6.5",
    "weeks": 10,
-   "durations": null,
+   "durations": {
+    "self": 10,
+    "2x30": 10,
+    "3x30": 7,
+    "2x60": 10,
+    "3x60": 7
+   },
    "weekList": [
     {
      "n": 1,
      "month": 1,
-     "themes": [
-      "TFNG, YNNG и NOT GIVEN",
-      "Sentence и note / table completion"
-     ],
+     "title": {
+      "ru": "TFNG, YNNG и NOT GIVEN · Sentence и note / table completion",
+      "kk": "TFNG, YNNG және NOT GIVEN · Sentence және note / table completion",
+      "en": "TFNG, YNNG and NOT GIVEN · Sentence and note / table completion"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -1625,63 +2392,93 @@
         "kind": "demo",
         "sub": "ynng",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "tfng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "ynng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "tfng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.opinion",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "sg",
-        "sub": "part1",
+        "sub": "p1",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -1690,70 +2487,106 @@
         "kind": "type",
         "sub": "sentence_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "note_table_flow_chart",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "sentence_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.line",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1gt.informal",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "line",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "informal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "sg",
-        "sub": "part2",
+        "sub": "p2",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "person",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "1",
+        "sub": "SH-01",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "education",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 1
+        }
        }
       ]
      ]
@@ -1761,10 +2594,11 @@
     {
      "n": 2,
      "month": 1,
-     "themes": [
-      "Summary и short answer",
-      "Multiple choice"
-     ],
+     "title": {
+      "ru": "Summary и short answer · Multiple choice",
+      "kk": "Summary және short answer · Multiple choice",
+      "en": "Summary and short answer · Multiple choice"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -1773,56 +2607,84 @@
         "kind": "demo",
         "sub": "summary_completion",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "summary_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "short_answer",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.discussion",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "place",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "education",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 2
+        }
        },
        {
         "sec": "listening",
         "kind": "spl",
         "sub": null,
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -1831,63 +2693,96 @@
         "kind": "type",
         "sub": "multiple_choice",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "multiple_choice",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.bar",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1gt.semi_formal",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "bar",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "semi_formal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "sg",
-        "sub": "part3",
+        "sub": "p3",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "event",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "environment",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 1
+        }
        }
       ]
      ]
@@ -1895,10 +2790,11 @@
     {
      "n": 3,
      "month": 1,
-     "themes": [
-      "Matching information и features",
-      "Повторение"
-     ],
+     "title": {
+      "ru": "Matching information и features · Повторение",
+      "kk": "Matching information және features · Қайталау",
+      "en": "Matching information and features · Review"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -1907,63 +2803,96 @@
         "kind": "type",
         "sub": "matching_information",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_features",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_information",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.adv_disadv",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "experience",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "2",
+        "sub": "SH-02",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "environment",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 2
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -1972,63 +2901,96 @@
         "kind": "mini",
         "sub": "tfng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.pie",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1gt.formal",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "pie",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "formal",
+         "timed": false
+        }
        },
        {
         "sec": "writing",
         "kind": "ideas",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "technology",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 1
+        }
        }
       ]
      ]
@@ -2036,10 +2998,11 @@
     {
      "n": 4,
      "month": 1,
-     "themes": [
-      "Diagram label",
-      "Matching headings"
-     ],
+     "title": {
+      "ru": "Diagram label · Matching headings",
+      "kk": "Diagram label · Matching headings",
+      "en": "Diagram label · Matching headings"
+     },
      "milestone": "monthTest",
      "sessions": [
       [
@@ -2048,63 +3011,97 @@
         "kind": "type",
         "sub": "diagram_label",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "diagram_label",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.problem_solution",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "object",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "technology",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 2
+        }
        },
        {
         "sec": "listening",
         "kind": "spl",
         "sub": null,
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -2113,56 +3110,86 @@
         "kind": "demo",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "reading",
         "kind": "drill",
         "sub": "headings",
         "n": 1,
-        "minutes": 12
+        "minutes": 12,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.table",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "table",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "semi_formal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "habit",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "health",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 1
+        }
        }
       ]
      ]
@@ -2170,10 +3197,11 @@
     {
      "n": 5,
      "month": 2,
-     "themes": [
-      "Matching sentence endings",
-      "Сложные типы вместе"
-     ],
+     "title": {
+      "ru": "Matching sentence endings · Сложные типы вместе",
+      "kk": "Matching sentence endings · Күрделі түрлер бірге",
+      "en": "Matching sentence endings · Hard types together"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -2182,63 +3210,96 @@
         "kind": "demo",
         "sub": "matching_sentence_endings",
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_sentence_endings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_sentence_endings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.two_part",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "two_part",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "media",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "3",
+        "sub": "SH-03",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "health",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 2
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -2247,56 +3308,87 @@
         "kind": "type",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "ynng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.process",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "process",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "formal",
+         "timed": false
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-1",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -2304,10 +3396,11 @@
     {
      "n": 6,
      "month": 2,
-     "themes": [
-      "Повторение",
-      "Первый полный Reading"
-     ],
+     "title": {
+      "ru": "Повторение · Первый полный Reading",
+      "kk": "Қайталау · Алғашқы толық Reading тест",
+      "en": "Review · First full Reading test"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -2316,63 +3409,96 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_features",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "summary_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2Lex.concession",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "plan",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-2",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        },
        {
         "sec": "listening",
         "kind": "spl",
         "sub": null,
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -2381,28 +3507,45 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "map",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "gt": "informal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "person",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-3",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -2410,10 +3553,11 @@
     {
      "n": 7,
      "month": 2,
-     "themes": [
-      "Один текст за 20 минут",
-      "Текст на время и слабые типы"
-     ],
+     "title": {
+      "ru": "Один текст за 20 минут · Текст на время и слабые типы",
+      "kk": "Бір мәтін 20 минутта · Уақытқа мәтін және әлсіз түрлер",
+      "en": "One passage in 20 minutes · A timed passage and weak types"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -2422,42 +3566,65 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "reading",
         "kind": "drill",
         "sub": "timing",
         "n": 1,
-        "minutes": 12
+        "minutes": 12,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-4",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -2466,56 +3633,88 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "multi",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "semi_formal",
+         "timed": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "place",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-5",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -2523,10 +3722,11 @@
     {
      "n": 8,
      "month": 2,
-     "themes": [
-      "Текст и тест на время",
-      "Слабые типы на время"
-     ],
+     "title": {
+      "ru": "Текст и тест на время · Слабые типы на время",
+      "kk": "Мәтін мен тест уақытқа · Әлсіз түрлер уақытқа",
+      "en": "A passage and a test on time · Weak types on time"
+     },
      "milestone": "monthTest",
      "sessions": [
       [
@@ -2535,35 +3735,55 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-6",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -2572,49 +3792,76 @@
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "bar",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "formal",
+         "timed": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "two_part",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "event",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "4",
+        "sub": "SH-04",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -2622,10 +3869,11 @@
     {
      "n": 9,
      "month": 3,
-     "themes": [
-      "Слабые типы и пара Writing",
-      "Темп: полный Reading"
-     ],
+     "title": {
+      "ru": "Слабые типы и пара Writing · Темп: полный Reading",
+      "kk": "Әлсіз түрлер және Writing жұбы · Қарқын: толық Reading тест",
+      "en": "Weak types and a Writing pair · Pace: full Reading test"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -2634,28 +3882,43 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "discussion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "ac": "line",
+         "gt": "formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ],
       [
@@ -2664,35 +3927,55 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "opinion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "ac": "table",
+         "gt": "informal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "experience",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -2700,10 +3983,11 @@
     {
      "n": 10,
      "month": 3,
-     "themes": [
-      "Генеральная репетиция",
-      "Итоговый mock программы и разбор"
-     ],
+     "title": {
+      "ru": "Генеральная репетиция · Итоговый mock программы и разбор",
+      "kk": "Бас дайындық · Бағдарламаның қорытынды mock-ы және талдау",
+      "en": "Dress rehearsal · Programme final mock and review"
+     },
      "milestone": "finalMock",
      "sessions": [
       [
@@ -2712,28 +3996,43 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "ac": "pie",
+         "gt": "semi_formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "5",
+        "sub": "SH-05",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ]
      ]
@@ -2743,6 +4042,7 @@
   {
    "id": "P75",
    "name": "IELTS 7.0–7.5",
+   "version": "3.0.0",
    "band": "7.0–7.5",
    "weeks": 10,
    "durations": {
@@ -2756,10 +4056,11 @@
     {
      "n": 1,
      "month": 1,
-     "themes": [
-      "Headings и YNNG на точность",
-      "Endings, features, summary"
-     ],
+     "title": {
+      "ru": "Headings и YNNG на точность · Endings, features, summary",
+      "kk": "Headings пен YNNG дәлдікке · Endings, features, summary",
+      "en": "Headings and YNNG for accuracy · Endings, features, summary"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -2768,49 +4069,74 @@
         "kind": "type",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "ynng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2Lex.hedging",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-1",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -2819,70 +4145,107 @@
         "kind": "type",
         "sub": "matching_sentence_endings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "summary_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_features",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.multi",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1gt.formal",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "multi",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "formal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "person",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-2",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        },
        {
         "sec": "listening",
         "kind": "spl",
         "sub": null,
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -2890,10 +4253,11 @@
     {
      "n": 2,
      "month": 1,
-     "themes": [
-      "Information, diagram, MC",
-      "NOT GIVEN: TFNG и YNNG"
-     ],
+     "title": {
+      "ru": "Information, diagram, MC · NOT GIVEN: TFNG и YNNG",
+      "kk": "Information, diagram, MC · NOT GIVEN: TFNG және YNNG",
+      "en": "Information, diagram, MC · NOT GIVEN: TFNG and YNNG"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -2902,56 +4266,85 @@
         "kind": "type",
         "sub": "matching_information",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "multiple_choice",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "diagram_label",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.discussion",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "experience",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "1",
+        "sub": "SH-01",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-3",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -2960,70 +4353,108 @@
         "kind": "type",
         "sub": "tfng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "ynng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t1ac.map",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "map",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "semi_formal",
+         "timed": false
+        }
        },
        {
         "sec": "writing",
         "kind": "ideas",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "plan",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-4",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -3031,10 +4462,11 @@
     {
      "n": 3,
      "month": 1,
-     "themes": [
-      "Note, summary и short answer",
-      "Первый полный Reading"
-     ],
+     "title": {
+      "ru": "Note, summary и short answer · Первый полный Reading",
+      "kk": "Note, summary және short answer · Алғашқы толық Reading тест",
+      "en": "Note, summary and short answer · First full Reading test"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -3043,49 +4475,74 @@
         "kind": "type",
         "sub": "sentence_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "note_table_flow_chart",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "short_answer",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.problem_solution",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-5",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -3094,28 +4551,44 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "process",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "gt": "informal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "object",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "2",
+        "sub": "SH-02",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -3123,10 +4596,11 @@
     {
      "n": 4,
      "month": 1,
-     "themes": [
-      "Headings и текст на время",
-      "Endings, features и YNNG"
-     ],
+     "title": {
+      "ru": "Headings и текст на время · Endings, features и YNNG",
+      "kk": "Headings және уақытқа мәтін · Endings, features және YNNG",
+      "en": "Headings and a timed passage · Endings, features and YNNG"
+     },
      "milestone": "monthTest",
      "sessions": [
       [
@@ -3135,49 +4609,74 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.two_part",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "two_part",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-6",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -3186,63 +4685,99 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_sentence_endings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_features",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "table",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "formal",
+         "timed": false
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "event",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-7",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        },
        {
         "sec": "listening",
         "kind": "spl",
         "sub": null,
         "n": 1,
-        "minutes": 8
+        "minutes": 8,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -3250,10 +4785,11 @@
     {
      "n": 5,
      "month": 2,
-     "themes": [
-      "Слабые типы на время",
-      "Темп: полный Reading"
-     ],
+     "title": {
+      "ru": "Слабые типы на время · Темп: полный Reading",
+      "kk": "Әлсіз түрлер уақытқа · Қарқын: толық Reading тест",
+      "en": "Weak types on time · Pace: full Reading test"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -3262,49 +4798,75 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "place",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "3",
+        "sub": "SH-03",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-8",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -3313,35 +4875,56 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "drill",
         "sub": "timing",
         "n": 1,
-        "minutes": 12
+        "minutes": 12,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "pie",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "gt": "semi_formal",
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-9",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -3349,10 +4932,11 @@
     {
      "n": 6,
      "month": 2,
-     "themes": [
-      "Текст и тест на время",
-      "Повторение"
-     ],
+     "title": {
+      "ru": "Текст и тест на время · Повторение",
+      "kk": "Мәтін мен тест уақытқа · Қайталау",
+      "en": "A passage and a test on time · Review"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -3361,56 +4945,86 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "summary_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "media",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-10",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        },
        {
         "sec": "listening",
         "kind": "dc",
         "sub": null,
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -3419,28 +5033,44 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "line",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "informal",
+         "timed": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        }
       ]
      ]
@@ -3448,10 +5078,11 @@
     {
      "n": 7,
      "month": 2,
-     "themes": [
-      "Два полных Reading",
-      "Слабые типы и пара Writing"
-     ],
+     "title": {
+      "ru": "Два полных Reading · Слабые типы и пара Writing",
+      "kk": "Екі толық Reading тест · Әлсіз түрлер және Writing жұбы",
+      "en": "Two full Reading tests · Weak types and a Writing pair"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -3460,28 +5091,44 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "bar",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "gt": "formal",
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "habit",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ],
       [
@@ -3490,28 +5137,43 @@
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "opinion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "ac": "map",
+         "gt": "informal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        }
       ]
      ]
@@ -3519,10 +5181,11 @@
     {
      "n": 8,
      "month": 2,
-     "themes": [
-      "Темп: полный Reading",
-      "Слабые типы и пара Writing"
-     ],
+     "title": {
+      "ru": "Темп: полный Reading · Слабые типы и пара Writing",
+      "kk": "Қарқын: толық Reading тест · Әлсіз түрлер және Writing жұбы",
+      "en": "Pace: full Reading test · Weak types and a Writing pair"
+     },
      "milestone": "monthTest",
      "sessions": [
       [
@@ -3531,35 +5194,54 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "two_part",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "person",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "4",
+        "sub": "SH-04",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -3568,28 +5250,43 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "ac": "process",
+         "gt": "semi_formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        }
       ]
      ]
@@ -3597,10 +5294,11 @@
     {
      "n": 9,
      "month": 3,
-     "themes": [
-      "Текст и тест на время",
-      "Слабые типы и пара Writing"
-     ],
+     "title": {
+      "ru": "Текст и тест на время · Слабые типы и пара Writing",
+      "kk": "Мәтін мен тест уақытқа · Әлсіз түрлер және Writing жұбы",
+      "en": "A passage and a test on time · Weak types and a Writing pair"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -3609,28 +5307,44 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "discussion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "ac": "table",
+         "gt": "semi_formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ],
       [
@@ -3639,35 +5353,54 @@
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "two_part",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "ac": "multi",
+         "gt": "informal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "experience",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -3675,10 +5408,11 @@
     {
      "n": 10,
      "month": 3,
-     "themes": [
-      "Генеральная репетиция",
-      "Итоговый mock программы и разбор"
-     ],
+     "title": {
+      "ru": "Генеральная репетиция · Итоговый mock программы и разбор",
+      "kk": "Бас дайындық · Бағдарламаның қорытынды mock-ы және талдау",
+      "en": "Dress rehearsal · Programme final mock and review"
+     },
      "milestone": "finalMock",
      "sessions": [
       [
@@ -3687,28 +5421,43 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "ac": "pie",
+         "gt": "formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "5",
+        "sub": "SH-05",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ]
      ]
@@ -3718,6 +5467,7 @@
   {
    "id": "P85",
    "name": "IELTS 8.0–8.5",
+   "version": "3.0.0",
    "band": "8.0–8.5",
    "weeks": 10,
    "durations": {
@@ -3731,10 +5481,11 @@
     {
      "n": 1,
      "month": 1,
-     "themes": [
-      "Ловушки band 8: YNNG и headings",
-      "Endings, features, summary"
-     ],
+     "title": {
+      "ru": "Ловушки band 8: YNNG и headings · Endings, features, summary",
+      "kk": "Band 8 тұзақтары: YNNG және headings · Endings, features, summary",
+      "en": "Band 8 traps: YNNG and headings · Endings, features, summary"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -3743,49 +5494,74 @@
         "kind": "type",
         "sub": "ynng",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_headings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2Lex.hedging",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-1",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -3794,49 +5570,76 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "summary_completion",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_sentence_endings",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "multi",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "formal",
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "media",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "plan",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-2",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -3844,10 +5647,11 @@
     {
      "n": 2,
      "month": 1,
-     "themes": [
-      "Information, diagram, MC",
-      "Темп: полный Reading"
-     ],
+     "title": {
+      "ru": "Information, diagram, MC · Темп: полный Reading",
+      "kk": "Information, diagram, MC · Қарқын: толық Reading тест",
+      "en": "Information, diagram, MC · Pace: full Reading test"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -3856,49 +5660,74 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "type",
         "sub": "matching_features",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2.two_part",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "two_part",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-3",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -3907,42 +5736,67 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "map",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "semi_formal",
+         "timed": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": false
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "experience",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 2,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-4",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -3950,10 +5804,11 @@
     {
      "n": 3,
      "month": 1,
-     "themes": [
-      "Слабые типы на время",
-      "Текст и тест на время"
-     ],
+     "title": {
+      "ru": "Слабые типы на время · Текст и тест на время",
+      "kk": "Әлсіз түрлер уақытқа · Мәтін мен тест уақытқа",
+      "en": "Weak types on time · A passage and a test on time"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -3962,42 +5817,64 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-5",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -4006,42 +5883,67 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "process",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "formal",
+         "timed": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "person",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-6",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -4049,10 +5951,11 @@
     {
      "n": 4,
      "month": 1,
-     "themes": [
-      "Writing 8+: аргумент и точность",
-      "Speaking 8+: рассуждение в Part 3"
-     ],
+     "title": {
+      "ru": "Writing 8+: аргумент и точность · Speaking 8+: рассуждение в Part 3",
+      "kk": "Writing 8+: дәлел және дәлдік · Speaking 8+: Part 3-те пайымдау",
+      "en": "Writing 8+: argument and precision · Speaking 8+: reasoning in Part 3"
+     },
      "milestone": "monthTest",
      "sessions": [
       [
@@ -4061,49 +5964,74 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2Lex.concession",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "ideas",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-7",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -4112,56 +6040,88 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "table",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 2,
+         "gt": "informal",
+         "timed": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "event",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "habit",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-8",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -4169,10 +6129,11 @@
     {
      "n": 5,
      "month": 2,
-     "themes": [
-      "Слабые типы и пара Writing",
-      "Слабые места"
-     ],
+     "title": {
+      "ru": "Слабые типы и пара Writing · Слабые места",
+      "kk": "Әлсіз түрлер және Writing жұбы · Әлсіз тұстар",
+      "en": "Weak types and a Writing pair · Weak spots"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -4181,35 +6142,55 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "two_part",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "ac": "line",
+         "gt": "formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-9",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -4218,49 +6199,77 @@
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "ac": "pie",
+         "gt": "semi_formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "object",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "4",
+        "sub": "SH-04",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-10",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -4268,10 +6277,11 @@
     {
      "n": 6,
      "month": 2,
-     "themes": [
-      "Текст и тест на время",
-      "Повторение"
-     ],
+     "title": {
+      "ru": "Текст и тест на время · Повторение",
+      "kk": "Мәтін мен тест уақытқа · Қайталау",
+      "en": "A passage and a test on time · Review"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -4280,28 +6290,42 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ],
       [
@@ -4310,21 +6334,33 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "opinion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "ac": "bar",
+         "gt": "informal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "place",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        }
       ]
      ]
@@ -4332,10 +6368,11 @@
     {
      "n": 7,
      "month": 2,
-     "themes": [
-      "Два полных Reading",
-      "Слабые типы и пара Writing"
-     ],
+     "title": {
+      "ru": "Два полных Reading · Слабые типы и пара Writing",
+      "kk": "Екі толық Reading тест · Әлсіз түрлер және Writing жұбы",
+      "en": "Two full Reading tests · Weak types and a Writing pair"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -4344,28 +6381,43 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ],
       [
@@ -4374,35 +6426,54 @@
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "ac": "multi",
+         "gt": "formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "person",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -4410,10 +6481,11 @@
     {
      "n": 8,
      "month": 2,
-     "themes": [
-      "Темп: полный Reading",
-      "Слабые типы и пара Writing"
-     ],
+     "title": {
+      "ru": "Темп: полный Reading · Слабые типы и пара Writing",
+      "kk": "Қарқын: толық Reading тест · Әлсіз түрлер және Writing жұбы",
+      "en": "Pace: full Reading test · Weak types and a Writing pair"
+     },
      "milestone": "monthTest",
      "sessions": [
       [
@@ -4422,28 +6494,44 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "two_part",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "ac": "process",
+         "gt": "semi_formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ],
       [
@@ -4452,35 +6540,54 @@
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "ac": "table",
+         "gt": "formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "experience",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -4488,10 +6595,11 @@
     {
      "n": 9,
      "month": 3,
-     "themes": [
-      "Текст и тест на время",
-      "Слабые типы и пара Writing"
-     ],
+     "title": {
+      "ru": "Текст и тест на время · Слабые типы и пара Writing",
+      "kk": "Мәтін мен тест уақытқа · Әлсіз түрлер және Writing жұбы",
+      "en": "A passage and a test on time · Weak types and a Writing pair"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -4500,28 +6608,44 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "opinion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "ac": "map",
+         "gt": "informal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ],
       [
@@ -4530,35 +6654,54 @@
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "discussion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "ac": "line",
+         "gt": "semi_formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "media",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        }
       ]
      ]
@@ -4566,10 +6709,11 @@
     {
      "n": 10,
      "month": 3,
-     "themes": [
-      "Генеральная репетиция",
-      "Итоговый mock программы и разбор"
-     ],
+     "title": {
+      "ru": "Генеральная репетиция · Итоговый mock программы и разбор",
+      "kk": "Бас дайындық · Бағдарламаның қорытынды mock-ы және талдау",
+      "en": "Dress rehearsal · Programme final mock and review"
+     },
      "milestone": "finalMock",
      "sessions": [
       [
@@ -4578,21 +6722,32 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "ac": "pie",
+         "gt": "informal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ]
      ]
@@ -4602,6 +6757,7 @@
   {
    "id": "P90",
    "name": "IELTS 9.0",
+   "version": "3.0.0",
    "band": "9.0",
    "weeks": 6,
    "durations": {
@@ -4615,10 +6771,11 @@
     {
      "n": 1,
      "month": 1,
-     "themes": [
-      "Reading без ошибок",
-      "Writing 9: каждое предложение"
-     ],
+     "title": {
+      "ru": "Reading без ошибок · Writing 9: каждое предложение",
+      "kk": "Қатесіз Reading · Writing 9: әр сөйлем",
+      "en": "Error-free Reading · Writing 9: every sentence"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -4627,35 +6784,54 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "guide",
         "sub": "t2Lex.hedging",
         "n": 1,
-        "minutes": 10
+        "minutes": 10,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-1",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -4664,42 +6840,66 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "discussion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "ac": "multi",
+         "gt": "formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "media",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "p1",
         "sub": null,
         "n": 2,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-2",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -4707,10 +6907,11 @@
     {
      "n": 2,
      "month": 1,
-     "themes": [
-      "Слабые типы на время",
-      "Темп: полный Reading"
-     ],
+     "title": {
+      "ru": "Слабые типы на время · Темп: полный Reading",
+      "kk": "Әлсіз түрлер уақытқа · Қарқын: толық Reading тест",
+      "en": "Weak types on time · Pace: full Reading test"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -4719,49 +6920,77 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "two_part",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "map",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "gt": "informal",
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-3",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -4770,42 +6999,67 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "ac": "process",
+         "gt": "semi_formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "plan",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-4",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "part": 0
+        }
        }
       ]
      ]
@@ -4813,10 +7067,11 @@
     {
      "n": 3,
      "month": 1,
-     "themes": [
-      "Speaking 9: беглость и точность",
-      "Текст и тест на время"
-     ],
+     "title": {
+      "ru": "Speaking 9: беглость и точность · Текст и тест на время",
+      "kk": "Speaking 9: еркіндік және дәлдік · Мәтін мен тест уақытқа",
+      "en": "Speaking 9: fluency and accuracy · A passage and a test on time"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -4825,49 +7080,75 @@
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "experience",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "habit",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "vocab",
         "kind": "vocab",
         "sub": "awl-5",
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "part": 0
+        }
        }
       ],
       [
@@ -4876,21 +7157,33 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "opinion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "plus": true,
+         "ac": "table",
+         "gt": "semi_formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        }
       ]
      ]
@@ -4898,10 +7191,11 @@
     {
      "n": 4,
      "month": 1,
-     "themes": [
-      "Два полных Reading",
-      "Слабые типы и пара Writing"
-     ],
+     "title": {
+      "ru": "Два полных Reading · Слабые типы и пара Writing",
+      "kk": "Екі толық Reading тест · Әлсіз түрлер және Writing жұбы",
+      "en": "Two full Reading tests · Weak types and a Writing pair"
+     },
      "milestone": "monthTest",
      "sessions": [
       [
@@ -4910,35 +7204,54 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "object",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -4947,28 +7260,43 @@
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "two_part",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "ac": "line",
+         "gt": "formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        }
       ]
      ]
@@ -4976,10 +7304,11 @@
     {
      "n": 5,
      "month": 2,
-     "themes": [
-      "Темп: полный Reading",
-      "Слабые типы и пара Writing"
-     ],
+     "title": {
+      "ru": "Темп: полный Reading · Слабые типы и пара Writing",
+      "kk": "Қарқын: толық Reading тест · Әлсіз түрлер және Writing жұбы",
+      "en": "Pace: full Reading test · Weak types and a Writing pair"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -4988,35 +7317,55 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "reading",
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "plus": true,
+         "ac": "pie",
+         "gt": "formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "p2",
         "sub": "event",
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1,
+         "plus": true
+        }
        }
       ],
       [
@@ -5025,28 +7374,43 @@
         "kind": "weak",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        },
        {
         "sec": "reading",
         "kind": "pm",
         "sub": null,
         "n": 1,
-        "minutes": 20
+        "minutes": 20,
+        "extra": {
+         "lesson": 2,
+         "plus": true
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 2,
+         "ac": "map",
+         "gt": "semi_formal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 2
+        }
        }
       ]
      ]
@@ -5054,10 +7418,11 @@
     {
      "n": 6,
      "month": 2,
-     "themes": [
-      "Генеральная репетиция",
-      "Итоговый mock программы и разбор"
-     ],
+     "title": {
+      "ru": "Генеральная репетиция · Итоговый mock программы и разбор",
+      "kk": "Бас дайындық · Бағдарламаның қорытынды mock-ы және талдау",
+      "en": "Dress rehearsal · Programme final mock and review"
+     },
      "milestone": "finalMock",
      "sessions": [
       [
@@ -5066,21 +7431,32 @@
         "kind": "full",
         "sub": null,
         "n": 1,
-        "minutes": 60
+        "minutes": 60,
+        "extra": {
+         "lesson": 1
+        }
        },
        {
         "sec": "writing",
         "kind": "pair",
         "sub": "opinion",
         "n": 1,
-        "minutes": 75
+        "minutes": 75,
+        "extra": {
+         "lesson": 1,
+         "ac": "bar",
+         "gt": "informal"
+        }
        },
        {
         "sec": "speaking",
         "kind": "run",
         "sub": null,
         "n": 1,
-        "minutes": 15
+        "minutes": 15,
+        "extra": {
+         "lesson": 1
+        }
        }
       ]
      ]
@@ -5090,6 +7466,7 @@
   {
    "id": "R",
    "name": "IELTS Exam Ready",
+   "version": "3.0.0",
    "band": null,
    "weeks": 3,
    "durations": {
@@ -5103,9 +7480,11 @@
     {
      "n": 1,
      "month": 1,
-     "themes": [
-      "Формат и правила ответов"
-     ],
+     "title": {
+      "ru": "Формат и правила ответов",
+      "kk": "Формат және жауап беру ережелері",
+      "en": "Format and answer rules"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -5128,7 +7507,10 @@
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
@@ -5164,9 +7546,11 @@
     {
      "n": 2,
      "month": 1,
-     "themes": [
-      "Полный mock и разбор"
-     ],
+     "title": {
+      "ru": "Полный mock и разбор",
+      "kk": "Толық mock және талдау",
+      "en": "Full mock and review"
+     },
      "milestone": "finalMock",
      "sessions": [
       [
@@ -5182,7 +7566,11 @@
         "kind": "t1",
         "sub": "bar",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "gt": "formal",
+         "timed": true
+        }
        },
        {
         "sec": "speaking",
@@ -5197,9 +7585,11 @@
     {
      "n": 3,
      "month": 1,
-     "themes": [
-      "Последние дни"
-     ],
+     "title": {
+      "ru": "Последние дни",
+      "kk": "Соңғы күндер",
+      "en": "The last days"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -5232,6 +7622,7 @@
   {
    "id": "SS",
    "name": "Speaking Sprint",
+   "version": "3.0.0",
    "band": null,
    "weeks": 4,
    "durations": {
@@ -5245,16 +7636,18 @@
     {
      "n": 1,
      "month": 1,
-     "themes": [
-      "Part 1: прямой ответ и развитие"
-     ],
+     "title": {
+      "ru": "Part 1: прямой ответ и развитие",
+      "kk": "Part 1: тікелей жауап және оны дамыту",
+      "en": "Part 1: a direct answer and extension"
+     },
      "milestone": null,
      "sessions": [
       [
        {
         "sec": "speaking",
         "kind": "sg",
-        "sub": "part1",
+        "sub": "p1",
         "n": 1,
         "minutes": 10
        },
@@ -5268,21 +7661,21 @@
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "1",
+        "sub": "SH-01",
         "n": 1,
         "minutes": 10
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "2",
+        "sub": "SH-02",
         "n": 1,
         "minutes": 10
        },
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "3",
+        "sub": "SH-03",
         "n": 1,
         "minutes": 10
        }
@@ -5292,16 +7685,18 @@
     {
      "n": 2,
      "month": 1,
-     "themes": [
-      "Part 2: план за минуту и полные 2 минуты"
-     ],
+     "title": {
+      "ru": "Part 2: план за минуту и полные 2 минуты",
+      "kk": "Part 2: бір минуттық жоспар және толық 2 минут",
+      "en": "Part 2: a one-minute plan and the full 2 minutes"
+     },
      "milestone": null,
      "sessions": [
       [
        {
         "sec": "speaking",
         "kind": "sg",
-        "sub": "part2",
+        "sub": "p2",
         "n": 1,
         "minutes": 10
        },
@@ -5336,7 +7731,7 @@
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "4",
+        "sub": "SH-04",
         "n": 1,
         "minutes": 10
        }
@@ -5346,16 +7741,18 @@
     {
      "n": 3,
      "month": 1,
-     "themes": [
-      "Part 3: рассуждение"
-     ],
+     "title": {
+      "ru": "Part 3: рассуждение",
+      "kk": "Part 3: пайымдау",
+      "en": "Part 3: reasoning"
+     },
      "milestone": null,
      "sessions": [
       [
        {
         "sec": "speaking",
         "kind": "sg",
-        "sub": "part3",
+        "sub": "p3",
         "n": 1,
         "minutes": 10
        },
@@ -5400,9 +7797,11 @@
     {
      "n": 4,
      "month": 1,
-     "themes": [
-      "Новые темы и тест"
-     ],
+     "title": {
+      "ru": "Новые темы и тест",
+      "kk": "Жаңа тақырыптар және тест",
+      "en": "New topics and the test"
+     },
      "milestone": "control.speaking",
      "sessions": [
       [
@@ -5423,7 +7822,7 @@
        {
         "sec": "speaking",
         "kind": "sh",
-        "sub": "5",
+        "sub": "SH-05",
         "n": 1,
         "minutes": 10
        }
@@ -5435,6 +7834,7 @@
   {
    "id": "SLR",
    "name": "Reading & Listening Sprint",
+   "version": "3.0.0",
    "band": null,
    "weeks": 4,
    "durations": {
@@ -5448,9 +7848,11 @@
     {
      "n": 1,
      "month": 1,
-     "themes": [
-      "Not Given и перефраз"
-     ],
+     "title": {
+      "ru": "Not Given и перефраз",
+      "kk": "Not Given және басқаша айтылым",
+      "en": "Not Given and paraphrase"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -5502,9 +7904,11 @@
     {
      "n": 2,
      "month": 1,
-     "themes": [
-      "Completion и ключевые слова"
-     ],
+     "title": {
+      "ru": "Completion и ключевые слова",
+      "kk": "Completion және тірек сөздер",
+      "en": "Completion and keywords"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -5563,9 +7967,11 @@
     {
      "n": 3,
      "month": 1,
-     "themes": [
-      "Matching и headings на время"
-     ],
+     "title": {
+      "ru": "Matching и headings на время",
+      "kk": "Matching және headings уақытқа",
+      "en": "Matching and headings on time"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -5624,9 +8030,11 @@
     {
      "n": 4,
      "month": 1,
-     "themes": [
-      "Слабые типы и контрольный тест"
-     ],
+     "title": {
+      "ru": "Слабые типы и контрольный тест",
+      "kk": "Әлсіз түрлер және бақылау тесті",
+      "en": "Weak types and the check test"
+     },
      "milestone": "control.reading",
      "sessions": [
       [
@@ -5666,6 +8074,7 @@
   {
    "id": "SW",
    "name": "Writing Sprint",
+   "version": "3.0.0",
    "band": null,
    "weeks": 4,
    "durations": {
@@ -5679,9 +8088,11 @@
     {
      "n": 1,
      "month": 1,
-     "themes": [
-      "Task 2: позиция и все части вопроса"
-     ],
+     "title": {
+      "ru": "Task 2: позиция и все части вопроса",
+      "kk": "Task 2: позиция және сұрақтың барлық бөлігі",
+      "en": "Task 2: position and every part of the question"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -5718,14 +8129,20 @@
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "timed": false
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "discussion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "timed": false
+        }
        }
       ]
      ]
@@ -5733,9 +8150,11 @@
     {
      "n": 2,
      "month": 1,
-     "themes": [
-      "Связность и лексика эссе"
-     ],
+     "title": {
+      "ru": "Связность и лексика эссе",
+      "kk": "Эссенің байланыстылығы мен лексикасы",
+      "en": "Cohesion and vocabulary in the essay"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -5779,14 +8198,20 @@
         "kind": "t2",
         "sub": "adv_disadv",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "timed": false
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "problem_solution",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "timed": false
+        }
        }
       ]
      ]
@@ -5794,9 +8219,11 @@
     {
      "n": 3,
      "month": 1,
-     "themes": [
-      "Task 1: overview и сравнения"
-     ],
+     "title": {
+      "ru": "Task 1: overview и сравнения",
+      "kk": "Task 1: overview және салыстыру",
+      "en": "Task 1: overview and comparisons"
+     },
      "milestone": null,
      "sessions": [
       [
@@ -5847,28 +8274,43 @@
         "kind": "t1",
         "sub": "line",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "gt": "formal",
+         "timed": false
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "bar",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "gt": "semi_formal",
+         "timed": false
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "process",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "gt": "informal",
+         "timed": false
+        }
        },
        {
         "sec": "writing",
         "kind": "t2",
         "sub": "two_part",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "timed": true
+        }
        }
       ]
      ]
@@ -5876,9 +8318,11 @@
     {
      "n": 4,
      "month": 1,
-     "themes": [
-      "Свои ошибки и тест"
-     ],
+     "title": {
+      "ru": "Свои ошибки и тест",
+      "kk": "Өз қателеріңіз және тест",
+      "en": "Your own mistakes and the test"
+     },
      "milestone": "control.writing",
      "sessions": [
       [
@@ -5894,14 +8338,21 @@
         "kind": "t2",
         "sub": "opinion",
         "n": 1,
-        "minutes": 50
+        "minutes": 50,
+        "extra": {
+         "timed": true
+        }
        },
        {
         "sec": "writing",
         "kind": "t1",
         "sub": "map",
         "n": 1,
-        "minutes": 25
+        "minutes": 25,
+        "extra": {
+         "gt": "formal",
+         "timed": false
+        }
        }
       ]
      ]

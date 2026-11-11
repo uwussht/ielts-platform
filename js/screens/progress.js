@@ -107,7 +107,7 @@
             h('td', { class: 'pg-d' }, Hub.fmtUTC(r.finishedAt)),
             h('td', null, h('b', null, r.title)),
             h('td', null, h('span', { class: 'pg-type is-' + r.source }, t('ieltsProgressV.type.' + r.source))),
-            h('td', { class: 'pg-score num' }, r.band != null ? Number(r.band).toFixed(1) + (r.source === 'work' ? ' · ' + t('ieltsProgressV.ai') : '') : ['pending_ai', 'grading'].includes(r.status) ? t('ieltsGoal.checking') : '—'),
+            h('td', { class: 'pg-score num' }, r.band != null ? Number(r.band).toFixed(1) + (r.source === 'work' ? ' · ' + t('review.teacherShort') : '') : ['pending_ai', 'grading', 'pending_review'].includes(r.status) ? t('ieltsGoal.checking') : '—'),
             h('td', null, h('a', { class: 'link', href: openAttempt(r) }, r.source === 'work' ? t('ieltsProgressV.openVersion') : r.source === 'partial' ? t('ieltsPlanV.open') : t('ieltsProgressV.openReview'), ' →')))))))
             : h('p', { class: 'muted' }, t('ieltsProgressV.noHistory')),
           history.length > state.n && h('button', { class: 'btn btn--secondary', type: 'button', onclick: () => { state.n += 15; rerender(); } },

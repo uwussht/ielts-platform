@@ -10,15 +10,22 @@
                   PUT    /staff/users/:id/role   role (admin)
                   DELETE /staff/users/:id        the staff record (admin; never oneself)
                   POST   /staff/scores/:id       confirm / send back a result (curator, admin)
+                  GET    /staff/users/:id/attempts      a student's attempts
+     checking     GET    /staff/reviews                 writing, speaking and diagnostics waiting for a teacher
+                  GET    /staff/attempts/:id            one attempt: the task, the text, the recordings
+                  GET    /staff/audio/:id               a recording
+                  POST   /staff/attempts/:id/grade      { criteria, feedback, skill? } → band, done
+     test bank    GET    /staff/tests?skill=&q=         the bank with attempt counts
+                  GET    /staff/tests/:id               a test with its answer keys
 
-   Deleting removes only this database's row (role, plans, results). The
-   ai-tutor account and its progress stay where they are.
+   Deleting a student deletes the account and everything in it.
    ========================================================================== */
 'use strict';
 
 const express = require('express');
 const { pool, tx } = require('./db');
 const { requireUser, requirePerm, permsOf, ROLES, PLANS } = require('./auth');
+const C = require('./content');
 
 const router = express.Router();
 router.use(requireUser);
@@ -183,6 +190,123 @@ staff.post('/scores/:id', requirePerm('scores'), async (req, res, next) => {
     if (!rows.length) return res.status(404).json({ ok: false, reason: 'not-found' });
     res.json({ ok: true, score: scoreRow(rows[0]) });
   } catch (e) { next(e); }
+});
+
+/* ------------------------------------------------------------- checking */
+
+const r5 = (x) => Math.round(x * 2) / 2;
+const CRITERIA = {
+  writing: ['taskResponse', 'coherenceCohesion', 'lexicalResource', 'grammaticalRange'],
+  speaking: ['fluencyCoherence', 'lexicalResource', 'grammaticalRange', 'pronunciation'],
+};
+const attemptRow = (r) => ({
+  id: r.id, userId: r.user_id, student: r.student_name ?? undefined, testId: r.test_id, skill: r.skill, kind: r.kind, title: r.title, mode: r.mode,
+  status: r.status, band: num(r.band), rawScore: r.raw_score, maxScore: r.max_score, timeSec: r.time_sec, finishedAt: r.finished_at,
+  reviewedAt: r.reviewed_at, reviewer: r.reviewer_name ?? undefined,
+});
+
+staff.get('/users/:id/attempts', async (req, res, next) => {
+  try {
+    const { rows } = await pool.query(
+      `SELECT a.id, a.user_id, a.test_id, a.skill, a.kind, a.title, a.mode, a.status, a.band, a.raw_score, a.max_score, a.time_sec, a.finished_at, a.reviewed_at
+         FROM attempts a WHERE a.user_id = $1 ORDER BY a.finished_at DESC LIMIT 300`, [Number(req.params.id) || 0]);
+    res.json({ ok: true, attempts: rows.map(attemptRow) });
+  } catch (e) { next(e); }
+});
+
+staff.get('/reviews', requirePerm('review'), async (req, res, next) => {
+  const done = req.query.status === 'done';
+  try {
+    const { rows } = await pool.query(
+      `SELECT a.id, a.user_id, a.test_id, a.skill, a.kind, a.title, a.mode, a.status, a.band, a.raw_score, a.max_score, a.time_sec,
+              a.finished_at, a.reviewed_at, u.name AS student_name, r.name AS reviewer_name
+         FROM attempts a JOIN users u ON u.id = a.user_id LEFT JOIN users r ON r.id = a.reviewed_by
+        WHERE ${done ? 'a.reviewed_at IS NOT NULL' : "a.status = 'pending_review'"}
+        ORDER BY ${done ? 'a.reviewed_at DESC' : 'a.finished_at ASC'} LIMIT 200`);
+    res.json({ ok: true, attempts: rows.map(attemptRow) });
+  } catch (e) { next(e); }
+});
+
+staff.get('/attempts/:id', requirePerm('review'), async (req, res, next) => {
+  try {
+    const { rows } = await pool.query(
+      'SELECT a.*, u.name AS student_name FROM attempts a JOIN users u ON u.id = a.user_id WHERE a.id = $1', [Number(req.params.id) || 0]);
+    const a = rows[0];
+    if (!a) return res.status(404).json({ ok: false, reason: 'not-found' });
+    const audio = await pool.query('SELECT id, item_id, duration, mime FROM attempt_audio WHERE attempt_id = $1 ORDER BY id', [a.id]);
+    const d = a.skill === 'diagnostic' ? null : C.doc(a.test_id);
+    let document = d?.document || null;
+    if (document && (a.skill === 'reading' || a.skill === 'listening')) document = C.withKeys(document, a.test_id);
+    res.json({ ok: true, attempt: { ...attemptRow(a), answers: a.answers, result: a.result, document,
+      audio: audio.rows.map((x) => ({ id: x.id, itemId: x.item_id, durationSec: x.duration, mime: x.mime })) } });
+  } catch (e) { next(e); }
+});
+
+staff.get('/audio/:id', requirePerm('review'), async (req, res, next) => {
+  try {
+    const { rows } = await pool.query('SELECT mime, data FROM attempt_audio WHERE id = $1', [Number(req.params.id) || 0]);
+    if (!rows.length) return res.status(404).end();
+    res.set({ 'content-type': rows[0].mime || 'audio/wav', 'cache-control': 'private, max-age=3600' }).send(rows[0].data);
+  } catch (e) { next(e); }
+});
+
+/** A teacher's grade: four criteria (0–9 in half steps) and a comment. The band is their mean. */
+staff.post('/attempts/:id/grade', requirePerm('review'), async (req, res, next) => {
+  const b = req.body || {};
+  try {
+    const { rows } = await pool.query('SELECT * FROM attempts WHERE id = $1', [Number(req.params.id) || 0]);
+    const a = rows[0];
+    if (!a) return res.status(404).json({ ok: false, reason: 'not-found' });
+    const skill = a.skill === 'diagnostic' ? b.skill : a.skill;
+    const keys = CRITERIA[skill];
+    if (!keys) return res.status(400).json({ ok: false, reason: 'bad-skill' });
+    const criteria = {};
+    for (const k of keys) {
+      const v = band(b.criteria?.[k]);
+      if (v == null) return res.status(400).json({ ok: false, reason: 'bad-band', field: k });
+      criteria[k] = v;
+    }
+    const score = r5(Object.values(criteria).reduce((s, v) => s + v, 0) / keys.length);
+    const feedback = String(b.feedback || '').trim().slice(0, 5000) || null;
+    const result = { ...a.result };
+    let status = 'done', overall = score;
+    if (a.skill === 'diagnostic') {
+      result[skill] = { ...(result[skill] || {}), status: 'done', criteria, feedback };
+      result.bands = { ...(result.bands || {}), [skill]: score };
+      const all = ['listening', 'reading', 'writing', 'speaking'].map((s) => result.bands[s]);
+      if (all.every((x) => x != null)) { result.bands.overall = r5(all.reduce((s, x) => s + x, 0) / 4); result.bands.overallPrelim = false; }
+      overall = result.bands.overall ?? null;
+      status = ['writing', 'speaking'].some((s) => ['pending_review', 'pending_ai'].includes(result[s]?.status)) ? 'pending_review' : 'done';
+    } else {
+      Object.assign(result, { status: 'done', criteria, feedback, reviewedBy: req.user.name || null });
+    }
+    await pool.query(
+      'UPDATE attempts SET status = $2, band = $3, result = $4, reviewed_by = $5, reviewed_at = now() WHERE id = $1',
+      [a.id, status, overall, JSON.stringify(result), req.user.id]);
+    res.json({ ok: true, band: score, status });
+  } catch (e) { next(e); }
+});
+
+/* ------------------------------------------------------------- test bank */
+
+staff.get('/tests', async (req, res, next) => {
+  const skill = ['reading', 'listening', 'writing', 'speaking', 'vocab', 'mock'].includes(req.query.skill) ? req.query.skill : 'reading';
+  const q = clean(req.query.q, 80).toLowerCase();
+  try {
+    const list = (skill === 'mock' ? C.mocks().map((m) => ({ ...m, kind: 'mock' })) : C.list(skill))
+      .filter((m) => !q || m.id.toLowerCase().includes(q) || String(m.title || '').toLowerCase().includes(q));
+    const { rows } = await pool.query(
+      'SELECT test_id, count(*)::int AS n, avg(band)::float AS band FROM attempts WHERE test_id = ANY($1) GROUP BY test_id', [list.map((m) => m.id)]);
+    const by = Object.fromEntries(rows.map((r) => [r.test_id, r]));
+    res.json({ ok: true, tests: list.map((m) => ({ id: m.id, title: m.title, kind: m.kind, module: m.module, category: m.category, questionCount: m.questionCount,
+      bandMin: m.bandMin, bandMax: m.bandMax, hasKey: !!C.check.keysOf(m.id), attempts: by[m.id]?.n || 0, avgBand: by[m.id]?.band != null ? r5(by[m.id].band) : null })) });
+  } catch (e) { next(e); }
+});
+
+staff.get('/tests/:id', (req, res) => {
+  const d = C.doc(req.params.id);
+  if (!d) return res.status(404).json({ ok: false, reason: 'not-found' });
+  res.json({ ok: true, test: { ...(C.meta(req.params.id) || {}), ...d.test }, document: C.withKeys(d.document, req.params.id), hasKey: !!C.check.keysOf(req.params.id) });
 });
 
 router.use('/staff', staff);

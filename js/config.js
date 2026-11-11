@@ -3,8 +3,9 @@
 window.IELTS_CONFIG = {
   brand: 'IELTS',  // product name in the window title
 
-  // Backend (Bearer token). AI routes (/api/*) go through server.js → AI_TUTOR_ORIGIN.
-  apiBase: 'https://prod-server.justtostudy.kz',
+  // The platform's API (server/, Bearer token): accounts, attempts, plan, mocks, vocabulary.
+  // server.js forwards this path to it (API_ORIGIN).
+  apiBase: '/app-api',
 
   // Test content: the copy in content/, served by server.js (audio and pictures under /media).
   contentApi: '/content-api',

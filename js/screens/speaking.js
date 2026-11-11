@@ -1,6 +1,6 @@
 // IELTS Speaking — ai-tutor HZ (task page), Vy (run state machine + recorder ts() + live
 // metrics), H1 (AI review), H2 (guide), H3 (shadowing). Answers are recorded in the browser,
-// converted to 16 kHz mono WAV and graded by ai-tutor's /api/ielts/speaking/assess.
+// converted to 16 kHz mono WAV and sent to the platform's API (/ielts/speaking/assess) for a teacher to grade.
 (function () {
   const { h, icon } = DOM;
   const put = (el, ...k) => el.replaceChildren(...k.flat(9).filter((x) => x != null && x !== false && x !== ''));
@@ -18,8 +18,8 @@
   const partN = (kind) => String(kind || '').slice(4);
 
   // ---------- examiner voice (speakTts) ----------
-  let ttsAudio = null;
-  function stopTts() { try { ttsAudio?.pause(); } catch {} ttsAudio = null; try { speechSynthesis.cancel(); } catch {} }
+
+  function stopTts() { try { speechSynthesis.cancel(); } catch {} }
   function synth(text, speed) {
     return new Promise((res) => {
       if (!('speechSynthesis' in window)) return res('failed');
@@ -32,19 +32,10 @@
       speechSynthesis.speak(u);
     });
   }
-  // ai-tutor's /api/tts (voice Freya) through the proxy; the browser voice is the fallback
+  // the examiner's voice: the browser's British English voice
   function speakTts(text, { speed = 1 } = {}) {
     stopTts();
-    const sp = Math.min(1.3, Math.max(0.7, Math.round(speed * 20) / 20));
-    if (window.Demo?.on) return synth(text, sp);
-    return new Promise((res) => {
-      const a = new Audio(`/api/tts?v=Freya&l=en&s=${sp}&t=${encodeURIComponent(String(text).slice(0, 1000))}`);
-      ttsAudio = a;
-      const max = setTimeout(() => { a.pause(); res('timeout'); }, 15000 + 120 * String(text).length);
-      a.onended = () => { clearTimeout(max); res('played'); };
-      a.onerror = () => { clearTimeout(max); if (ttsAudio === a) synth(text, sp).then(res); else res('cancelled'); };
-      a.play().catch(() => { clearTimeout(max); if (ttsAudio === a) synth(text, sp).then(res); else res('cancelled'); });
-    });
+    return synth(text, Math.min(1.3, Math.max(0.7, Math.round(speed * 20) / 20)));
   }
 
   // ---------- recorder (ts) + WAV encoder (e0) ----------
@@ -538,6 +529,7 @@
         const fr = String(r.failReason || '');
         const canResend = !!st.pending && !fr.startsWith('no_speech');
         const done = r.status === 'done';
+        const review = r.status === 'pending_review';  // waits for a teacher (staff area → Checking)
         const grading = st.busy || r.status === 'grading' || r.status === 'pending_ai';
         const retry = learnHref('speaking-works', { ieltsTest: view.testId });
         put(root,
@@ -549,6 +541,9 @@
             r.criteria && r.criteria.pronunciation == null && h('p', { class: 'wscore__fb small muted' }, icon('about', 'ic16'), ' ', t('ieltsSpeaking.noPron')),
             r.feedback && h('p', { class: 'wscore__fb' }, r.feedback),
             h('div', { class: 'row' }, h('a', { class: 'btn btn--primary', href: retry }, t('ieltsSpeaking.again'))))
+            : review ? h('section', { class: 'card wstatus', role: 'status' },
+              h('span', { class: 'wstatus__ic' }, icon('clock')),
+              h('div', { class: 'grow stack-sm' }, h('b', null, t('review.pendingTitle')), h('p', { class: 'small' }, t('review.pendingSpeaking'))))
             : h('section', { class: 'card wstatus is-bad', role: 'status' },
               h('span', { class: 'wstatus__ic' }, icon('mic')),
               h('div', { class: 'grow stack-sm' },
@@ -571,7 +566,7 @@
               return h('div', { class: 'sanswer stack-sm' }, h('b', { lang: 'en' }, it.question),
                 h('div', { class: 'chips' }, h('span', { class: 'badge' }, icon('clock', 'ic12'), ' ', HY(x.durationSec)), x.wpm != null && h('span', { class: 'badge' }, t('ieltsSpeaking.wpm', { n: x.wpm }))),
                 x.transcript ? h('p', { class: 'sanswer__text', lang: 'en' }, x.transcript)
-                  : h('p', { class: 'sanswer__text muted' }, t(r.demo || Demo.on ? 'ieltsSpeaking.demoNoTranscript' : 'ieltsSpeaking.noSpeech')),
+                  : h('p', { class: 'sanswer__text muted' }, t(x.skipped ? 'ieltsSpeaking.noSpeech' : 'review.recorded')),
                 x.skipped && h('p', { class: 'small muted' }, t('ieltsSpeaking.skippedAnswer')),
                 m?.text?.length > 0 && h('details', { class: 'sanswer__model' }, h('summary', null, t('ieltsSpeaking.modelAnswer') + (m.band != null ? ` · band ${m.band}` : '')),
                   m.text.map((y) => h('p', { lang: 'en' }, y)),

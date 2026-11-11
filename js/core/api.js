@@ -1,6 +1,7 @@
-// API client — ported from ai-tutor's client so attempts and scores live in the
-// same backend (prod-server.justtostudy.kz, Bearer token). AI routes (/api/*)
-// are ai-tutor's Next.js routes, reached through server.js's same-origin proxy.
+// API client. The student's account and data live on the platform's own API
+// (IELTS_CONFIG.apiBase → server/, Bearer token); test content is read from the
+// platform's copy (IELTS_CONFIG.contentApi). Paths and shapes follow ai-tutor's,
+// so the screens ported from it read the same responses.
 (function () {
   const API_BASE = IELTS_CONFIG.apiBase.replace(/\/+$/, '');
   // Test content (lists, documents, transcripts, model answers, mocks) comes from the
@@ -65,11 +66,12 @@
   const mut = (p) => p.finally(clearCache);
   const enc = encodeURIComponent;
 
-  // Public (no token) POST as ai-tutor's `ep`: appends jts_app=student.
-  const pub = (p, b) => Api.request('POST', p + (p.includes('?') ? '&' : '?') + 'jts_app=student', b, { auth: false });
+  // Public (no token) POST.
+  const pub = (p, b) => Api.request('POST', p, b, { auth: false });
 
-  // Same-origin Next routes (via proxy).
+  // Grading routes that were ai-tutor's /api/* — now on the platform's API (multipart or JSON).
   async function local(path, { method = 'POST', json, form, raw } = {}) {
+    path = path.replace(/^\/api\//, API_BASE + '/');
     const headers = {};
     const tok = Auth.token;
     if (tok) headers.Authorization = `Bearer ${tok}`;
@@ -118,15 +120,25 @@
       setRole: (id, role) => sreq('PUT', `/staff/users/${id}/role`, { role }),
       remove: (id) => sreq('DELETE', `/staff/users/${id}`),
       decide: (id, status, comment) => sreq('POST', `/staff/scores/${id}`, { status, comment }),
+      userAttempts: (id) => sreq('GET', `/staff/users/${id}/attempts`),
+      reviews: (done) => sreq('GET', '/staff/reviews' + (done ? '?status=done' : '')),
+      attempt: (id) => sreq('GET', `/staff/attempts/${id}`),
+      grade: (id, body) => sreq('POST', `/staff/attempts/${id}/grade`, body),
+      // a recording as an object URL (the request needs the token)
+      audio: async (id) => {
+        const r = await fetch(IELTS_CONFIG.staffApi + `/staff/audio/${id}`, { headers: { Authorization: `Bearer ${Auth.token}` } });
+        if (!r.ok) throw new Error(t('err.server', { status: r.status }));
+        return URL.createObjectURL(await r.blob());
+      },
+      tests: (skill, q = '') => sreq('GET', `/staff/tests?skill=${enc(skill)}&q=${enc(q)}`),
+      test: (id) => sreq('GET', `/staff/tests/${enc(id)}`),
     },
 
     // ---- auth ----
     login: (login, password) => pub('/auth/login', { ...(/@/.test(login) ? { email: String(login).trim().toLowerCase() } : { phone: String(login).replace(/[^\d+]/g, '') }), password }),
+    logout: () => post('/auth/logout').catch(() => null),
     currentUser: () => get('/user/me'),
-    registrationInitiate: (body) => pub('/registration/initiate', body),
-    registrationVerify: (body) => pub('/registration/verify', body),
-    otpRequest: (body) => pub('/auth/otp/request', body),
-    otpVerify: (body) => pub('/auth/otp/verify', body),
+    register: (body) => pub('/registration', body),
     setPassword: (password) => post('/user/set-password', { password }),
     quotaUsage: () => get('/mobile/content-quota/usage?area=IELTS'),
     // vocabulary (IELTS sets + spaced repetition + the user's own words)
@@ -152,13 +164,13 @@
     saveProfile: (body) => mut(put('/mobile/ielts/profile', body)),
     setRoute: (route) => mut(put('/mobile/ielts/profile/route', { route })),
     progress: () => get('/mobile/ielts/progress'),
-    tests: (skill = 'reading') => cached('tests|' + skill, 12e4, () => cget(`/mobile/ielts/tests?skill=${enc(skill)}`)),
+    // the bank's list with this student's attempts on each test
+    tests: (skill = 'reading') => cached('tests|' + skill, 3e4, () => get(`/mobile/ielts/tests?skill=${enc(skill)}`)),
     test: (id) => cget(`/mobile/ielts/tests/${enc(id)}`),
     transcript: (id) => cget(`/mobile/ielts/tests/${enc(id)}/transcript`),
     writingModel: (id) => cget(`/mobile/ielts/tests/${enc(id)}/model`),
-    // answers are checked on the platform (content/keys); tests without a key fall back to the backend
-    check: (id, body) => Api.request('POST', `/mobile/ielts/tests/${enc(id)}/check`, body, CONTENT)
-      .catch((e) => (e.status === 404 ? post(`/mobile/ielts/tests/${enc(id)}/check`, body) : Promise.reject(e))),
+    // one answer checked by the bank's keys (content/keys)
+    check: (id, body) => Api.request('POST', `/mobile/ielts/tests/${enc(id)}/check`, body, CONTENT),
     submitAttempt: (id, body) => mut(post(`/mobile/ielts/tests/${enc(id)}/attempts`, body)),
     submitWriting: (id, body) => mut(post(`/mobile/ielts/tests/${enc(id)}/writing`, body)),
     attempt: (id) => get(`/mobile/ielts/attempts/${enc(id)}`),
@@ -169,9 +181,12 @@
     submitDiagnostic: (body) => mut(post('/mobile/ielts/diagnostic', body)),
     lastDiagnostic: () => get('/mobile/ielts/diagnostic/last'),
     diagnosticPath: (body) => post('/mobile/ielts/diagnostic/path', body),
-    // the course programmes (content/programmes.json); plain fetch so demo mode reads the same file
-    programmes: () => cached('programmes', 6e5, () => fetch(CONTENT.base + '/mobile/ielts/programmes').then((r) => { if (!r.ok) throw new Error(t('err.server', { status: r.status })); return r.json(); })),
-    mocks: (module) => cached('mocks|' + (module || ''), 3e4, () => cget('/mobile/ielts/mocks' + (module ? `?module=${enc(module)}` : ''))),
+    // the course programmes (content/programmes.json)
+    programmes: () => cached('programmes', 6e5, () => cget('/mobile/ielts/programmes')),
+    // the plan's marks (start date, mode, done and moved tasks), see js/core/plan-local.js
+    planState: () => get('/mobile/ielts/plan/state').then((r) => r?.state ?? null),
+    savePlanState: (state) => put('/mobile/ielts/plan/state', { state }),
+    mocks: (module) => cached('mocks|' + (module || ''), 3e4, () => get('/mobile/ielts/mocks' + (module ? `?module=${enc(module)}` : ''))),
     startMock: (id) => mut(post(`/mobile/ielts/mocks/${enc(id)}/sessions`, {})),
     mockSession: (sid) => get(`/mobile/ielts/mocks/sessions/${sid}`),
     startMockSection: (sid, sec) => post(`/mobile/ielts/mocks/sessions/${sid}/sections/${sec}/start`, {}),
@@ -182,15 +197,9 @@
     saveWord: (body) => mut(post('/mobile/saved-words', { language: 'ru', ...body })),
     translate: (q, tl = 'ru') => get(`/translate?tl=${tl}&q=${enc(q)}`),
 
-    // ---- AI (ai-tutor Next routes) ----
-    // current flow: grade a saved attempt; errors carry {error:"<code>"}
+    // ---- writing and speaking: saved for a teacher to grade (status 'pending_review') ----
+    // returns the essay's attempt as it stands; errors carry {error:"<code>"}
     assessIeltsWriting: (attemptId, uiLang) => Api.local('/api/ielts/writing/assess', { json: { attemptId, uiLang } }).catch((e) => { e.code = e.data?.error || e.code; throw e; }),
-    assessWriting: (body) => Api.local('/api/ielts/assess-writing', { json: body }),
-    assessSpeaking: (body) => Api.local('/api/ielts/assess-speaking', { json: body }),
-    transcribe: (form) => Api.local('/api/transcribe', { form }),
-    recordSection: (body) => Api.local('/api/ielts/record-section', { json: body }).catch(() => null),
-    ieltsScores: (q = '') => local(`/api/ielts/scores${q}`, { method: 'GET' }),
-    tts: (text, voice) => Api.local('/api/tutor-tts', { json: { text, voice }, raw: true }),
   };
   window.Api = Api;
 })();

@@ -1,10 +1,14 @@
 /* ==========================================================================
    Database: the connection pool and the schema.
 
-   Accounts themselves live on the ai-tutor backend. This database keeps only
-   what the staff area adds to them: a role, the plans a student has, the
-   official IELTS results waiting for confirmation, and a snapshot of where
-   the student is (route, bands, exam date) for the staff table.
+   Everything the platform knows about its people: accounts (password and
+   sign-in sessions), the role and plans, the student's profile, every test
+   attempt with its answers and result, recorded speaking answers, the
+   student's own state (plan marks, vocabulary, mock sessions) and the
+   official IELTS results waiting for confirmation.
+
+   Migration 1 was written when accounts lived on ai-tutor (users.ext_id);
+   from migration 2 on the platform has its own accounts.
 
    Schema changes are numbered migrations, applied once each and in order
    when the API starts. Never edit one that has shipped: add the next number.
@@ -58,6 +62,59 @@ const MIGRATIONS = [
      created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
    );
    CREATE INDEX IF NOT EXISTS score_reports_user_idx ON score_reports (user_id, taken_on DESC)`,
+
+  /* 2: own accounts and the student's data. */
+  `ALTER TABLE users ALTER COLUMN ext_id DROP NOT NULL;
+   ALTER TABLE users ADD COLUMN password_hash TEXT;
+   ALTER TABLE users ADD COLUMN birth_date DATE;
+   ALTER TABLE users ADD COLUMN lang TEXT;
+   ALTER TABLE users ADD COLUMN profile JSONB NOT NULL DEFAULT '{}';
+   CREATE UNIQUE INDEX users_email_login_idx ON users (lower(email)) WHERE email IS NOT NULL AND password_hash IS NOT NULL;
+   CREATE UNIQUE INDEX users_phone_login_idx ON users (phone) WHERE phone IS NOT NULL AND password_hash IS NOT NULL;
+   CREATE TABLE sessions (
+     token_hash    TEXT PRIMARY KEY,
+     user_id       INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+     created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+     last_used_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+   );
+   CREATE INDEX sessions_user_idx ON sessions (user_id);
+   CREATE TABLE attempts (
+     id           SERIAL PRIMARY KEY,
+     user_id      INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+     test_id      TEXT NOT NULL,
+     skill        TEXT NOT NULL,
+     kind         TEXT,
+     title        TEXT NOT NULL DEFAULT '',
+     mode         TEXT NOT NULL DEFAULT 'practice',
+     status       TEXT NOT NULL DEFAULT 'done' CHECK (status IN ('done', 'pending_review')),
+     band         NUMERIC(2,1),
+     raw_score    INTEGER,
+     max_score    INTEGER,
+     time_sec     INTEGER,
+     answers      JSONB NOT NULL DEFAULT '{}',
+     result       JSONB NOT NULL DEFAULT '{}',
+     finished_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+     reviewed_by  INTEGER REFERENCES users (id) ON DELETE SET NULL,
+     reviewed_at  TIMESTAMPTZ
+   );
+   CREATE INDEX attempts_user_idx ON attempts (user_id, finished_at DESC);
+   CREATE INDEX attempts_review_idx ON attempts (status, finished_at) WHERE status = 'pending_review';
+   CREATE TABLE attempt_audio (
+     id          SERIAL PRIMARY KEY,
+     attempt_id  INTEGER NOT NULL REFERENCES attempts (id) ON DELETE CASCADE,
+     item_id     TEXT NOT NULL,
+     duration    REAL,
+     mime        TEXT NOT NULL DEFAULT 'audio/wav',
+     data        BYTEA NOT NULL
+   );
+   CREATE INDEX attempt_audio_attempt_idx ON attempt_audio (attempt_id);
+   CREATE TABLE user_state (
+     user_id     INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+     key         TEXT NOT NULL,
+     value       JSONB NOT NULL,
+     updated_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+     PRIMARY KEY (user_id, key)
+   )`,
 ];
 
 async function tx(fn) {

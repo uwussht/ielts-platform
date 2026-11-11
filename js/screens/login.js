@@ -1,4 +1,4 @@
-// Login — email + password against the ai-tutor backend, styled like the TeenTech login.
+// Login — email or phone + password against the platform's API, styled like the TeenTech login.
 (function () {
   const { h, svg, BRAND } = DOM;
 
@@ -44,7 +44,6 @@
           const token = res?.token || res?.accessToken || res?.access_token || res?.jwt;
           if (!token) throw new Error(t('login.error'));
           Api.Auth.set(token);
-          Demo.set(false);
           State.me = null; State.user = res?.user || null;
           const next = p.next && p.next.startsWith('?') && !p.next.includes('screen=login') ? p.next : '?screen=ielts';
           history.replaceState(null, '', next); Router.emit();
@@ -57,9 +56,7 @@
         h('div', { class: 'field' }, h('label', { for: 'email' }, t('login.identifierPlaceholder')), email),
         h('div', { class: 'field' }, h('label', { for: 'password' }, t('app.login.password')), pw.node),
         err, hint, btn,
-        h('p', { class: 'small', style: { textAlign: 'center' } }, h('a', { class: 'link', href: '?screen=login-code' }, t('login.useOtp'))),
-        h('p', { class: 'small', style: { textAlign: 'center' } }, t('app.login.noProfile'), ' ', h('a', { class: 'link', href: '?screen=register' }, t('app.login.create'))),
-        h('p', { class: 'small', style: { textAlign: 'center' } }, h('button', { type: 'button', class: 'btn btn--ghost btn--sm', onclick: () => { Demo.set(true); State.me = null; Router.go({ screen: 'ielts' }, { replace: true }); } }, t('app.login.demo'))));
+        h('p', { class: 'small', style: { textAlign: 'center' } }, t('app.login.noProfile'), ' ', h('a', { class: 'link', href: '?screen=register' }, t('app.login.create'))));
       return shell(form);
     },
   };

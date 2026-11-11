@@ -150,7 +150,7 @@
             return h('tr', null,
               h('td', { 'data-label': t('staff.col.name') },
                 h('div', { class: 'staff-who' }, h('div', { class: 'avatar', 'aria-hidden': 'true' }, DOM.initials(u.name)),
-                  h('div', null, h('b', null, u.name || '—'),
+                  h('div', null, h('a', { class: 'link', href: Router.href({ screen: 'staff-student', student: u.id }) }, h('b', null, u.name || '—')),
                     h('div', { class: 'xs muted' }, u.phone || ''), u.email && h('div', { class: 'xs muted' }, u.email)))),
               h('td', { class: 'small', 'data-label': t('staff.col.start') }, fmt(u.createdAt)),
               h('td', { 'data-label': t('staff.col.route') }, routeCell(u)),

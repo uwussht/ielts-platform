@@ -7,11 +7,10 @@
 // length (programmes.json `durations`) packs programme weeks into fewer calendar weeks. Each
 // calendar week's tasks are spread over its first six days in order, the week's control is on the seventh.
 //
-// Per-student state (start date, mode, start band, done marks, moved dates) is kept in this
-// browser under STORE until the platform's own API stores it (see server/).
+// Per-student state (start date, mode, start band, done marks, moved dates) is kept on the
+// platform's API (Api.planState / Api.savePlanState, server/src/student.js).
 (function () {
   if (IELTS_CONFIG.planSource !== 'local') return;
-  const STORE = 'ielts_plan.v1';
   const STUDY_DAYS = 6;                  // days 1–6 of each week; day 7 holds the week's control
   const CONTROL_DAY = 6;
   // stage programmes and the band each one ends at; a route runs from the first stage above
@@ -25,8 +24,14 @@
   const addDays = (ymd, n) => { const d = new Date(ymd + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return iso(d); };
   const daysBetween = (a, b) => Math.round((Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / 864e5);
 
-  function load() { try { return JSON.parse(localStorage.getItem(STORE) || 'null'); } catch { return null; } }
-  function save(s) { try { localStorage.setItem(STORE, JSON.stringify(s)); } catch {} }
+  // one request per screen: the state is read once and reused until a mark changes it
+  // (per signed-in account)
+  let memo = null, memoTok = null;
+  function load() {
+    if (memoTok !== Api.Auth.token) { memo = null; memoTok = Api.Auth.token; }
+    return (memo ||= Api.planState().catch((e) => { memo = null; throw e; }));
+  }
+  async function save(s) { memo = Promise.resolve(s); await Api.savePlanState(s); }
 
   function route(start, target) {
     if (start == null) return [];
@@ -53,12 +58,12 @@
   }
 
   async function build() {
-    const [data, profile] = await Promise.all([Api.programmes(), Api.profile().catch(() => null)]);
+    const [data, profile, saved] = await Promise.all([Api.programmes(), Api.profile().catch(() => null), load()]);
     const byId = Object.fromEntries((data?.programmes || []).map((p) => [p.id, p]));
     const today = todayISO();
-    let s = load();
+    let s = saved;
     const nowBand = profile?.bands?.overall ?? null;
-    if (!s && nowBand != null) { s = { startDate: today, mode: 'self', startBand: nowBand, done: {}, moved: {} }; save(s); }
+    if (!s && nowBand != null) { s = { startDate: today, mode: 'self', startBand: nowBand, done: {}, moved: {} }; await save(s); }
     const target = profile?.targetBand ?? null;
     if (!s) return { pending: true, today, target };
 
@@ -137,15 +142,15 @@
     return { ...(d || {}), programme: programmeBlock(b, d?.examDate ?? null) };
   };
   Api.markPlanTask = async (id, done) => {
-    const s = load(); if (!s) return null;
+    const s = await load(); if (!s) return null;
     if (done) s.done[id] = new Date().toISOString(); else delete s.done[id];
-    save(s); Api.clearCache(); return { ok: true };
+    await save(s); Api.clearCache(); return { ok: true };
   };
   Api.movePlanTask = async (id, date) => {
-    const s = load(); if (!s) return null;
-    s.moved[id] = date; save(s); Api.clearCache(); return { ok: true };
+    const s = await load(); if (!s) return null;
+    s.moved[id] = date; await save(s); Api.clearCache(); return { ok: true };
   };
   // start over from this week (e.g. after a new diagnostic); keeps nothing
-  Api.resetPlan = () => { try { localStorage.removeItem(STORE); } catch {} Api.clearCache(); };
+  Api.resetPlan = async () => { memo = null; await Api.savePlanState(null); Api.clearCache(); };
   window.PlanLocal = { route, spread, build };
 })();

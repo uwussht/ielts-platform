@@ -1,0 +1,434 @@
+{
+ "id": "A1",
+ "levels": {
+  "light": {
+   "minutes": 20,
+   "listening": {
+    "slots": [
+     1
+    ],
+    "take": {
+     "1": 3
+    },
+    "mode": "practice",
+    "minutes": 5
+   },
+   "reading": {
+    "light": true,
+    "minutes": 6
+   },
+   "writing": {
+    "words": 120,
+    "minutes": 5
+   },
+   "speaking": {
+    "part1": 2,
+    "monologueSec": 60,
+    "answerSec": 30,
+    "prepSec": 30,
+    "minutes": 4
+   }
+  },
+  "standard": {
+   "minutes": 45,
+   "listening": {
+    "slots": [
+     1,
+     2
+    ],
+    "mode": "exam",
+    "minutes": 10
+   },
+   "reading": {
+    "light": false,
+    "minutes": 15
+   },
+   "writing": {
+    "words": 250,
+    "minutes": 12
+   },
+   "speaking": {
+    "part1": 3,
+    "monologueSec": 120,
+    "answerSec": 45,
+    "prepSec": 60,
+    "minutes": 8
+   }
+  },
+  "full": {
+   "minutes": 70,
+   "listening": {
+    "slots": [
+     1,
+     2
+    ],
+    "mode": "exam",
+    "minutes": 14
+   },
+   "reading": {
+    "light": false,
+    "minutes": 20
+   },
+   "writing": {
+    "words": 250,
+    "minutes": 25
+   },
+   "speaking": {
+    "part1": 4,
+    "monologueSec": 120,
+    "answerSec": 45,
+    "prepSec": 60,
+    "minutes": 11
+   }
+  }
+ },
+ "listening": {
+  "slots": [
+   {
+    "slot": 1,
+    "clips": [
+     {
+      "id": "L1a",
+      "context": "A caller is booking a place on a weekend cooking course.",
+      "instruction": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "audio": null,
+      "transcript": [
+       "Woman: Good morning, Riverside Community Kitchen.",
+       "Man: Hi, I would like to book the weekend bread course.",
+       "Woman: Of course. That starts on Saturday the fourteenth at nine thirty.",
+       "Man: And how much is it?",
+       "Woman: Forty-five pounds, and that includes all the flour and an apron.",
+       "Man: Great. My name is Daniel Brook."
+      ],
+      "items": [
+       {
+        "id": "dl1",
+        "type": "form_completion",
+        "prompt": "Course starts at: ____ on Saturday",
+        "answer": "9:30|nine thirty|9.30",
+        "inputmode": "numeric"
+       },
+       {
+        "id": "dl2",
+        "type": "form_completion",
+        "prompt": "Price: £____",
+        "answer": "45|forty-five",
+        "inputmode": "numeric"
+       },
+       {
+        "id": "dl3",
+        "type": "form_completion",
+        "prompt": "Price includes flour and an ____",
+        "answer": "apron"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "slot": 2,
+    "clips": [
+     {
+      "id": "L2a",
+      "context": "A guide talks to visitors at the start of a museum tour.",
+      "instruction": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "audio": null,
+      "transcript": [
+       "Guide: Welcome to the harbour museum. The tour lasts about forty minutes.",
+       "We begin in the ship room, then visit the map gallery.",
+       "Photography is allowed everywhere except the map gallery, because the old paper is fragile."
+      ],
+      "items": [
+       {
+        "id": "dl4",
+        "type": "multiple_choice_single",
+        "prompt": "How long is the tour?",
+        "options": [
+         {
+          "key": "A",
+          "text": "20 minutes"
+         },
+         {
+          "key": "B",
+          "text": "40 minutes"
+         },
+         {
+          "key": "C",
+          "text": "one hour"
+         }
+        ],
+        "answer": "B"
+       },
+       {
+        "id": "dl5",
+        "type": "multiple_choice_single",
+        "prompt": "Where are photos not allowed?",
+        "options": [
+         {
+          "key": "A",
+          "text": "the ship room"
+         },
+         {
+          "key": "B",
+          "text": "the café"
+         },
+         {
+          "key": "C",
+          "text": "the map gallery"
+         }
+        ],
+        "answer": "C"
+       }
+      ]
+     },
+     {
+      "id": "L2b",
+      "context": "A guide talks to visitors at the start of a garden tour.",
+      "instruction": "Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+      "audio": null,
+      "transcript": [
+       "Guide: Welcome to the botanical garden. Our walk takes about forty minutes.",
+       "We start in the glasshouse and finish by the lake.",
+       "Please do not take photos inside the glasshouse; the flash harms the young plants."
+      ],
+      "items": [
+       {
+        "id": "dl4b",
+        "type": "multiple_choice_single",
+        "prompt": "How long is the walk?",
+        "options": [
+         {
+          "key": "A",
+          "text": "20 minutes"
+         },
+         {
+          "key": "B",
+          "text": "40 minutes"
+         },
+         {
+          "key": "C",
+          "text": "one hour"
+         }
+        ],
+        "answer": "B"
+       },
+       {
+        "id": "dl5b",
+        "type": "multiple_choice_single",
+        "prompt": "Where are photos not allowed?",
+        "options": [
+         {
+          "key": "A",
+          "text": "the lake"
+         },
+         {
+          "key": "B",
+          "text": "the glasshouse"
+         },
+         {
+          "key": "C",
+          "text": "the entrance"
+         }
+        ],
+        "answer": "B"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "reading": {
+  "academic": {
+   "title": "The return of urban bees",
+   "paragraphs": [
+    "## A",
+    "Over the last decade, rooftop beehives have appeared on offices, hotels and schools in many large cities. Supporters argue that urban hives help pollinate parks and gardens and raise awareness of declining insect numbers.",
+    "## B",
+    "However, some ecologists warn that too many honeybee hives can harm wild bees, which compete for the same flowers. In parts of central London, the number of hives per square kilometre is now higher than in most farmland.",
+    "## C",
+    "Researchers therefore recommend planting more flowering plants before adding new hives. A city, they say, should measure the food available to insects rather than simply count beehives."
+   ],
+   "headings": [
+    {
+     "key": "i",
+     "text": "A possible downside of a popular trend"
+    },
+    {
+     "key": "ii",
+     "text": "The spread of hives in cities"
+    },
+    {
+     "key": "iii",
+     "text": "A suggested change of approach"
+    },
+    {
+     "key": "iv",
+     "text": "The cost of keeping bees"
+    }
+   ],
+   "items": [
+    {
+     "id": "dr1",
+     "type": "matching_headings",
+     "prompt": "Paragraph A",
+     "answer": "ii",
+     "instruction": "Choose the correct heading for each paragraph."
+    },
+    {
+     "id": "dr2",
+     "type": "matching_headings",
+     "prompt": "Paragraph B",
+     "answer": "i",
+     "instruction": "Choose the correct heading for each paragraph."
+    },
+    {
+     "id": "dr3",
+     "type": "tfng",
+     "prompt": "Urban hives are found only on office buildings.",
+     "answer": "FALSE",
+     "instruction": "Do the statements agree with the information in the passage?"
+    },
+    {
+     "id": "dr4",
+     "type": "tfng",
+     "prompt": "Honeybees and wild bees feed on the same flowers.",
+     "answer": "TRUE",
+     "instruction": "Do the statements agree with the information in the passage?"
+    },
+    {
+     "id": "dr5",
+     "type": "tfng",
+     "prompt": "Rooftop beekeeping is more profitable than farming.",
+     "answer": "NOT GIVEN",
+     "instruction": "Do the statements agree with the information in the passage?"
+    },
+    {
+     "id": "dr6",
+     "type": "sentence_completion",
+     "prompt": "Cities should measure the ____ available to insects.",
+     "answer": "food",
+     "instruction": "Complete the sentence with ONE WORD from the passage."
+    }
+   ],
+   "lightItems": [
+    "dr1",
+    "dr3",
+    "dr4",
+    "dr6"
+   ]
+  },
+  "general": {
+   "title": "The return of urban bees",
+   "paragraphs": [
+    "## A",
+    "Over the last decade, rooftop beehives have appeared on offices, hotels and schools in many large cities. Supporters argue that urban hives help pollinate parks and gardens and raise awareness of declining insect numbers.",
+    "## B",
+    "However, some ecologists warn that too many honeybee hives can harm wild bees, which compete for the same flowers. In parts of central London, the number of hives per square kilometre is now higher than in most farmland.",
+    "## C",
+    "Researchers therefore recommend planting more flowering plants before adding new hives. A city, they say, should measure the food available to insects rather than simply count beehives."
+   ],
+   "headings": [
+    {
+     "key": "i",
+     "text": "A possible downside of a popular trend"
+    },
+    {
+     "key": "ii",
+     "text": "The spread of hives in cities"
+    },
+    {
+     "key": "iii",
+     "text": "A suggested change of approach"
+    },
+    {
+     "key": "iv",
+     "text": "The cost of keeping bees"
+    }
+   ],
+   "items": [
+    {
+     "id": "dr1",
+     "type": "matching_headings",
+     "prompt": "Paragraph A",
+     "answer": "ii",
+     "instruction": "Choose the correct heading for each paragraph."
+    },
+    {
+     "id": "dr2",
+     "type": "matching_headings",
+     "prompt": "Paragraph B",
+     "answer": "i",
+     "instruction": "Choose the correct heading for each paragraph."
+    },
+    {
+     "id": "dr3",
+     "type": "tfng",
+     "prompt": "Urban hives are found only on office buildings.",
+     "answer": "FALSE",
+     "instruction": "Do the statements agree with the information in the passage?"
+    },
+    {
+     "id": "dr4",
+     "type": "tfng",
+     "prompt": "Honeybees and wild bees feed on the same flowers.",
+     "answer": "TRUE",
+     "instruction": "Do the statements agree with the information in the passage?"
+    },
+    {
+     "id": "dr5",
+     "type": "tfng",
+     "prompt": "Rooftop beekeeping is more profitable than farming.",
+     "answer": "NOT GIVEN",
+     "instruction": "Do the statements agree with the information in the passage?"
+    },
+    {
+     "id": "dr6",
+     "type": "sentence_completion",
+     "prompt": "Cities should measure the ____ available to insects.",
+     "answer": "food",
+     "instruction": "Complete the sentence with ONE WORD from the passage."
+    }
+   ],
+   "lightItems": [
+    "dr1",
+    "dr3",
+    "dr4",
+    "dr6"
+   ]
+  }
+ },
+ "writing": {
+  "question": "Some people think that schools should teach practical skills such as cooking and managing money, while others believe academic subjects are more important.\n\nDiscuss both views and give your own opinion."
+ },
+ "speaking": {
+  "part1": [
+   {
+    "id": "ds1",
+    "text": "Where do you live, and what do you like about it?"
+   },
+   {
+    "id": "ds2",
+    "text": "How do you usually spend your weekends?"
+   },
+   {
+    "id": "ds3",
+    "text": "Do you prefer reading books or watching films? Why?"
+   },
+   {
+    "id": "ds4",
+    "text": "What kind of music do you enjoy?"
+   }
+  ],
+  "cueCard": {
+   "id": "ds5",
+   "topic": "Describe a skill you would like to learn.",
+   "points": [
+    "what the skill is",
+    "why you want to learn it",
+    "how you would learn it"
+   ],
+   "explain": "and explain how this skill would help you in the future."
+  }
+ }
+}

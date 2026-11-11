@@ -1,6 +1,6 @@
 // IELTS Writing — ai-tutor HI (task page), Vf (editor), HF (AI review), HP (works lists),
-// HB (guide «Как писать»), chart renderer HM. Grading is server-side via ai-tutor's
-// /api/ielts/writing/assess; drafts live in localStorage like ai-tutor.
+// HB (guide «Как писать»), chart renderer HM. Essays are saved on the platform's API and
+// a teacher grades them in the staff area; drafts live in localStorage like ai-tutor.
 (function () {
   const { h, icon } = DOM;
   const put = (el, ...k) => el.replaceChildren(...k.flat(9).filter((x) => x != null && x !== false && x !== ''));
@@ -404,6 +404,9 @@
             h('div', { class: 'wscore__crit' }, CRIT.map((c) => h('div', null, h('b', null, bandTxt(r.criteria?.[c])), h('span', null, critLabel(c, k))))),
             r.feedback && h('p', { class: 'wscore__fb' }, r.feedback),
             h('div', { class: 'row' }, h('a', { class: 'btn btn--primary', href: retry }, t('ieltsWriting.p.work.again'))))
+            : r.status === 'pending_review' && !st.busy ? h('section', { class: 'card wstatus', role: 'status' },
+              h('span', { class: 'wstatus__ic' }, icon('clock')),
+              h('div', { class: 'grow stack-sm' }, h('b', null, t('review.pendingTitle')), h('p', { class: 'small' }, t('review.pendingWriting'))))
             : h('section', { class: 'card wstatus' + (r.status === 'failed' || st.err ? ' is-bad' : ''), role: 'status' },
               h('span', { class: 'wstatus__ic' }, icon(O === 'grading' ? 'spark' : 'clock')),
               h('div', { class: 'grow stack-sm' },

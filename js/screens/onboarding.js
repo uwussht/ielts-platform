@@ -1,6 +1,6 @@
 // IELTS onboarding (V5), diagnostic (Z4), diagnostic result (Jl) and route choice (Jd).
 // Profile and diagnostic live on prod-server; writing/speaking of the diagnostic are graded by
-// ai-tutor's /api/ielts/diagnostic/assess (proxied). Mascot artwork is replaced by line icons.
+// the platform's API (/ielts/diagnostic/assess; a teacher grades writing and speaking). Mascot artwork is replaced by line icons.
 (function () {
   const { h, icon } = DOM;
   const put = (el, ...k) => el.replaceChildren(...k.flat(9).filter((x) => x != null && x !== false && x !== ''));
@@ -493,7 +493,7 @@
             const pending = (s === 'writing' || s === 'speaking') && ws && (ws.status === 'pending_ai' || ws.status === 'grading');
             if (pending && !gs[s] && !gradeRuns[id + s]) setTimeout(() => run(s));
             const status = band != null ? (light && raw ? '≈' : '') + Number(band).toFixed(1)
-              : gs[s] === 'run' || ws?.status === 'grading' ? t('ieltsOb.grading') : gs[s] === 'err' || ws?.status === 'failed' ? t('ieltsOb.gradeFailed') : gs[s] === 'lost' ? t('ieltsOb.gradeLost') : ws?.status === 'pending_ai' ? t('ieltsOb.waitsAiShort') : D('result.skipped');
+              : gs[s] === 'run' || ws?.status === 'grading' ? t('ieltsOb.grading') : gs[s] === 'err' || ws?.status === 'failed' ? t('ieltsOb.gradeFailed') : gs[s] === 'lost' ? t('ieltsOb.gradeLost') : ws?.status === 'pending_ai' ? t('ieltsOb.waitsAiShort') : ws?.status === 'pending_review' ? t('review.short') : D('result.skipped');
             return h('section', { class: 'card stack-sm' }, h('div', { class: 'row' }, Hub.plate(s, 36), h('b', { class: 'grow' }, D('block.' + s)), h('b', { class: band != null ? 'dres__band' : 'small muted' }, status)),
               h('div', { class: 'progress' }, h('i', { style: { width: ((band || 0) / 9) * 100 + '%' } })),
               h('p', { class: 'xs muted' }, raw ? t('ieltsOb.rawOf', { n: raw.correct, total: raw.total }) : s === 'writing' && ws ? t('ieltsOb.essaySaved', { n: ws.words || 0 }) : s === 'speaking' && ws ? t('ieltsOb.speakingSaved', { n: ws.answers || 0, sec: Math.round(ws.seconds || 0) }) : ''),

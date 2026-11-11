@@ -56,6 +56,8 @@
   const STAFF_NAV = [
     { group: 'staff.nav.group' },
     { screen: 'staff', key: 'staff.nav', icon: 'users' },
+    { screen: 'staff-review', key: 'review.nav', icon: 'check' },
+    { screen: 'staff-tests', key: 'bank.nav', icon: 'theory' },
   ];
   const can = (perm) => !!State.staff?.perms?.includes(perm);
   const TITLES = { today: 'app.nav.today', plan: 'app.nav.plan', learn: 'app.nav.practice', mocks: 'app.nav.mocks', progress: 'ieltsProgressV.title', vocab: 'app.nav.vocab', info: 'app.nav.about' };
@@ -103,7 +105,7 @@
           icon(State.theme === 'dark' ? 'sun' : 'moon'))),
       h('div', { class: 'user' },
         h('div', { class: 'avatar', 'aria-hidden': 'true' }, initials(name)),
-        h('div', { class: 'grow' }, h('div', { class: 'user__name' }, name || '—'), h('div', { class: 'user__sub' }, Demo.on ? 'Demo' : (State.user?.email || ''))),
+        h('div', { class: 'grow' }, h('div', { class: 'user__name' }, name || '—'), h('div', { class: 'user__sub' }, State.user?.email || '')),
         h('button', { class: 'icon-btn', type: 'button', onclick: logout, 'aria-label': t('app.logout'), title: t('app.logout') }, icon('logout'))));
   }
 
@@ -149,12 +151,12 @@
   function closeDrawer() { if (!drawerOpen) return; drawerOpen = false; renderShellOnly(); }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drawerOpen) closeDrawer(); });
 
-  function logout() {
-    Api.Auth.clear(); Demo.set(false);
+  function logout(remote = true) {
+    if (remote) Api.logout(); Api.Auth.clear();
     State.me = null; State.user = null; State.staff = null;
     Router.go({ screen: 'login' }, { replace: true });
   }
-  window.addEventListener('unauthorized', () => { if (!Demo.on) logout(); });
+  window.addEventListener('unauthorized', () => logout(false));
 
   // ---------- render ----------
   let shellEl = null, mainEl = null, contentEl = null;
@@ -178,9 +180,9 @@
     for (const fn of current.leave.splice(0)) { try { fn(); } catch (e) { console.error(e); } }
     current.params = p;
     drawerOpen = false;
-    const authed = !!Api.Auth.token || Demo.on;
+    const authed = !!Api.Auth.token;
 
-    const PUBLIC = ['login', 'register', 'login-code'];
+    const PUBLIC = ['login', 'register'];
     if (!authed && !PUBLIC.includes(p.screen)) return Router.go({ screen: 'login', next: location.search }, { replace: true });
     if (authed && PUBLIC.includes(p.screen)) return Router.go({ screen: 'ielts' }, { replace: true });
 
@@ -192,7 +194,7 @@
         State.me = { ...me, targetBand: prof?.targetBand ?? me.targetBand ?? null, examDate: prof?.examDate ?? me.examDate ?? null };
         State.user = user;
         loadStaff(prof);
-      } catch (e) { if (e.status === 401) return logout(); State.me = {}; }
+      } catch (e) { if (e.status === 401) return logout(false); State.me = {}; }
       if (State.me?.track && !store.get('ielts_track')) State.trackLocal = State.me.track;
     }
 

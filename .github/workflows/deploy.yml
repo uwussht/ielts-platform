@@ -54,6 +54,9 @@ jobs:
           git fetch --prune origin main
           git reset --hard "$SHA"
           docker compose up -d --build --remove-orphans db api web
+          # test audio and pictures: downloads in the background into the media volume,
+          # skipping files already there, then exits (the site serves them from /media)
+          docker compose up -d media
           docker image prune -f >/dev/null
           docker compose ps
           EOF

@@ -1,0 +1,9 @@
+# Not needed inside the images (both are built from the repository root).
+.git
+.github
+.claude
+.env
+**/node_modules
+content/media
+content/source
+*.log

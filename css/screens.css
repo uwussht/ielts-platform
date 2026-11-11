@@ -134,3 +134,14 @@ html[data-theme="light"] .auth .eyebrow { color: var(--eyebrow); }
   .prg-week__text { flex-basis: calc(100% - 100px); }
   .prg-week__body { padding: 4px 14px 14px; }
 }
+
+/* ---------- staff: checking and the test bank (js/screens/staff-admin.js) ---------- */
+.review-crit { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.review-essay { display: grid; gap: 10px; padding: 14px 16px; border-radius: var(--r-md); background: var(--surface-2); line-height: 1.6; }
+.review-essay p { margin: 0; }
+.review-audio { padding-left: 20px; }
+.bank-items { padding-left: 20px; }
+.bank-key { padding: 6px 10px; border-left: 3px solid var(--brand-600); background: var(--surface-2); border-radius: var(--r-sm); }
+.bank-audio { width: 100%; max-width: 520px; }
+.pre { white-space: pre-line; }
+@media (max-width: 720px) { .review-crit { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

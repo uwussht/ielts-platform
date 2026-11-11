@@ -1,7 +1,8 @@
 /* ==========================================================================
    Accounts and who is calling.
 
-   A student signs up with a name, email, phone and password and gets a
+   A student signs up with their name, phone and password (email optional),
+   as on the SAT platform, signs in with phone and password and gets a
    session token (random, kept here only as its SHA-256). The app sends it as
    "Authorization: Bearer <token>" to /app-api and /staff-api.
 
@@ -9,8 +10,12 @@
      student   nothing
      teacher   sees the students table and the test bank, checks writing and speaking
      curator   + confirms or sends back official results
-     manager   + sets a student's plans
+     manager   + sets a student's plans and course access
      admin     everything: roles, and deleting a student
+
+   Course access, as on the SAT platform: a new student has none until a
+   manager gives a trial (a week by default) or full access, open-ended or
+   until a date (the last day included). Staff always have access.
    ========================================================================== */
 'use strict';
 
@@ -33,6 +38,7 @@ const PERMS = {
   staff: ['teacher', 'curator', 'manager', 'admin'],
   review: ['teacher', 'curator', 'manager', 'admin'],
   plans: ['manager', 'admin'],
+  access: ['manager', 'admin'],
   scores: ['curator', 'admin'],
   roles: ['admin'],
 };
@@ -59,7 +65,7 @@ const isAdminContact = (phone, email) => !!((phone && ADMIN_PHONES.includes(phon
 
 /* ------------------------------------------------------------ passwords */
 
-const MIN_PASSWORD = 6;
+const MIN_PASSWORD = 8;
 async function hashPassword(pw) {
   const salt = crypto.randomBytes(16);
   const key = await scrypt(String(pw), salt, 64);
@@ -108,6 +114,40 @@ async function requireUser(req, res, next) {
   } catch (e) { next(e); }
 }
 
+const isoDate = (d) => (d ? new Date(d).toISOString().slice(0, 10) : null);
+// Days (access end dates, a trial's week) are counted in the school's time zone, not UTC.
+const TIME_ZONE = process.env.APP_TZ || 'Asia/Almaty';
+const dayFmt = new Intl.DateTimeFormat('en-CA', { timeZone: TIME_ZONE, year: 'numeric', month: '2-digit', day: '2-digit' });
+const today = () => dayFmt.format(new Date());
+
+/** Can this account use the course today? */
+function accessOf(role, type, until) {
+  const end = isoDate(until);
+  const staff = !!role && role !== 'student';
+  const active = staff || ((type === 'trial' || type === 'full') && (!end || end >= today()));
+  return { type: type || 'none', until: end, active, staff };
+}
+const accessOfUser = (u) => accessOf(u.role, u.access_type, u.access_until);
+
+/** After requireUser: the course itself is for accounts with access. */
+function requireAccess(req, res, next) {
+  const access = accessOfUser(req.user);
+  if (!access.active) return res.status(403).json({ ok: false, reason: 'no-access', access });
+  next();
+}
+
+/** A few wrong passwords are typos; dozens from one address in 15 minutes are not. */
+const tries = new Map();
+function rateLimited(key, max = 20) {
+  const now = Date.now(), windowMs = 15 * 60000;
+  const rec = tries.get(key) || { n: 0, since: now };
+  if (now - rec.since > windowMs) { rec.n = 0; rec.since = now; }
+  rec.n++;
+  tries.set(key, rec);
+  if (tries.size > 5000) for (const [k, v] of tries) if (now - v.since > windowMs) tries.delete(k);
+  return rec.n > max;
+}
+
 function requirePerm(perm) {
   return (req, res, next) => (can(req.user.role, perm) ? next() : res.status(403).json({ ok: false, reason: 'forbidden' }));
 }
@@ -115,4 +155,5 @@ function requirePerm(perm) {
 module.exports = {
   requireUser, requirePerm, can, permsOf, normPhone, normEmail, isAdminContact, ROLES, PERMS, PLANS,
   hashPassword, checkPassword, createSession, dropSession, givePlans, MIN_PASSWORD, bearer,
+  accessOf, accessOfUser, requireAccess, rateLimited, isoDate, today,
 };

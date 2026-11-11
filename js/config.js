@@ -34,18 +34,7 @@ window.IELTS_CONFIG = {
     { id: 'intensive', months: 2, price: null },
   ],
 
-  // Phone sign-up: ISO region (name comes from Intl in the UI language), dial code, min/max digits.
-  // region null = "other country" (any code, free length). Several regions share one dial code via `regions`.
-  phoneCountries: [
-    { id: 'KZ', dial: '7', min: 10, max: 10 }, { id: 'RU', dial: '7', min: 10, max: 10 },
-    { id: 'UZ', dial: '998', min: 9, max: 9 }, { id: 'KG', dial: '996', min: 9, max: 9 },
-    { id: 'TJ', dial: '992', min: 9, max: 9 }, { id: 'TM', dial: '993', min: 8, max: 8 },
-    { id: 'AZ', dial: '994', min: 9, max: 9 }, { id: 'GE', dial: '995', min: 9, max: 9 },
-    { id: 'AM', dial: '374', min: 8, max: 8 }, { id: 'BY', dial: '375', min: 9, max: 9 },
-    { id: 'UA', dial: '380', min: 9, max: 9 }, { id: 'MD', dial: '373', min: 8, max: 8 },
-    { id: 'MN', dial: '976', min: 8, max: 8 }, { id: 'GB', dial: '44', min: 10, max: 10 },
-    { id: 'DE', dial: '49', min: 6, max: 11 }, { id: 'US', regions: ['US', 'CA'], dial: '1', min: 10, max: 10 },
-    { id: 'XX', dial: '', min: 7, max: 15 },
-  ],
-  defaultCountry: 'KZ',
+  // Phone sign-in and sign-up, as on the SAT platform: the box starts with this code
+  // and takes the ten digits after it (+7 700 123 45 67).
+  phoneDial: '7',
 };

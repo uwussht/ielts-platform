@@ -1,7 +1,7 @@
 // Screen: Staff (?screen=staff) — for teachers, curators, managers and admins, as SAT's #/staff.
 // One table of students, each row everything about one student: who they are, when they started,
 // their route and bands (start → now → goal), the exam date, the official IELTS results they reported
-// with confirm / send back for the ones waiting, their plans and their role.
+// with confirm / send back for the ones waiting, course access (none / trial / full until a date), plans and role.
 // A filter shows only the students with a result to confirm. Needs the staff API (server/);
 // without it the screen says so.
 (function () {
@@ -79,6 +79,36 @@
     }));
   }
 
+  /**
+   * Course access, as on the SAT platform: none / trial / full and the last day it lasts
+   * (empty: no end). Choosing trial with no date gives a week from today.
+   */
+  function accessCell(u) {
+    const acc = u.access || { type: 'none', until: null, active: false };
+    if (acc.staff) return h('span', { class: 'small muted' }, t('access.staffAlways'));
+    const editable = App.can('access');
+    const type = h('select', { class: 'input input--sm staff-access', 'aria-label': t('staff.col.access'), disabled: !editable },
+      ['none', 'trial', 'full'].map((k) => h('option', { value: k, selected: acc.type === k }, t('access.type.' + k))));
+    const until = h('input', { class: 'input input--sm staff-until', type: 'date', value: acc.until || '', disabled: !editable || acc.type === 'none', 'aria-label': t('access.until') });
+    let state = h('span');
+    const paint = (a) => {
+      until.value = a.until || '';
+      until.disabled = !editable || a.type === 'none';
+      state.replaceWith(state = DOM.statusBadge(a.active ? 'ok' : 'danger',
+        a.active ? (a.until ? t('access.activeUntil', { date: fmt(a.until) }) : t('access.activeOpen')) : t('access.closed')));
+    };
+    const save = (clearDate) => S().setAccess(u.id, type.value, clearDate || type.value === 'none' ? null : until.value || null).then((r) => {
+      if (!r.ok) { type.value = u.access?.type || 'none'; return failToast(r); }
+      u.access = r.access; paint(r.access); DOM.toast(t('staff.saved'));
+    });
+    // a new trial starts a fresh week; switching to full keeps no old date
+    type.addEventListener('change', () => save(type.value !== 'none'));
+    until.addEventListener('change', () => save(false));
+    const node = h('div', { class: 'stack-sm' }, type, until, state);
+    paint(acc);
+    return node;
+  }
+
   function roleCell(u) {
     if (!App.can('roles')) return h('span', { class: 'small' }, t('staff.role.' + u.role));
     const self = State.staff?.id === u.id;
@@ -142,7 +172,7 @@
         const waiting = res.users.reduce((n, u) => n + u.scores.filter((sc) => sc.status === 'pending').length, 0);
         count.textContent = t('staff.count', { n: users.length }) + (waiting ? ' · ' + t('staff.waiting', { n: waiting }) : '');
         if (!users.length) { table.replaceChildren(Hub.empty ? Hub.empty({ icon: 'users', title: t(onlyPending ? 'staff.noScores' : 'staff.noStudents') }) : h('p', { class: 'empty' }, t(onlyPending ? 'staff.noScores' : 'staff.noStudents'))); return; }
-        const cols = ['name', 'start', 'route', 'bands', 'exam', 'results', 'plans', 'role'];
+        const cols = ['name', 'start', 'route', 'bands', 'exam', 'results', 'access', 'plans', 'role'];
         table.replaceChildren(h('table', { class: 'table staff-table' },
           h('thead', null, h('tr', null, cols.map((k) => h('th', { scope: 'col' }, t('staff.col.' + k))))),
           h('tbody', null, users.map((u) => {
@@ -157,6 +187,7 @@
               h('td', { 'data-label': t('staff.col.bands') }, bandsCell(u)),
               h('td', { 'data-label': t('staff.col.exam') }, examCell(u)),
               h('td', { 'data-label': t('staff.col.results') }, shown.length ? h('div', { class: 'stack-sm' }, shown.map((sc) => scoreLine(sc, load))) : h('span', { class: 'muted' }, '—')),
+              h('td', { 'data-label': t('staff.col.access') }, accessCell(u)),
               h('td', { 'data-label': t('staff.col.plans') }, u.role === 'student' ? plansCell(u) : h('span', { class: 'muted small' }, t('staff.staffMember'))),
               h('td', { 'data-label': t('staff.col.role') }, h('div', { class: 'stack-sm' }, roleCell(u), deleteButton(u, load))));
           }))));

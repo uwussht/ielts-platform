@@ -25,11 +25,11 @@ const path = require('path');
 const express = require('express');
 const Busboy = require('busboy');
 const { pool, tx } = require('./db');
-const { requireUser } = require('./auth');
+const { requireUser, requireAccess } = require('./auth');
 const C = require('./content');
 
 const router = express.Router();
-router.use(requireUser);
+router.use(requireUser, requireAccess);
 
 const SKILLS = ['listening', 'reading', 'writing', 'speaking'];
 const r5 = (x) => Math.round(x * 2) / 2;

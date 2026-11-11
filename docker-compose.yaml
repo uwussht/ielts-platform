@@ -31,6 +31,8 @@ services:
       # Phones and emails that become admins when they sign up or sign in (comma-separated).
       ADMIN_PHONES: ${ADMIN_PHONES:-}
       ADMIN_EMAILS: ${ADMIN_EMAILS:-}
+      # Course access ends at the end of its last day in this time zone.
+      APP_TZ: ${APP_TZ:-Asia/Almaty}
       # Plan ids (as in js/config.js) and the ones a new student starts with.
       PLANS: ${PLANS:-self,coach,intensive}
       DEFAULT_PLANS: ${DEFAULT_PLANS:-self}

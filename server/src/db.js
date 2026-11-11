@@ -15,7 +15,11 @@
    ========================================================================== */
 'use strict';
 
-const { Pool } = require('pg');
+const { Pool, types } = require('pg');
+
+// DATE columns (exam dates, access end dates) stay 'YYYY-MM-DD' strings: as JS Dates they
+// become local midnight and toISOString() would hand back the day before east of UTC.
+types.setTypeParser(1082, (v) => v);
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -115,6 +119,21 @@ const MIGRATIONS = [
      updated_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
      PRIMARY KEY (user_id, key)
    )`,
+  // 3: sign-up as on the SAT platform (first and last name, consent) and
+  // course access: none / trial / full until a date (the last day included).
+  // Accounts made before this keep using the course: they get full access.
+  `ALTER TABLE users ADD COLUMN first_name TEXT;
+   ALTER TABLE users ADD COLUMN last_name TEXT;
+   ALTER TABLE users ADD COLUMN consent_at TIMESTAMPTZ;
+   ALTER TABLE users ADD COLUMN last_login_at TIMESTAMPTZ;
+   ALTER TABLE users ADD COLUMN access_type TEXT NOT NULL DEFAULT 'none' CHECK (access_type IN ('none', 'trial', 'full'));
+   ALTER TABLE users ADD COLUMN access_until DATE;
+   ALTER TABLE users ADD COLUMN access_set_by INTEGER REFERENCES users (id) ON DELETE SET NULL;
+   ALTER TABLE users ADD COLUMN access_set_at TIMESTAMPTZ;
+   UPDATE users SET access_type = 'full' WHERE password_hash IS NOT NULL;
+   UPDATE users SET first_name = split_part(name, ' ', 1),
+                    last_name = NULLIF(substr(name, length(split_part(name, ' ', 1)) + 2), '')
+    WHERE name IS NOT NULL`,
 ];
 
 async function tx(fn) {

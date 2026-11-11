@@ -157,6 +157,7 @@
     Router.go({ screen: 'login' }, { replace: true });
   }
   window.addEventListener('unauthorized', () => logout(false));
+  window.addEventListener('no-access', () => { if (!State.me?.noAccess) { State.me = null; render(); } });
 
   // ---------- render ----------
   let shellEl = null, mainEl = null, contentEl = null;
@@ -189,11 +190,16 @@
     if (authed && !State.me) {
       root.replaceChildren(h('div', { class: 'content' }, DOM.skeleton(2)));
       try {
-        const [me, user, prof] = await Promise.all([Api.ieltsMe(), Api.currentUser().catch(() => null), Api.profile().catch(() => null)]);
-        // plan/me has no goal fields — the sidebar goal card reads them from the profile
-        State.me = { ...me, targetBand: prof?.targetBand ?? me.targetBand ?? null, examDate: prof?.examDate ?? me.examDate ?? null };
+        // the account first: without course access (as on the SAT platform) the course API answers 403
+        const user = await Api.currentUser();
         State.user = user;
-        loadStaff(prof);
+        if (user?.access && !user.access.active) State.me = { noAccess: true };
+        else {
+          const [me, prof] = await Promise.all([Api.ieltsMe(), Api.profile().catch(() => null)]);
+          // plan/me has no goal fields — the sidebar goal card reads them from the profile
+          State.me = { ...me, targetBand: prof?.targetBand ?? me.targetBand ?? null, examDate: prof?.examDate ?? me.examDate ?? null };
+          loadStaff(prof);
+        }
       } catch (e) { if (e.status === 401) return logout(false); State.me = {}; }
       if (State.me?.track && !store.get('ielts_track')) State.trackLocal = State.me.track;
     }
@@ -204,7 +210,8 @@
     }
 
     // no access yet (onboarding/diagnostic not done): the hub shows the locked card, as on ai-tutor
-    const key = p.screen === 'ielts' ? (State.me?.access === false ? 'ielts-locked' : 'tab:' + p.ieltsTab) : p.screen;
+    const key = State.me?.noAccess ? 'no-access'
+      : p.screen === 'ielts' ? (State.me?.access === false ? 'ielts-locked' : 'tab:' + p.ieltsTab) : p.screen;
     const scr = Screens[key];
     const full = !scr || scr.fullscreen;
 

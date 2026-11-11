@@ -7,6 +7,7 @@
                   POST   /me/scores              report an official IELTS result (waits)
      staff        GET    /staff/users?q=&role=   the students table
                   PUT    /staff/users/:id/plans  plans (manager, admin)
+                  PUT    /staff/users/:id/access { type: none|trial|full, until? } course access (manager, admin)
                   PUT    /staff/users/:id/role   role (admin)
                   DELETE /staff/users/:id        the staff record (admin; never oneself)
                   POST   /staff/scores/:id       confirm / send back a result (curator, admin)
@@ -24,7 +25,7 @@
 
 const express = require('express');
 const { pool, tx } = require('./db');
-const { requireUser, requirePerm, permsOf, ROLES, PLANS } = require('./auth');
+const { requireUser, requirePerm, permsOf, ROLES, PLANS, accessOf, accessOfUser, today } = require('./auth');
 const C = require('./content');
 
 const router = express.Router();
@@ -59,7 +60,7 @@ async function plansOf(id) {
 router.get('/me', async (req, res, next) => {
   try {
     const u = req.user;
-    res.json({ ok: true, user: { id: u.id, name: u.name, role: u.role, perms: permsOf(u.role), plans: await plansOf(u.id) } });
+    res.json({ ok: true, user: { id: u.id, name: u.name, role: u.role, perms: permsOf(u.role), plans: await plansOf(u.id), access: accessOfUser(u) } });
   } catch (e) { next(e); }
 });
 
@@ -132,7 +133,8 @@ staff.get('/users', async (req, res, next) => {
       ok: true,
       users: rows.map((r) => ({
         id: r.id, name: r.name, phone: r.phone, email: r.email, role: r.role, plans: r.plans,
-        createdAt: r.created_at, lastSeenAt: r.last_seen_at,
+        createdAt: r.created_at, lastSeenAt: r.last_seen_at, lastLoginAt: r.last_login_at,
+        access: accessOfUser(r),
         track: r.track, route: r.route, programme: r.programme,
         startBand: num(r.start_band), currentBand: num(r.current_band), targetBand: num(r.target_band),
         examDate: iso(r.exam_date),
@@ -152,6 +154,30 @@ staff.put('/users/:id/plans', requirePerm('plans'), async (req, res, next) => {
       if (plans.length) await c.query('INSERT INTO user_plans (user_id, plan) SELECT $1, unnest($2::text[])', [id, plans]);
     });
     res.json({ ok: true, plans: await plansOf(id) });
+  } catch (e) { next(e); }
+});
+
+/**
+ * Course access: none, trial or full, until a date (the last day included)
+ * or, with no date, open-ended. A trial with no date lasts TRIAL_DAYS,
+ * today included.
+ */
+const TRIAL_DAYS = 7;
+const addDays = (day, n) => { const d = new Date(day + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+staff.put('/users/:id/access', requirePerm('access'), async (req, res, next) => {
+  const id = Number(req.params.id);
+  const type = req.body?.type;
+  let until = req.body?.until || null;
+  if (!['none', 'trial', 'full'].includes(type)) return res.status(400).json({ ok: false, reason: 'bad-access' });
+  if (until !== null && !isDate(until)) return res.status(400).json({ ok: false, reason: 'bad-date' });
+  if (type === 'trial' && !until) until = addDays(today(), TRIAL_DAYS - 1);
+  if (type === 'none') until = null;
+  try {
+    const { rows } = await pool.query(
+      `UPDATE users SET access_type = $2, access_until = $3, access_set_by = $4, access_set_at = now()
+        WHERE id = $1 RETURNING role, access_type, access_until`, [id, type, until, req.user.id]);
+    if (!rows.length) return res.status(404).json({ ok: false, reason: 'not-found' });
+    res.json({ ok: true, access: accessOf(rows[0].role, rows[0].access_type, rows[0].access_until) });
   } catch (e) { next(e); }
 });
 

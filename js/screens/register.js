@@ -1,182 +1,90 @@
-// Registration (lang → name/birth → contacts → password → done) on the platform's API
-// (POST /registration), the IELTS locked state (no access yet) and IELTS pricing.
-// Screens follow ai-tutor's rg.* flow without its SMS/email codes.
+// Sign-up as on the SAT platform (POST /registration): first and last name, phone,
+// password, optional email and consent, all on one card. Also the screen for a
+// student whose course access is closed, the IELTS locked state and IELTS pricing.
 (function () {
   const { h, icon } = DOM;
-  const put = (el, ...k) => el.replaceChildren(...k.flat(9).filter((x) => x != null && x !== false && x !== ''));
   const isEmail = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(s).trim());
-  const digits = (s) => String(s || '').replace(/\D/g, '');
-  const ident = (id) => { id = String(id).trim(); if (isEmail(id)) return { email: id.toLowerCase() }; let d = digits(id); if (d.length === 11 && d[0] === '8') d = '7' + d.slice(1); if (d.length === 10) d = '7' + d; return { phone: d }; };
-  const fmtPhone = (d) => { d = digits(d); const m = d.match(/^7(\d{3})(\d{3})(\d{2})(\d{2})$/); return m ? `+7 (${m[1]}) ${m[2]}-${m[3]}-${m[4]}` : '+' + d; };
-  const errMsg = (e, fb) => e?.serverMessage || (e?.message && !/^Ошибка сервера/.test(e.message) ? e.message : '') || t(fb);
-  const home = () => { State.me = null; Router.go({ screen: 'ielts' }, { replace: true }); };
-
-  // ---------- shared widgets ----------
-  function card({ back, step, title, sub, body, actions, onSubmit, footer }) {
-    const form = h('form', { class: 'auth__card stack rg', novalidate: true, onsubmit: (e) => { e.preventDefault(); onSubmit?.(); } },
-      (back || step) && h('div', { class: 'row row--between' }, back ? h('button', { class: 'btn btn--ghost btn--sm', type: 'button', onclick: back }, icon('arrowL', 'ic16'), t('rg.back')) : h('span'),
-        step && h('span', { class: 'xs muted' }, t('rg.step', { n: step[0], total: step[1] }))),
-      h('h2', { class: 'rg__title' }, title), sub && h('p', { class: 'muted small' }, sub), body, actions, footer);
-    return form;
-  }
-  function field({ id, label, hint, error, input }) {
-    if (error) input.classList.add('is-invalid'); else input.classList.remove('is-invalid');
-    input.setAttribute('aria-invalid', error ? 'true' : 'false');
-    input.setAttribute('aria-describedby', id + '-msg');
-    return h('div', { class: 'field' }, h('label', { for: id }, label), input,
-      (error || hint) && h('p', { id: id + '-msg', class: error ? 'error' : 'xs muted', role: error ? 'alert' : null }, error || hint));
-  }
-  const submitBtn = (label, { busy, busyLabel, disabled, arrow = true } = {}) =>
-    h('button', { class: 'btn btn--primary btn--lg btn--block', type: 'submit', disabled: !!(busy || disabled) }, busy ? busyLabel || label : label, !busy && arrow && icon('arrowR', 'ic16'));
-  const sw = (q, label, onclick) => h('p', { class: 'small rg__switch' }, q, ' ', h('button', { class: 'link', type: 'button', onclick }, label));
-  function input(attrs, value, onInput) {
-    const el = h('input', { class: 'input', ...attrs });
-    el.value = value || '';
-    el.addEventListener('input', () => onInput(el.value));
-    return el;
-  }
-  // keeps focus/caret across repaints of the same form
-  function keepFocus(host, fn) {
-    const a = document.activeElement, id = host.contains(a) ? a.id : null, pos = id && a.selectionStart;
-    fn();
-    if (id) { const el = host.querySelector('#' + CSS.escape(id)); if (el) { el.focus(); try { if (pos != null) el.setSelectionRange(pos, pos); } catch {} } }
-  }
-
-  // birth date dd . mm . yyyy (+ native date picker)
-  // parts = {d, m, y} as typed; onChange(parts, iso|'partial'|'')
-  function dobInput(parts, onChange, invalid) {
-    const cells = [['day', 2, parts.d], ['month', 2, parts.m], ['year', 4, parts.y]].map(([k, len, v], i) => h('input', { class: 'input dob__cell', id: i === 0 ? 'rg-birth' : 'rg-birth-' + k, inputmode: 'numeric', maxlength: len,
-      placeholder: t('dob.' + k), 'aria-label': t('dob.' + k), value: v, 'aria-invalid': invalid ? 'true' : 'false' }));
-    const emit = () => { const [dd, mm, yy] = cells.map((c) => c.value); onChange({ d: dd, m: mm, y: yy }, dd.length === 2 && mm.length === 2 && yy.length === 4 ? `${yy}-${mm}-${dd}` : dd || mm || yy ? 'partial' : ''); };
-    cells.forEach((c, i) => {
-      c.addEventListener('input', () => {
-        let v = digits(c.value); const len = +c.maxLength;
-        if (v.length > len && cells[i + 1]) { cells[i + 1].value = v.slice(len) + cells[i + 1].value; v = v.slice(0, len); cells[i + 1].focus(); }
-        c.value = v; if (v.length === len && cells[i + 1] && document.activeElement === c) cells[i + 1].focus();
-        emit();
-      });
-      c.addEventListener('keydown', (e) => { if (e.key === 'Backspace' && !c.value && cells[i - 1]) cells[i - 1].focus(); });
-    });
-    const now = new Date(), ymd = (yy) => `${now.getFullYear() - yy}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-    const picker = h('input', { type: 'date', class: 'dob__native', tabindex: '-1', 'aria-hidden': 'true', min: ymd(101), max: ymd(6), onchange: (e) => { const [yy, mm, dd] = e.target.value.split('-'); if (yy) { cells[0].value = dd; cells[1].value = mm; cells[2].value = yy; emit(); } } });
-    return h('div', { class: 'dob' }, cells[0], h('span', { 'aria-hidden': 'true' }, '.'), cells[1], h('span', { 'aria-hidden': 'true' }, '.'), cells[2],
-      h('button', { class: 'icon-btn', type: 'button', 'aria-label': t('dob.pick'), title: t('dob.pick'), onclick: () => { try { picker.showPicker(); } catch { picker.click(); } } }, icon('calendar')), picker);
-  }
-  function birthError(v) {
-    if (!v) return t('rg.birth.required');
-    if (v === 'partial') return t('regbirth.invalid');
-    const [y, m, d] = v.split('-').map(Number), dt = new Date(y, m - 1, d);
-    if (dt.getFullYear() !== y || dt.getMonth() !== m - 1 || dt.getDate() !== d) return t('regbirth.invalid');
-    const now = new Date(); let age = now.getFullYear() - y; if (now < new Date(now.getFullYear(), m - 1, d)) age--;
-    if (age < 0) return t('regbirth.invalid');
-    if (age < 6) return t('regbirth.tooYoung');
-    if (age > 100) return t('regbirth.tooOld');
-    return '';
-  }
-  // Phone countries come from config; names from Intl in the UI language, "other" from i18n.
-  function countryName(c) {
-    if (!c.dial) return t('rg.phone.other');
-    // Some engines ship no region names for a locale (kk) and answer in English — then use the base language.
-    const names = (loc) => { try { return new Intl.DisplayNames([loc], { type: 'region' }); } catch { return null; } };
-    const cur = names(DOM.locale()), en = names('en'), base = names(IELTS_CONFIG.locales[IELTS_CONFIG.langs[0]]);
-    const one = (r) => { const n = cur?.of(r); return n && (I18n.lang === 'en' || n !== en?.of(r)) ? n : base?.of(r) || n || r; };
-    return (c.regions || [c.id]).map(one).join(' / ');
-  }
-  const COUNTRIES = IELTS_CONFIG.phoneCountries;
-  const maskPhone = (dial, d) => (dial === '7' ? d.replace(/^(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2}).*/, (_, a, b, c, e) => [a && `(${a}${a.length === 3 ? ')' : ''}`, b && ' ' + b, c && '-' + c, e && '-' + e].filter(Boolean).join('')) : d.replace(/(\d{3})(?=\d)/g, '$1 '));
-
-  function saveSession(res) {
-    const tok = res?.accessToken || res?.token;
-    if (!tok) throw new Error(t('login.failed'));
-    Api.Auth.set(tok);
-    State.user = res.user || null;
-  }
-
-  function success(host, { registered }) {
-    put(host, h('div', { class: 'auth__card stack rg rg--done' }, h('div', { class: 'brand__mark auth__mark rg__avatar' }, DOM.svg(DOM.BRAND)),
-      h('h2', { class: 'rg__title' }, t(registered ? 'rg.done.title' : 'rg.welcome.title')), h('p', { class: 'muted' }, t(registered ? 'rg.done.sub' : 'rg.welcome.sub')),
-      registered && h('button', { class: 'btn btn--primary btn--lg btn--block', type: 'button', onclick: home }, t('rg.continue'), icon('arrowR', 'ic16'))));
-    if (!registered) setTimeout(home, 1200);
-  }
 
   // ---------- registration ----------
   Screens.register = {
     fullscreen: true,
-    title: () => t('rg.register'),
-    render(p) {
-      const host = h('div');
-      const st = { name: '', birth: '', dob: { d: '', m: '', y: '' }, email: '', phone: '', cc: IELTS_CONFIG.defaultCountry, tried: false, busy: false, err: '', errField: null, pass: '', pass2: '' };
-      const toLogin = () => Router.go({ screen: 'login' });
-      function lang() {
-        put(host, card({ title: t('rg.lang.title'), sub: t('rg.lang.sub'), body: h('div', { class: 'stack-sm', role: 'radiogroup' },
-          I18n.langs.map((v) => [v, I18n.nameOf(v)]).map(([v, l]) => h('button', { type: 'button', role: 'radio', 'aria-checked': String(I18n.lang === v), class: 'obopt' + (I18n.lang === v ? ' is-on' : ''),
-            onclick: () => { if (v === I18n.lang) return name(); Router.go({ screen: 'register', step: 'name' }, { replace: true }); I18n.setLang(v); } }, h('span', { class: 'obopt__body' }, h('b', null, l)), h('span', { class: 'obopt__radio', 'aria-hidden': 'true' })))),
-          footer: sw(t('rg.haveAccount'), t('rg.signIn'), toLogin) }));
-      }
-      function name() {
-        const nameErr = st.tried && !st.name.trim() ? t('rg.name.required') : '';
-        const bErr = st.tried || st.birth.length === 10 ? birthError(st.birth) : '';
-        keepFocus(host, () => put(host, card({ back: lang, step: [1, 3], title: t('rg.name.title'), sub: t('rg.name.sub'),
-          body: [h('div', { class: 'rg__bubble' }, h('span', { class: 'brand__mark' }, DOM.svg(DOM.BRAND)), h('div', null, h('b', { class: 'xs' }, t('rg.dexter.who')), h('p', { class: 'small' }, t('rg.dexter.hello')))),
-            field({ id: 'rg-name', label: t('rg.name.label'), error: nameErr, input: input({ id: 'rg-name', maxlength: 100, autocomplete: 'given-name', placeholder: t('rg.name.placeholder') }, st.name, (v) => { st.name = v; if (st.tried) name(); }) }),
-            h('div', { class: 'field' }, h('label', { for: 'rg-birth' }, t('regbirth.label')), dobInput(st.dob, (parts, v) => { const was = st.birth; st.dob = parts; st.birth = v; if (v.length === 10 || was.length === 10 || (st.tried && !v)) name(); }, !!bErr),
-              h('p', { class: bErr ? 'error' : 'xs muted', role: bErr ? 'alert' : null }, bErr || t('rg.birth.hint')))],
-          actions: submitBtn(t('rg.continue')),
-          onSubmit: () => { st.tried = true; if (st.name.trim() && !birthError(st.birth)) { st.tried = false; contacts(); } else name(); },
-          footer: sw(t('rg.haveAccount'), t('rg.signIn'), toLogin) })));
-      }
-      function contacts() {
-        const C = COUNTRIES.find((c) => c.id === st.cc) || COUNTRIES[0], d = digits(st.phone);
-        const eErr = st.errField === 'email' ? [t('rg.email.taken'), ' ', h('button', { class: 'link', type: 'button', onclick: toLogin }, t('rg.signIn'))] : st.tried && !isEmail(st.email) ? t('rg.email.invalid') : '';
-        const pErr = st.errField === 'phone' ? t('rg.phone.taken') : st.tried && (d.length < C.min || d.length > C.max) ? t('regphone.invalid') : '';
-        const phoneIn = input({ id: 'rg-phone', inputmode: 'tel', autocomplete: 'tel-national', placeholder: C.dial === '7' ? t('rg.phone.placeholder') : '' }, maskPhone(C.dial, d), (v) => {
-          st.phone = digits(v).slice(0, C.max); st.errField = st.errField === 'phone' ? null : st.errField; phoneIn.value = maskPhone(C.dial, st.phone); if (st.tried) contacts(); });
-        keepFocus(host, () => put(host, card({ back: name, step: [2, 3], title: t('rg.contacts.title'), sub: t('rg.contacts.sub'),
-          body: [field({ id: 'rg-email', label: t('rg.email.label'), hint: t('rg.email.hint'), error: eErr, input: input({ id: 'rg-email', type: 'email', inputmode: 'email', autocomplete: 'email', placeholder: 'name@mail.com', autocapitalize: 'none' }, st.email, (v) => { st.email = v; if (st.errField === 'email') st.errField = null; if (st.tried) contacts(); }) }),
-            h('div', { class: 'field' }, h('label', { for: 'rg-phone' }, t('rg.phone.label')),
-              h('div', { class: 'rg__phone' }, h('select', { class: 'input', 'aria-label': t('rg.phone.country'), onchange: (e) => { st.cc = e.target.value; contacts(); } },
-                COUNTRIES.map((c) => h('option', { value: c.id, selected: c.id === st.cc }, `${countryName(c)}${c.dial ? ' +' + c.dial : ''}`))), phoneIn),
-              h('p', { class: pErr ? 'error' : 'xs muted', role: pErr ? 'alert' : null }, pErr || t('rg.phone.hint'))),
-            st.err && h('p', { class: 'error', role: 'alert' }, st.err)],
-          actions: [submitBtn(t('rg.continue')),
-            h('p', { class: 'xs muted' }, t('rg.consent'), h('a', { class: 'link', href: IELTS_CONFIG.privacyUrl, target: '_blank', rel: 'noopener' }, t('rg.privacy')))],
-          onSubmit: async () => {
-            st.tried = true; st.err = '';
-            const d = digits(st.phone); // fresh: the phone field updates st without repainting
-            if (!isEmail(st.email) || d.length < C.min || d.length > C.max) return contacts();
-            st.tried = false; st.err = '';
-            password();
-          } })));
-      }
-      function password() {
-        const short = st.pass.length < 6, mism = st.pass2 && (st.tried || st.pass2.length >= st.pass.length) && st.pass2 !== st.pass;
-        const pw = AuthUI.passwordField('rg-pass'), pw2 = AuthUI.passwordField('rg-pass2');
-        pw.input.value = st.pass; pw2.input.value = st.pass2;
-        pw.input.addEventListener('input', () => { st.pass = pw.input.value; password(); });
-        pw2.input.addEventListener('input', () => { st.pass2 = pw2.input.value; password(); });
-        keepFocus(host, () => put(host, card({ back: contacts, step: [3, 3], title: t('rg.pass.title'), sub: t('setpass.subtitle'),
-          body: [h('div', { class: 'field' }, h('label', { for: 'rg-pass' }, t('rg.pass.label')), pw.node, h('p', { class: st.tried && short ? 'error' : 'xs muted' }, t('setpass.tooShort', { n: 6 }))),
-            h('div', { class: 'field' }, h('label', { for: 'rg-pass2' }, t('rg.pass.repeat')), pw2.node, mism && h('p', { class: 'error', role: 'alert' }, t('setpass.mismatch'))),
-            st.err && h('p', { class: 'error', role: 'alert' }, st.err)],
-          actions: submitBtn(t('setpass.submit'), { busy: st.busy, busyLabel: t('setpass.saving'), arrow: false }),
-          onSubmit: async () => {
-            st.tried = true; st.err = '';
-            if (short || st.pass !== st.pass2) return password();
-            st.busy = true; password();
-            const C = COUNTRIES.find((c) => c.id === st.cc) || COUNTRIES[0];
-            const body = { name: st.name.trim() || t('rg.name.guest'), phone: C.dial + digits(st.phone), email: st.email.trim().toLowerCase(), birthDate: st.birth, lang: I18n.lang, password: st.pass };
-            try { saveSession(await Api.register(body)); success(host, { registered: true }); }
-            catch (e) {
-              st.busy = false;
-              const why = e?.data?.reason;
-              if (why === 'email-taken' || why === 'phone-taken') { st.errField = why === 'email-taken' ? 'email' : 'phone'; st.tried = false; return contacts(); }
-              st.err = errMsg(e, 'err.send'); password();
-            }
-          } })));
-      }
-      // the app re-renders on a language change, so the step after the language pick lives in the URL
-      if (p.step === 'name') name(); else lang();
-      return AuthUI.shell(host);
+    title: () => t('auth.register'),
+    render() {
+      const first = h('input', { class: 'input', id: 'auth-first', autocomplete: 'given-name', maxlength: 60, required: true });
+      const last = h('input', { class: 'input', id: 'auth-last', autocomplete: 'family-name', maxlength: 60, required: true });
+      const phone = AuthUI.phoneField('auth-phone');
+      const pw = AuthUI.passwordField('auth-password', { create: true });
+      const email = h('input', { class: 'input', id: 'auth-email', type: 'email', inputmode: 'email', autocomplete: 'email', autocapitalize: 'none', placeholder: 'name@mail.com' });
+      const consent = h('input', { type: 'checkbox', id: 'auth-consent' });
+      const err = h('p', { class: 'error', role: 'alert' });
+      const btn = h('button', { class: 'btn btn--primary btn--lg btn--block', type: 'submit' }, t('auth.register'));
+      const fail = (msg, field) => { err.textContent = msg; if (field) { field.setAttribute('aria-invalid', 'true'); field.focus(); } };
+      const field = (id, label, input, hint) => h('div', { class: 'field' }, h('label', { for: id }, label), input, hint && h('p', { class: 'xs muted' }, hint));
+
+      const form = h('form', { class: 'auth__card stack', novalidate: true, onsubmit: async (e) => {
+        e.preventDefault();
+        err.textContent = '';
+        form.querySelectorAll('[aria-invalid]').forEach((x) => x.removeAttribute('aria-invalid'));
+        if (!first.value.trim()) return fail(t('auth.errName'), first);
+        if (!last.value.trim()) return fail(t('auth.errName'), last);
+        const number = AuthUI.phoneOf(phone.value);
+        if (!number) return fail(t('auth.errPhone'), phone);
+        if (pw.input.value.length < 8) return fail(t('auth.errPassword8'), pw.input);
+        const mail = email.value.trim().toLowerCase();
+        if (mail && !isEmail(mail)) return fail(t('auth.errEmail'), email);
+        if (!consent.checked) return fail(t('auth.errConsent'), consent);
+        btn.disabled = true;
+        try {
+          AuthUI.saveSession(await Api.register({ firstName: first.value.trim(), lastName: last.value.trim(), phone: number,
+            password: pw.input.value, email: mail || null, consent: true, lang: I18n.lang }));
+          Router.go({ screen: 'ielts' }, { replace: true });
+        } catch (ex) {
+          const why = ex?.data?.reason;
+          fail(AuthUI.errText(ex), why === 'exists' || why === 'bad-phone' ? phone : why === 'email-taken' || why === 'bad-email' ? email : null);
+        } finally { btn.disabled = false; }
+      } },
+        h('h2', { class: 'rg__title' }, t('auth.register')),
+        h('p', { class: 'muted small' }, t('auth.serverSubtitle')),
+        h('div', { class: 'auth__row' }, field('auth-first', t('auth.firstName'), first), field('auth-last', t('auth.lastName'), last)),
+        field('auth-phone', t('auth.phone'), phone, t('auth.phoneHint')),
+        field('auth-password', t('app.login.password'), pw.node, t('auth.passwordHint')),
+        field('auth-email', t('auth.emailOptional'), email),
+        h('label', { class: 'auth__consent', for: 'auth-consent' }, consent,
+          h('span', { class: 'small' }, t('auth.consent'), ' · ', h('a', { class: 'link', href: IELTS_CONFIG.privacyUrl, target: '_blank', rel: 'noopener' }, t('auth.privacyLink')))),
+        err, btn,
+        h('a', { class: 'btn btn--ghost btn--block', href: '?screen=login' }, t('auth.toLogin')));
+      return AuthUI.shell(form, h('p', { class: 'xs muted', style: { textAlign: 'center' } }, t('auth.serverNote')));
+    },
+  };
+
+  // ---------- course access closed (as on the SAT platform) ----------
+  Screens['no-access'] = {
+    fullscreen: true,
+    title: () => t('access.title'),
+    render() {
+      const acc = State.user?.access || { type: 'none' };
+      const ended = acc.until && acc.type !== 'none';
+      const why = ended ? t(acc.type === 'trial' ? 'access.trialEnded' : 'access.fullEnded', { date: DOM.dateFull(acc.until) }) : t('access.none');
+      const note = h('p', { class: 'small muted', role: 'status' });
+      const check = h('button', { class: 'btn btn--secondary btn--lg btn--block', type: 'button', onclick: async () => {
+        check.disabled = true;
+        try {
+          const user = await Api.currentUser();
+          State.user = user;
+          if (user?.access?.active) { State.me = null; Router.go({ screen: 'ielts' }, { replace: true }); return; }
+          note.textContent = t('access.stillClosed');
+        } catch { note.textContent = t('auth.errServer'); }
+        finally { check.disabled = false; }
+      } }, t('access.check'));
+      const name = State.user?.name || '';
+      return AuthUI.shell(h('div', { class: 'auth__card stack' },
+        h('span', { class: 'locked__ic' }, icon('lock')),
+        h('h2', { class: 'rg__title' }, t('access.title')),
+        h('p', null, why),
+        h('p', { class: 'muted small' }, t('access.lead')),
+        h('a', { class: 'btn btn--primary btn--lg btn--block', href: DOM.waLink(t('access.waText', { name, phone: State.user?.phone || '' })), target: '_blank', rel: 'noopener' }, t('access.contact')),
+        check, note,
+        h('button', { class: 'btn btn--ghost btn--block', type: 'button', onclick: () => App.logout() }, t('app.logout'))));
     },
   };
 

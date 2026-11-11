@@ -42,6 +42,8 @@
       err.status = res.status;
       await readError(res, err);
       if (res.status === 401 && auth && tok) window.dispatchEvent(new Event('unauthorized'));
+      // course access ended while the app was open (a trial ran out, a manager closed it)
+      if (res.status === 403 && err.data?.reason === 'no-access') window.dispatchEvent(new Event('no-access'));
       throw err;
     }
     if (res.status === 204) return null;
@@ -118,6 +120,7 @@
       users: (q = '') => sreq('GET', '/staff/users?q=' + enc(q)),
       setPlans: (id, plans) => sreq('PUT', `/staff/users/${id}/plans`, { plans }),
       setRole: (id, role) => sreq('PUT', `/staff/users/${id}/role`, { role }),
+      setAccess: (id, type, until) => sreq('PUT', `/staff/users/${id}/access`, { type, until }),
       remove: (id) => sreq('DELETE', `/staff/users/${id}`),
       decide: (id, status, comment) => sreq('POST', `/staff/scores/${id}`, { status, comment }),
       userAttempts: (id) => sreq('GET', `/staff/users/${id}/attempts`),
@@ -135,7 +138,7 @@
     },
 
     // ---- auth ----
-    login: (login, password) => pub('/auth/login', { ...(/@/.test(login) ? { email: String(login).trim().toLowerCase() } : { phone: String(login).replace(/[^\d+]/g, '') }), password }),
+    login: (phone, password) => pub('/auth/login', { phone, password }),
     logout: () => post('/auth/logout').catch(() => null),
     currentUser: () => get('/user/me'),
     register: (body) => pub('/registration', body),

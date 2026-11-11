@@ -14,6 +14,8 @@ const student = require('./student');
 const PORT = Number(process.env.PORT) || 3000;
 const app = express();
 app.disable('x-powered-by');
+// behind Caddy and the web server: req.ip is the client, two hops back
+app.set('trust proxy', 2);
 app.use(express.json({ limit: '512kb' }));
 
 app.get(['/staff-api/health', '/app-api/health'], (req, res) => res.json({ ok: true }));

@@ -17,6 +17,12 @@ html[data-theme="light"] .auth__card { background: var(--surface); border-color:
 .auth__card .input { background: #1B1B1B; border-color: #3A3A3A; color: #F4F4F2; }
 html[data-theme="light"] .auth__card .input { background: var(--surface-2); border-color: var(--border-strong); color: var(--ink); }
 .auth__card .link, .auth__card .btn--ghost { color: inherit; }
+.auth__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 420px) { .auth__row { grid-template-columns: 1fr; } }
+.auth__consent { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
+.auth__consent input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--brand-600); flex: none; }
+.auth__consent input[aria-invalid="true"] { outline: 2px solid var(--danger); outline-offset: 2px; }
+.auth__card .input[aria-invalid="true"] { border-color: var(--danger); }
 .auth__langs { display: flex; justify-content: center; gap: 8px; }
 .auth .chip { background: transparent; color: inherit; border-color: #3A3A3A; }
 html[data-theme="light"] .auth .chip { border-color: var(--border-strong); }

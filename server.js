@@ -34,6 +34,8 @@ function proxy(req, res, origin) {
   const target = new URL(origin + req.url);
   const headers = { ...req.headers, host: target.host };
   delete headers.origin; delete headers.referer; delete headers['accept-encoding'];
+  // who is calling, for the API's sign-in rate limit (Caddy adds the client in front)
+  headers['x-forwarded-for'] = [req.headers['x-forwarded-for'], req.socket.remoteAddress].filter(Boolean).join(', ');
   const up = (target.protocol === 'http:' ? http : https).request(target, { method: req.method, headers }, (r) => {
     const h = { ...r.headers };
     delete h['content-security-policy'];

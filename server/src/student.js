@@ -353,48 +353,71 @@ router.post('/ielts/speaking/assess', wrap(async (req, res) => {
 
 /* ------------------------------------------------------------ diagnostic */
 
-let FORM = null;
-const form = () => (FORM ||= JSON.parse(fs.readFileSync(path.join(C.DIR, 'diagnostic.json'), 'utf8')));
-const answerOf = (it) => String(it.answer).split('|');
-const isRight = (it, v) => answerOf(it).some((a) => C.check.norm(a) === C.check.norm(v));
-const diagItems = (f) => [
+/* The admin panel's diagnostic forms (content/diagnostic.json, built by scripts/build-diagnostic.js).
+   A student gets them in turn: the first diagnostic the first form, a retake the next one. */
+let FORMS = null;
+const forms = () => (FORMS ||= JSON.parse(fs.readFileSync(path.join(C.DIR, 'diagnostic.json'), 'utf8')).forms);
+const formOf = (id) => forms().find((f) => f.id === id) || forms()[0];
+const moduleOf = (f, m) => (f.reading[m] ? m : 'academic');
+/** Every spelling that counts: the answers and the acceptable alternatives. */
+const answerOf = (it) => [...[].concat(it.answer ?? []), ...[].concat(it.acceptable ?? [])].flatMap((a) => String(a).split('|')).filter((a) => a !== '');
+const isRight = (it, v) => v != null && v !== '' && answerOf(it).some((a) => C.check.norm(a) === C.check.norm(v));
+const diagItems = (f, module) => [
   ...f.listening.slots.flatMap((s) => s.clips.flatMap((c) => c.items.map((it) => ({ ...it, skill: 'listening', slot: s.slot, clip: c.id })))),
-  ...f.reading.academic.items.map((it) => ({ ...it, skill: 'reading' })),
+  ...f.reading[moduleOf(f, module)].items.map((it) => ({ ...it, skill: 'reading' })),
 ];
-/* slot 1 decides slot 2: two right answers or more → the first clip, else the easier second one */
+/**
+ * Which clip of each Listening slot the student hears, by the form's adaptive rule: the
+ * estimate starts at `adaptive.start`; after a slot, the number right among its first
+ * `every` questions moves it by `delta[n]` (within min…max); the next slot plays the clip
+ * whose questions aim closest to the estimate.
+ */
 function diagPath(f, answers) {
-  const first = f.listening.slots[0].clips[0];
-  const right = first.items.filter((it) => isRight(it, answers?.[it.id])).length;
+  const A = f.adaptive || { start: 5, min: 1, max: 9, every: 3, delta: { 0: -2, 1: -1, 2: 1, 3: 2 } };
+  const aim = (c) => { const b = c.items.map((it) => Number(it.targetBand)).filter(Number.isFinite); return b.length ? b.reduce((s, x) => s + x, 0) / b.length : A.start; };
+  let est = A.start;
   const path = {};
-  for (const s of f.listening.slots) path[s.slot] = s.slot === 1 || s.clips.length < 2 ? s.clips[0].id : s.clips[right >= Math.ceil(first.items.length * 0.6) ? 0 : 1].id;
+  for (const s of f.listening.slots) {
+    const clip = s.clips.reduce((best, c) => (Math.abs(aim(c) - est) < Math.abs(aim(best) - est) ? c : best), s.clips[0]);
+    path[s.slot] = clip.id;
+    const first = clip.items.slice(0, A.every);
+    if (!first.some((it) => answers?.[it.id] != null)) continue; // not answered yet: later slots keep this estimate
+    const right = first.filter((it) => isRight(it, answers[it.id])).length;
+    est = Math.max(A.min, Math.min(A.max, est + (Number(A.delta?.[right]) || 0)));
+  }
   return path;
 }
 const toBand = (c, t) => (t ? Math.max(3, Math.min(8.5, r5(3 + (c / t) * 5.5))) : null);
+/** The form as the student gets it: nothing that gives an answer away. */
+const SECRET = ['answer', 'acceptable', 'quote', 'explanation', 'keywords', 'trap'];
 function stripAnswers(f) {
   const out = structuredClone(f);
-  for (const s of out.listening.slots) for (const c of s.clips) for (const it of c.items) delete it.answer;
-  for (const k of Object.keys(out.reading)) for (const it of out.reading[k].items || []) delete it.answer;
+  const clean = (it) => SECRET.forEach((k) => delete it[k]);
+  for (const s of out.listening.slots) for (const c of s.clips) c.items.forEach(clean);
+  for (const k of Object.keys(out.reading)) (out.reading[k].items || []).forEach(clean);
   return out;
 }
 
 router.get('/mobile/ielts/diagnostic', wrap(async (req, res) => {
-  const f = form();
+  const { rows } = await pool.query("SELECT count(*)::int AS n FROM attempts WHERE user_id = $1 AND skill = 'diagnostic'", [req.user.id]);
+  const f = forms()[rows[0].n % forms().length];
   const level = f.levels[req.query.level] ? req.query.level : 'standard';
   const p = await profileOf(req.user);
-  res.json({ formId: f.id, level, module: req.query.module || p.track || 'academic', code: f.id, form: stripAnswers(f) });
+  res.json({ formId: f.id, level, module: moduleOf(f, req.query.module || p.track || 'academic'), code: f.code || f.id, form: stripAnswers(f) });
 }));
-router.post('/mobile/ielts/diagnostic/path', (req, res) => res.json({ path: diagPath(form(), req.body?.answers) }));
+router.post('/mobile/ielts/diagnostic/path', (req, res) => res.json({ path: diagPath(formOf(req.body?.formId), req.body?.answers) }));
 router.get('/mobile/ielts/diagnostic/last', wrap(async (req, res) => {
   const { rows } = await pool.query("SELECT id FROM attempts WHERE user_id = $1 AND skill = 'diagnostic' ORDER BY id DESC LIMIT 1", [req.user.id]);
   res.json({ attemptId: rows[0]?.id ?? null });
 }));
 router.post('/mobile/ielts/diagnostic', wrap(async (req, res) => {
-  const f = form(), b = req.body || {};
+  const b = req.body || {}, f = formOf(b.formId);
   const L = f.levels[b.level] || f.levels.standard;
+  const module = moduleOf(f, b.module);
   const path = diagPath(f, b.answers);
   const clipOf = (it) => f.listening.slots.find((x) => x.slot === it.slot).clips.find((c) => c.id === it.clip);
-  const asked = diagItems(f).filter((it) => {
-    if (it.skill === 'reading') return !L.reading.light || f.reading.academic.lightItems.includes(it.id);
+  const asked = diagItems(f, module).filter((it) => {
+    if (it.skill === 'reading') return !L.reading.light || (f.reading[module].lightItems || []).includes(it.id);
     if (!L.listening.slots.includes(it.slot) || path[it.slot] !== it.clip) return false;
     const take = L.listening.take?.[it.slot];
     return !take || clipOf(it).items.findIndex((x) => x.id === it.id) < take;
@@ -410,12 +433,12 @@ router.post('/mobile/ielts/diagnostic', wrap(async (req, res) => {
   const words = countWords(b.writingText), secs = Object.values(b.speakingSec || {}).map(Number).filter(Boolean);
   const bands = { listening: toBand(rl.correct, rl.total), reading: toBand(rr.correct, rr.total), writing: null, speaking: null, overallPrelim: true };
   bands.overall = bands.listening != null && bands.reading != null ? r5((bands.listening + bands.reading) / 2) : bands.listening ?? bands.reading;
-  const result = { level: b.level || 'standard', module: b.module || 'academic', bands, raw: { listening: rl, reading: rr },
+  const result = { level: b.level || 'standard', module, formId: f.id, bands, raw: { listening: rl, reading: rr },
     writing: words ? { status: 'pending_review', words, text: String(b.writingText).slice(0, 20000), question: f.writing.question } : null,
     // speaking waits for its recordings (POST /ielts/diagnostic/assess), then for a teacher
     speaking: secs.length ? { status: 'pending_ai', answers: secs.length, seconds: secs.reduce((s, x) => s + x, 0) } : null,
     weakTypes: Object.entries(byType).filter(([, v]) => v.correct / v.total < 0.6).map(([k]) => k), byType, items };
-  const row = await insertAttempt(pool, { userId: req.user.id, testId: 'DG-' + f.id, skill: 'diagnostic', kind: 'diagnostic', title: 'Diagnostic', mode: 'exam',
+  const row = await insertAttempt(pool, { userId: req.user.id, testId: f.id, skill: 'diagnostic', kind: 'diagnostic', title: 'Diagnostic', mode: 'exam',
     status: result.writing || result.speaking ? 'pending_review' : 'done', band: bands.overall, raw: rl.correct + rr.correct, max: rl.total + rr.total, timeSec: b.timeSec,
     answers: { answers: b.answers || {}, writingText: b.writingText || '' }, result });
   res.json({ attempt: attemptOut(row) });

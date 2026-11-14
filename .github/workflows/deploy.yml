@@ -20,6 +20,10 @@ jobs:
       PORT: ${{ secrets.DEPLOY_PORT || '22' }}
       APP_DIR: ${{ secrets.DEPLOY_PATH || '/opt/ielts-platform' }}
       SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+      # Repository variables (Settings → Secrets and variables → Actions → Variables), as on the
+      # SAT platform: phones (and optionally emails) that become admins, comma-separated.
+      ADMIN_PHONES: ${{ vars.IELTS_ADMIN_PHONES || vars.ADMIN_PHONES }}
+      ADMIN_EMAILS: ${{ vars.IELTS_ADMIN_EMAILS || vars.ADMIN_EMAILS }}
     steps:
       - name: Check configuration
         id: cfg
@@ -28,6 +32,14 @@ jobs:
             echo "::notice::Deploy secrets are not set yet, skipping."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
+          # only phone and email characters travel to the server's shell
+          if ! printf '%s' "$ADMIN_PHONES" | grep -qE '^[0-9+ ,()-]*$'; then
+            echo "::error::IELTS_ADMIN_PHONES may hold only phone numbers separated by commas."; exit 1
+          fi
+          if ! printf '%s' "$ADMIN_EMAILS" | grep -qE '^[A-Za-z0-9@._+ ,-]*$'; then
+            echo "::error::IELTS_ADMIN_EMAILS may hold only emails separated by commas."; exit 1
+          fi
+          [ -n "$ADMIN_PHONES" ] || echo "::notice::IELTS_ADMIN_PHONES is not set: admins stay as the server's .env has them."
 
       - name: Set up SSH
         if: steps.cfg.outputs.skip != 'true'
@@ -41,16 +53,31 @@ jobs:
         run: |
           ssh -i ~/.ssh/deploy -p "$PORT" "$USER@$HOST" \
             APP_DIR="$APP_DIR" SHA="$GITHUB_SHA" REPO="https://github.com/${GITHUB_REPOSITORY}.git" \
+            ADMIN_PHONES="'$ADMIN_PHONES'" ADMIN_EMAILS="'$ADMIN_EMAILS'" \
             'bash -s' <<'EOF'
           set -euo pipefail
           if [ ! -d "$APP_DIR/.git" ]; then
             git clone "$REPO" "$APP_DIR"
           fi
           cd "$APP_DIR"
-          if [ ! -f .env ]; then
-            echo "::error::$APP_DIR/.env is missing: copy .env.example and fill it in on the server."
-            exit 1
+          # Made once and kept, as on the SAT platform: a new password would lock the API
+          # out of the database that the existing volume already holds.
+          if [ ! -s .env ]; then
+            umask 077
+            printf 'POSTGRES_PASSWORD=%s\n' "$(head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n')" > .env
+            umask 022
+            echo "Created .env with a new database password"
           fi
+          # Admins from the repository variables, when they are set; otherwise .env keeps its own.
+          set_env() {
+            [ -n "$2" ] || return 0
+            { grep -v "^$1=" .env || true; printf '%s=%s\n' "$1" "$2"; } > .env.next
+            mv .env.next .env
+            chmod 600 .env
+            echo "$1 set from the repository variable"
+          }
+          set_env ADMIN_PHONES "$ADMIN_PHONES"
+          set_env ADMIN_EMAILS "$ADMIN_EMAILS"
           git fetch --prune origin main
           git reset --hard "$SHA"
           docker compose up -d --build --remove-orphans db api web

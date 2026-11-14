@@ -33,10 +33,12 @@ jobs:
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
           # only phone and email characters travel to the server's shell
-          if ! printf '%s' "$ADMIN_PHONES" | grep -qE '^[0-9+ ,()-]*$'; then
+          phones_re='^[0-9+ ,()-]*$'
+          emails_re='^[A-Za-z0-9@._+ ,-]*$'
+          if [[ ! "$ADMIN_PHONES" =~ $phones_re ]]; then
             echo "::error::IELTS_ADMIN_PHONES may hold only phone numbers separated by commas."; exit 1
           fi
-          if ! printf '%s' "$ADMIN_EMAILS" | grep -qE '^[A-Za-z0-9@._+ ,-]*$'; then
+          if [[ ! "$ADMIN_EMAILS" =~ $emails_re ]]; then
             echo "::error::IELTS_ADMIN_EMAILS may hold only emails separated by commas."; exit 1
           fi
           [ -n "$ADMIN_PHONES" ] || echo "::notice::IELTS_ADMIN_PHONES is not set: admins stay as the server's .env has them."

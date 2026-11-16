@@ -1,6 +1,6 @@
-// IELTS onboarding (V5), diagnostic (Z4), diagnostic result (Jl) and route choice (Jd).
+// IELTS onboarding (V5), diagnostic (Z4) and diagnostic result (Jl).
 // Profile and diagnostic live on prod-server; writing/speaking of the diagnostic are graded by
-// the platform's API (/ielts/diagnostic/assess; a teacher grades writing and speaking). Mascot artwork is replaced by line icons.
+// the platform's API (/ielts/diagnostic/assess; the AI grades writing and speaking). Mascot artwork is replaced by line icons.
 (function () {
   const { h, icon } = DOM;
   const put = (el, ...k) => el.replaceChildren(...k.flat(9).filter((x) => x != null && x !== false && x !== ''));
@@ -285,11 +285,11 @@
       async function submit() {
         busy = true; err = ''; paint();
         try {
-          const res = await Api.submitDiagnostic({ formId: S.formId, level: S.level, module: S.module, answers: S.answers, writingText: S.writing, speakingSec: S.speakingSec,
+          const res = await Api.submitDiagnostic({ formId: S.formId, level: S.level, module: S.module, uiLang: I18n.lang, answers: S.answers, writingText: S.writing, speakingSec: S.speakingSec,
             timeSec: Math.round((Date.now() - Date.parse(S.startedAt)) / 1000), startedAt: S.startedAt, device: innerWidth < 760 ? 'mobile' : 'desktop' });
           const id = res?.attempt?.id;
           try { localStorage.removeItem(DRAFT); } catch {}
-          const answers = Object.entries(takes).map(([itemId, x]) => ({ itemId, durationSec: x.durationSec, wav: x.wav }));
+          const answers = Object.entries(takes).map(([itemId, x]) => ({ itemId, durationSec: x.durationSec, transcript: x.transcript || null, wav: x.wav }));
           if (id && answers.length) { wavs[id] = answers; Speaking.Pending.save('diag:' + id, { testId: 'diag', mode: 'exam', answers, savedAt: Date.now() }); }
           stopAll();
           Router.go({ screen: 'ielts-diagnostic-result', ieltsAttempt: String(id) });
@@ -343,7 +343,7 @@
           put(box, isPlayed ? h('span', { class: 'badge badge--ok' }, icon('check', 'ic12'), ' ', D('block.played'))
             : playing ? h('span', { class: 'row small' }, icon('volume', 'ic16'), '…', !exam && h('button', { class: 'btn btn--ghost btn--sm', type: 'button', onclick: () => { stop(); draw(); } }, icon('pause', 'ic16')))
               : left > 0 ? [h('span', { class: 'small' }, D('block.readTime', { n: left })), h('button', { class: 'btn btn--secondary btn--sm', type: 'button', onclick: play }, D('block.startNow'))]
-                : [blocked && h('span', { class: 'small' }, D('block.autoplayBlocked')), (!exam || !played) && h('button', { class: 'btn btn--primary btn--sm', type: 'button', 'aria-label': 'Play', onclick: play }, icon('play', 'ic16'))],
+                : [blocked && h('span', { class: 'small' }, D('block.autoplayBlocked')), (!exam || !played) && h('button', { class: 'btn btn--primary btn--sm', type: 'button', 'aria-label': t('ieltsListening.play'), onclick: play }, icon('play', 'ic16'))],
             exam && !isPlayed && h('p', { class: 'xs muted' }, D('block.playOnce')));
         }
         if (!played) iv = setInterval(() => { left--; if (left <= 0) play(); else draw(); }, 1000);
@@ -359,7 +359,7 @@
             if (recording) return rec.stop();
             rec = rec || Speaking.makeRecorder((tick) => { if (!tick) paint(); else root.querySelector('.dsrow__clock')?.replaceChildren(`${DOM.mmss(rec.elapsed)} / ${DOM.mmss(maxSec)}`); });
             rec.itemId = id;
-            rec.start({ maxSec, onDone: (take) => { if (take) { takes[id] = take; S.speakingSec[id] = take.durationSec; save(); } paint(); } });
+            rec.start({ maxSec, transcribe: true, onDone: (take) => { if (take) { takes[id] = take; S.speakingSec[id] = take.durationSec; save(); } paint(); } });
           } }, icon(recording ? 'stop' : 'mic', 'ic16'), recording ? [t('ieltsSpeaking.stop'), ' · ', h('span', { class: 'dsrow__clock' }, `${DOM.mmss(rec.elapsed)} / ${DOM.mmss(maxSec)}`)] : tk || S.speakingSec[id] ? t('ieltsSpeaking.retake') : t('ieltsSpeaking.answer')));
       }
       function blockView() {
@@ -445,18 +445,20 @@
   // ---------- diagnostic result ----------
   const CR = { writing: [['taskResponse', 'TR'], ['coherenceCohesion', 'CC'], ['lexicalResource', 'LR'], ['grammaticalRange', 'GRA']], speaking: [['fluencyCoherence', 'FC'], ['lexicalResource', 'LR'], ['grammaticalRange', 'GRA'], ['pronunciation', 'P']] };
   const gradeRuns = {};
+  /** Sends the Speaking recordings kept on this device (once), or asks to grade a part that failed once more. */
   async function gradeDiag(id, skill) {
     const fd = new FormData();
     fd.append('attemptId', id); fd.append('skill', skill); fd.append('uiLang', I18n.lang);
-    if (skill === 'speaking') {
-      const ans = wavs[id] || (await Speaking.Pending.load('diag:' + id))?.answers;
-      if (!ans?.length) { const e = new Error('lost'); e.lost = true; throw e; }
-      fd.append('items', JSON.stringify(ans.map((a) => ({ itemId: a.itemId, durationSec: a.durationSec }))));
+    const ans = skill === 'speaking' ? wavs[id] || (await Speaking.Pending.load('diag:' + id))?.answers : null;
+    if (ans?.length) {
+      fd.append('items', JSON.stringify(ans.map((a) => ({ itemId: a.itemId, durationSec: a.durationSec, transcript: a.transcript || null }))));
       ans.forEach((a, i) => fd.append('audio_' + i, a.wav, `${a.itemId}.wav`));
     }
-    await Api.local('/api/ielts/diagnostic/assess', { form: fd });
-    if (skill === 'speaking') { delete wavs[id]; Speaking.Pending.drop('diag:' + id); }
+    try { await Api.local('/api/ielts/diagnostic/assess', { form: fd }); }
+    catch (e) { if (e.status === 409) e.lost = true; throw e; }
+    if (ans?.length) { delete wavs[id]; Speaking.Pending.drop('diag:' + id); }
   }
+  const WAITING = ['pending_ai', 'grading'];
   Screens['ielts-diagnostic-result'] = {
     fullscreen: true,
     title: () => t('ieltsOb.resultTitle'),
@@ -467,10 +469,19 @@
       let [view, prof] = await Promise.all([Api.attempt(id), Api.profile().catch(() => ({}))]);
       const gs = {};
       const root = h('div');
+      // the AI grades in the background (server/src/ai.js): look again until both parts are in
+      let pollT = null, gone = false;
+      App.onLeave(() => { gone = true; clearTimeout(pollT); });
+      function poll() {
+        clearTimeout(pollT);
+        if (gone || !['writing', 'speaking'].some((s) => WAITING.includes(view.result?.[s]?.status))) return;
+        pollT = setTimeout(async () => { try { view = await Api.attempt(id); } catch {} if (!gone) { paint(); poll(); } }, IELTS_CONFIG.aiPollMs);
+      }
       async function run(skill, force) {
         if (gradeRuns[id + skill] && !force) return;
         gs[skill] = 'run'; paint();
-        gradeRuns[id + skill] = gradeDiag(id, skill).then(async () => { gs[skill] = null; view = await Api.attempt(id); }).catch((e) => { gs[skill] = e.lost ? 'lost' : 'err'; }).finally(() => { delete gradeRuns[id + skill]; paint(); });
+        gradeRuns[id + skill] = gradeDiag(id, skill).then(async () => { gs[skill] = null; view = await Api.attempt(id); }).catch((e) => { gs[skill] = e.lost ? 'lost' : 'err'; })
+          .finally(() => { delete gradeRuns[id + skill]; paint(); poll(); });
       }
       function paint() {
         const r = view.result || {}, b = r.bands || {}, light = r.level === 'light';
@@ -486,19 +497,19 @@
             h('span', { class: 'small' }, (b.overallPrelim === false ? t('ieltsOb.overallFinal') : t('ieltsOb.overallPrelim')) + (light ? ' · ≈' : '')),
             h('div', { class: 'row' }, h('b', { class: 'dres__big' }, b.overall != null ? Number(b.overall).toFixed(1) : '—'), target && h('span', { class: 'badge' }, t('ieltsDash.goalShort', { n: target.toFixed(1) }))),
             h('div', { class: 'progress' }, h('i', { style: { width: Math.min(100, ((b.overall || 0) / (target || 9)) * 100) + '%' } })),
-            h('p', { class: 'small' }, !target ? t('ieltsOb.noTarget') : gap != null && gap <= 0 ? t('ieltsOb.gapReached') : term?.long ? t('ieltsOb.gapText', { gap }) : term ? t('ieltsOb.gapTerm', { gap, term: I18n.tp('ieltsOb.months', term.months, { n: numFmt(term.months) }), daily: dailyText(prof?.dailyMinutes || 60) }) : ''),
+            h('p', { class: 'small' }, !target ? t('ieltsOb.noTarget') : gap != null && gap <= 0 ? t('ieltsOb.gapReached') : term?.long ? t('ieltsOb.gapText', { n: gap }) : term ? t('ieltsOb.gapTerm', { gap, term: I18n.tp('ieltsOb.months', term.months, { n: numFmt(term.months) }), daily: dailyText(prof?.dailyMinutes || 60) }) : ''),
             light && h('p', { class: 'xs muted' }, t('ieltsOb.shortEstimate'))),
           h('div', { class: 'dres__skills' }, Z0.map((s) => {
             const band = b[s], raw = r.raw?.[s], ws = r[s];
-            const pending = (s === 'writing' || s === 'speaking') && ws && (ws.status === 'pending_ai' || ws.status === 'grading');
-            if (pending && !gs[s] && !gradeRuns[id + s]) setTimeout(() => run(s));
+            // the recordings are still on this device: send them (once)
+            if (s === 'speaking' && ws?.status === 'awaiting_audio' && !gs[s] && !gradeRuns[id + s]) setTimeout(() => run(s));
             const status = band != null ? (light && raw ? '≈' : '') + Number(band).toFixed(1)
-              : gs[s] === 'run' || ws?.status === 'grading' ? t('ieltsOb.grading') : gs[s] === 'err' || ws?.status === 'failed' ? t('ieltsOb.gradeFailed') : gs[s] === 'lost' ? t('ieltsOb.gradeLost') : ws?.status === 'pending_ai' ? t('ieltsOb.waitsAiShort') : ws?.status === 'pending_review' ? t('review.short') : D('result.skipped');
+              : gs[s] === 'run' || WAITING.includes(ws?.status) ? t('ieltsOb.grading') : gs[s] === 'lost' ? t('ieltsOb.gradeLost') : gs[s] === 'err' || ws?.status === 'failed' ? t('ieltsOb.gradeFailed') : D('result.skipped');
             return h('section', { class: 'card stack-sm' }, h('div', { class: 'row' }, Hub.plate(s, 36), h('b', { class: 'grow' }, D('block.' + s)), h('b', { class: band != null ? 'dres__band' : 'small muted' }, status)),
               h('div', { class: 'progress' }, h('i', { style: { width: ((band || 0) / 9) * 100 + '%' } })),
               h('p', { class: 'xs muted' }, raw ? t('ieltsOb.rawOf', { n: raw.correct, total: raw.total }) : s === 'writing' && ws ? t('ieltsOb.essaySaved', { n: ws.words || 0 }) : s === 'speaking' && ws ? t('ieltsOb.speakingSaved', { n: ws.answers || 0, sec: Math.round(ws.seconds || 0) }) : ''),
               ws?.criteria && h('div', { class: 'chips' }, CR[s].filter(([k]) => ws.criteria[k] != null).map(([k, l]) => h('span', { class: 'badge' }, `${l} ${Number(ws.criteria[k]).toFixed(1)}`))),
-              (gs[s] === 'err' || ws?.status === 'failed') && h('button', { class: 'btn btn--secondary btn--sm', type: 'button', onclick: () => run(s, true) }, t('ieltsOb.gradeRetry')));
+              gs[s] !== 'lost' && gs[s] !== 'run' && (gs[s] === 'err' || ws?.status === 'failed') && h('button', { class: 'btn btn--secondary btn--sm', type: 'button', onclick: () => run(s, true) }, t('ieltsOb.gradeRetry')));
           })),
           h('section', { class: 'card stack-sm' }, h('h2', null, D('result.weak')), h('p', { class: 'small muted' }, D('result.weakHint')),
             (r.weakTypes || []).length ? r.weakTypes.map((ty) => h('div', { class: 'row dgrow' }, icon('target', 'ic16'), h('b', { class: 'grow' }, D('types.' + ty) || RL.typeLabel(ty)),
@@ -506,7 +517,7 @@
               : h('p', { class: 'small' }, D('result.noWeak'))),
           h('section', { class: 'card card--brand stack-sm' }, h('h2', null, t('ieltsOb.nextTitle')),
             h('p', null, prof?.examDate ? t('ieltsOb.nextTextDate', { date: fmtLong(prof.examDate) }) : t('ieltsOb.nextText')),
-            h('div', null, h('a', { class: 'btn btn--primary btn--lg', href: Router.href({ screen: 'ielts-route' }) }, t('ieltsOb.buildPlan'), icon('arrowR', 'ic16'))),
+            h('div', null, h('a', { class: 'btn btn--primary btn--lg', href: Router.href({ screen: 'ielts', ieltsTab: 'today' }) }, t('ieltsOb.buildPlan'), icon('arrowR', 'ic16'))),
             h('p', { class: 'xs muted' }, t('ieltsOb.bandNote'))),
           reviewItems.length > 0 && h('details', { class: 'card', id: 'dres-review' }, h('summary', null, h('b', null, D('result.review'))),
             h('div', { class: 'stack-sm', style: { marginTop: '12px' } }, reviewItems.map((x, i) => h('div', { class: 'dgrow stack-sm' },
@@ -515,55 +526,7 @@
               x.trap && h('span', { class: 'badge badge--warn' }, `${D('result.trap')}: ${D('trap.' + x.trap) || x.trap}`))))))
         }));
       }
-      paint();
-      return root;
-    },
-  };
-
-  // ---------- route ----------
-  Screens['ielts-route'] = {
-    fullscreen: true,
-    title: () => 'IELTS',
-    async render() {
-      const pr = await Api.profile().catch(() => ({}));
-      const target = Number(pr.targetBand) || 7, B = pr.bands || {};
-      const overall = B.overall ?? null, gap = VY(target, overall), daily = pr.dailyMinutes || 60;
-      const weeksToExam = pr.examDate ? daysTo(pr.examDate) / 7 : Infinity;
-      let rec = null;
-      if (overall == null) rec = null;
-      else if (overall < 4.5 || gap >= 1.5 || (weeksToExam < 4 && gap >= 1)) rec = 'teacher';
-      else if (Math.max(target - (B.writing ?? target), target - (B.speaking ?? target)) >= 1) rec = target >= 7 ? 'teacher' : 'mix';
-      else if (gap <= 1) rec = gap > 0.5 ? 'mix' : 'platform';
-      else rec = 'platform';
-      const opts = [{ id: 'platform', speedup: 1, k: 3 }, { id: 'mix', speedup: 1.6, k: 4 }, { id: 'teacher', speedup: 2, k: 3 }];
-      let saving = false;
-      const root = h('div');
-      const wa = (name) => DOM.waLink(t('ieltsOb.route.waText', { name }));
-      async function choose(id) {
-        saving = true; paint();
-        try { await Api.setRoute(id); if (id !== 'platform') window.open(wa(t('ieltsOb.route.' + id)), '_blank', 'noopener'); State.me = null; today(); }
-        catch (e) { saving = false; paint(); DOM.toast(e?.serverMessage || t('ieltsReading.errorText')); }
-      }
-      function paint() {
-        put(root, frame({ onBack: () => history.back(), main: h('div', { class: 'ob__wide stack' },
-          h('h1', { class: 'ob__title' }, t('ieltsOb.routeTitle', { n: target.toFixed(1) })),
-          h('p', { class: 'muted' }, overall == null ? t('ieltsOb.routeNoDiag') : pr.examDate ? t('ieltsOb.routeSubFull', { now: overall.toFixed(1), gap, date: fmtLong(pr.examDate), daily: dailyText(daily) }) : t('ieltsOb.routeSubNoDate', { now: overall.toFixed(1), gap, daily: dailyText(daily) })),
-          h('div', { class: 'route' }, opts.map((o) => {
-            const term = VV(gap ?? 1.5, daily, o.speedup), fits = VG(term, pr.examDate);
-            const isRec = rec === o.id;
-            return h('section', { class: 'card stack-sm route__card' + (isRec ? ' is-rec' : '') + (pr.route === o.id ? ' is-chosen' : '') },
-              h('div', { class: 'row row--between' }, h('span', { class: 'eyebrow' }, t('ieltsOb.routeKicker.' + o.id)), isRec && h('span', { class: 'badge badge--brand' }, t('ieltsOb.recommended'))),
-              h('h2', null, t('ieltsOb.route.' + o.id)),
-              h('p', null, h('b', { class: 'route__term' }, term.long ? t('ieltsOb.termLongShort') : `≈ ${I18n.tp('ieltsOb.months', term.months, { n: numFmt(term.months) })}`), ' ', h('span', { class: 'small muted' }, t('ieltsOb.toGoal'))),
-              fits === false ? h('span', { class: 'badge badge--warn' }, t('ieltsOb.notFitsShort', { date: fmtLong(pr.examDate) }))
-                : fits === true ? h('span', { class: 'badge badge--ok' }, daysTo(pr.examDate) - 7 * term.weeks >= 21 ? t('ieltsOb.fitsSpare') : t('ieltsOb.fitsExam')) : null,
-              h('ul', { class: 'bul small' }, Array.from({ length: o.k }, (_, i) => h('li', null, t(`ieltsOb.routeFeature.${o.id}.${i + 1}`)))),
-              h('button', { class: 'btn btn--lg ' + (isRec ? 'btn--primary' : 'btn--secondary'), type: 'button', disabled: saving, onclick: () => choose(o.id) }, t('ieltsOb.routeCta.' + o.id)));
-          })),
-          h('a', { class: 'link small', href: wa(t('ieltsOb.route.' + (rec || 'mix'))), target: '_blank', rel: 'noopener' }, t('ieltsOb.routeManager')),
-          h('p', { class: 'small muted' }, t('ieltsOb.routeWhy', { daily }))) }));
-      }
-      paint();
+      paint(); poll();
       return root;
     },
   };

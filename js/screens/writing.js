@@ -1,6 +1,6 @@
 // IELTS Writing — ai-tutor HI (task page), Vf (editor), HF (AI review), HP (works lists),
 // HB (guide «Как писать»), chart renderer HM. Essays are saved on the platform's API and
-// a teacher grades them in the staff area; drafts live in localStorage like ai-tutor.
+// graded there by the AI (server/src/ai.js); drafts live in localStorage like ai-tutor.
 (function () {
   const { h, icon } = DOM;
   const put = (el, ...k) => el.replaceChildren(...k.flat(9).filter((x) => x != null && x !== false && x !== ''));
@@ -53,8 +53,9 @@
   const MARKS = ['circle', 'square', 'triangle', 'diamond', 'circle', 'square'];
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const num = (v) => Math.round(v * 100) / 100;
+  const markerFill = () => getComputedStyle(document.documentElement).getPropertyValue('--chart-marker').trim();
   function marker(kind, x, y, c) {
-    const a = `fill="#fff" stroke="${c}" stroke-width="2"`;
+    const a = `fill="${markerFill()}" stroke="${c}" stroke-width="2"`;
     if (kind === 'square') return `<rect x="${x - 4}" y="${y - 4}" width="8" height="8" ${a}/>`;
     if (kind === 'triangle') return `<polygon points="${x},${y - 5} ${x + 5},${y + 4} ${x - 5},${y + 4}" ${a}/>`;
     if (kind === 'diamond') return `<polygon points="${x},${y - 5} ${x + 5},${y} ${x},${y + 5} ${x - 5},${y}" ${a}/>`;
@@ -78,7 +79,7 @@
     if (c.type === 'line' || c.type === 'bar') return `${t('ielts.term.visual.' + c.type)}: "${c.title || ''}". ${c.yLabel ? `${t('ielts.term.chart.yAxis', { label: c.yLabel })}${c.unit ? ` (${c.unit})` : ''}. ` : ''}${ser}`;
     if (c.type === 'pie') return `${t('ielts.term.visual.pie')}: "${c.title || ''}". ${(c.slices || []).map((s) => `${s.label} — ${s.value}`).join(', ')}`;
     if (c.type === 'table') return `${t('ielts.term.visual.table')}: "${c.title || ''}"${c.unit ? ` (${c.unit})` : ''}. ${t('ielts.term.chart.columns', { list: (c.columns || []).join(' | ') })}.`;
-    if (c.type === 'figure') return `${c.kind === 'map' ? 'Maps' : 'Diagram'}: ${c.alt || ''}`;
+    if (c.type === 'figure') return `${t('ielts.term.visual.' + (c.kind === 'map' ? 'map' : 'process'))}: ${c.alt || ''}`;
     return c.title || '';
   }
   function axesChart(c) {
@@ -369,7 +370,7 @@
     out.push(text.slice(at));
     return out;
   }
-  const ERR_UI = (c) => (['quota', 'grading_unavailable', 'already'].includes(c) ? c : 'other');
+  const ERR_UI = (c) => (['quota', 'grading_unavailable', 'already', 'empty'].includes(c) ? c : 'other');
 
   Screens['learn:writing-work'] = {
     async render(p) {
@@ -413,15 +414,12 @@
             h('div', { class: 'wscore__crit' }, CRIT.map((c) => h('div', null, h('b', null, bandTxt(r.criteria?.[c])), h('span', null, critLabel(c, k))))),
             r.feedback && h('p', { class: 'wscore__fb' }, r.feedback),
             h('div', { class: 'row' }, h('a', { class: 'btn btn--primary', href: retry }, t('ieltsWriting.p.work.again'))))
-            : r.status === 'pending_review' && !st.busy ? h('section', { class: 'card wstatus', role: 'status' },
-              h('span', { class: 'wstatus__ic' }, icon('clock')),
-              h('div', { class: 'grow stack-sm' }, h('b', null, t('review.pendingTitle')), h('p', { class: 'small' }, t('review.pendingWriting'))))
             : h('section', { class: 'card wstatus' + (r.status === 'failed' || st.err ? ' is-bad' : ''), role: 'status' },
               h('span', { class: 'wstatus__ic' }, icon(O === 'grading' ? 'spark' : 'clock')),
               h('div', { class: 'grow stack-sm' },
-                h('b', null, O === 'grading' ? t('ieltsWriting.gradingTitle') : t('ieltsWriting.p.work.pendingTitle')),
-                h('p', { class: 'small' }, O === 'grading' ? t('ieltsWriting.gradingText') : st.err ? t('ieltsWriting.gradeError.' + ERR_UI(st.err)) : t('ieltsWriting.pendingText'))),
-              O !== 'grading' && h('button', { class: 'btn btn--primary', type: 'button', onclick: grade }, icon('spark', 'ic16'), t('ieltsWriting.gradeNow'))),
+                h('b', null, O === 'grading' ? t('ieltsWriting.gradingTitle') : O === 'failed' ? t('ieltsWriting.failedTitle') : t('ieltsWriting.p.work.pendingTitle')),
+                h('p', { class: 'small' }, O === 'grading' ? t('ieltsWriting.gradingText') : st.err || O === 'failed' ? t('ieltsWriting.gradeError.' + ERR_UI(st.err || r.failReason)) : t('ieltsWriting.pendingText'))),
+              O !== 'grading' && r.failReason !== 'empty' && h('button', { class: 'btn btn--primary', type: 'button', onclick: grade }, icon('spark', 'ic16'), t('ieltsWriting.gradeNow'))),
           done && (d.criteriaNotes?.length || d.nextSteps?.length) && h('section', { class: 'card stack wdet' },
             h('h3', null, t('ieltsWriting.d.title')),
             h('div', { class: 'wdet__crits' }, (d.criteriaNotes || []).map((n) => h('article', { class: 'wdet__crit' },

@@ -8,8 +8,7 @@
 
    Roles and what each may do in the staff area:
      student   nothing
-     teacher   sees the students table and the test bank, checks writing and speaking
-     curator   + confirms or sends back official results
+     curator   sees the students table and the test bank, confirms or sends back official results
      manager   + sets a student's plans and course access
      admin     everything: roles, and deleting a student
 
@@ -30,13 +29,12 @@ const scrypt = promisify(crypto.scrypt);
 const ADMIN_PHONES = String(process.env.ADMIN_PHONES || '').split(',').map(normPhone).filter(Boolean);
 const ADMIN_EMAILS = String(process.env.ADMIN_EMAILS || '').split(',').map(normEmail).filter(Boolean);
 /* Plan ids, the same as `plans` in js/config.js, and the ones a new student starts with. */
-const PLANS = list(process.env.PLANS || 'self,coach,intensive');
+const PLANS = list(process.env.PLANS || 'self,coach');
 const DEFAULT_PLANS = list(process.env.DEFAULT_PLANS || 'self').filter((p) => PLANS.includes(p));
 
-const ROLES = ['student', 'teacher', 'curator', 'manager', 'admin'];
+const ROLES = ['student', 'curator', 'manager', 'admin'];
 const PERMS = {
-  staff: ['teacher', 'curator', 'manager', 'admin'],
-  review: ['teacher', 'curator', 'manager', 'admin'],
+  staff: ['curator', 'manager', 'admin'],
   plans: ['manager', 'admin'],
   access: ['manager', 'admin'],
   scores: ['curator', 'admin'],

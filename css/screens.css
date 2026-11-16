@@ -3,18 +3,18 @@
 /* ---------- Auth ---------- */
 .auth {
   min-height: 100vh; display: grid; place-items: center; padding: 48px 16px;
-  background: radial-gradient(60% 45% at 50% 0%, rgba(255, 212, 0, .16), transparent 70%), #000;
-  color: #F4F4F2;
+  background: radial-gradient(60% 45% at 50% 0%, var(--auth-glow), transparent 70%), var(--auth-bg);
+  color: var(--auth-ink);
 }
-html[data-theme="light"] .auth { background: radial-gradient(60% 45% at 50% 0%, rgba(255, 212, 0, .28), transparent 70%), var(--bg); color: var(--ink); }
+html[data-theme="light"] .auth { background: radial-gradient(60% 45% at 50% 0%, var(--auth-glow-light), transparent 70%), var(--bg); color: var(--ink); }
 .auth__inner { width: min(420px, 100%); display: flex; flex-direction: column; gap: 24px; }
 .auth__brand { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
 .auth__mark { width: 56px; height: 56px; border-radius: 16px; }
 .auth__mark svg { width: 28px; height: 28px; }
 .auth__title { font-size: 32px; font-weight: 800; letter-spacing: .06em; }
-.auth__card { background: #141414; border: 1px solid #262626; border-radius: var(--r-xl); padding: 28px; }
+.auth__card { background: var(--auth-surface); border: 1px solid var(--auth-border); border-radius: var(--r-xl); padding: 28px; }
 html[data-theme="light"] .auth__card { background: var(--surface); border-color: var(--border); }
-.auth__card .input { background: #1B1B1B; border-color: #3A3A3A; color: #F4F4F2; }
+.auth__card .input { background: var(--auth-surface-2); border-color: var(--auth-border-strong); color: var(--auth-ink); }
 html[data-theme="light"] .auth__card .input { background: var(--surface-2); border-color: var(--border-strong); color: var(--ink); }
 .auth__card .link, .auth__card .btn--ghost { color: inherit; }
 .auth__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -24,10 +24,10 @@ html[data-theme="light"] .auth__card .input { background: var(--surface-2); bord
 .auth__consent input[aria-invalid="true"] { outline: 2px solid var(--danger); outline-offset: 2px; }
 .auth__card .input[aria-invalid="true"] { border-color: var(--danger); }
 .auth__langs { display: flex; justify-content: center; gap: 8px; }
-.auth .chip { background: transparent; color: inherit; border-color: #3A3A3A; }
+.auth .chip { background: transparent; color: inherit; border-color: var(--auth-border-strong); }
 html[data-theme="light"] .auth .chip { border-color: var(--border-strong); }
-.auth .chip[aria-pressed="true"] { background: #FFD400; color: #0B0B0B; border-color: #FFD400; }
-.auth .eyebrow { color: #FFD400; }
+.auth .chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.auth .eyebrow { color: var(--accent); }
 html[data-theme="light"] .auth .eyebrow { color: var(--eyebrow); }
 
 /* ---------- Full-screen runners ---------- */
@@ -40,7 +40,7 @@ html[data-theme="light"] .auth .eyebrow { color: var(--eyebrow); }
 @media (max-width: 599.98px) { .runbar { padding: 8px 16px; } .runwrap { padding: 16px; } }
 
 /* ---------- Guide (Об экзамене) ---------- */
-.seg--hero { border-color: rgba(255,255,255,.25); }
+.seg--hero { border-color: var(--hero-line-strong); }
 .seg--hero button { background: transparent; color: var(--hero-muted); padding: 8px 14px; font-size: 13px; }
 .seg--hero button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
 .tab__sub { font-weight: 600; color: var(--muted); }
@@ -141,13 +141,8 @@ html[data-theme="light"] .auth .eyebrow { color: var(--eyebrow); }
   .prg-week__body { padding: 4px 14px 14px; }
 }
 
-/* ---------- staff: checking and the test bank (js/screens/staff-admin.js) ---------- */
-.review-crit { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.review-essay { display: grid; gap: 10px; padding: 14px 16px; border-radius: var(--r-md); background: var(--surface-2); line-height: 1.6; }
-.review-essay p { margin: 0; }
-.review-audio { padding-left: 20px; }
+/* ---------- staff: a student's work and the test bank (js/screens/staff-admin.js) ---------- */
 .bank-items { padding-left: 20px; }
 .bank-key { padding: 6px 10px; border-left: 3px solid var(--brand-600); background: var(--surface-2); border-radius: var(--r-sm); }
 .bank-audio { width: 100%; max-width: 520px; }
 .pre { white-space: pre-line; }
-@media (max-width: 720px) { .review-crit { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

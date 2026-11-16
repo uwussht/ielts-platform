@@ -45,22 +45,9 @@
   }
   function taskTitle(task) {
     if (task.origin === 'weekly_control' || task.kind === 'checkpoint') return t('ieltsPlan.control.' + (task.control || 'weekly'));
-    if (task.origin === 'teacher') {
-      const s = task.extra?.title || t('ieltsPlan.origin.teacher');
-      const pre = task.sec === 'vocab' ? t('ieltsPlan.sec.vocab') : SKILL_NAME[task.sec];
-      return pre ? `${pre} · ${s}` : s;
-    }
     const secLabel = task.sec === 'vocab' ? t('ieltsPlan.sec.vocab') : SKILL_NAME[task.sec] || task.sec;
     return `${secLabel} · ${t('ieltsPlan.item.' + task.kind, { sub: subLabel(task.kind, task.sub), n: String(task.n) })}`;
   }
-  const originOf = (task) => (task.origin !== 'teacher' ? null : task.mode === 'homework' ? 'homework' : 'teacher');
-  function originBadge(task, short = false) {
-    const o = originOf(task); if (!o) return null;
-    const title = task.extra?.createdByName ? t('ieltsPlan.origin.by', { name: task.extra.createdByName }) : null;
-    const text = short ? t(`ieltsPlan.origin.${o}Short`) : o === 'homework' ? t('ieltsPlan.origin.homework', { date: fmtDate(task.extra?.dueDate || task.date, true) }) : t('ieltsPlan.origin.teacher');
-    return h('span', { class: 'badge badge--info', title }, text);
-  }
-  const teacherNote = (task) => task.origin === 'teacher' && task.extra?.note ? h('span', { class: 'tnote' }, task.extra.note) : null;
 
   // ---------- task → route AU ----------
   const AH = { mock: { tab: 'mocks' }, 'reading-full': { tab: 'learn', view: 'reading-full' }, 'listening-full': { tab: 'learn', view: 'listening-full' }, 'writing-task2': { tab: 'learn', view: 'writing-task2' }, 'speaking-part2': { tab: 'learn', view: 'speaking-part2' } };
@@ -68,22 +55,8 @@
   const AB = { type: L('types'), demo: L('types'), mini: L('types'), weak: L('types'), drill: L('drills'), pm: L('texts'), full: { tab: 'mocks' }, guide: L('writing-guide'), ideas: L('writing-guide'),
     t1: L('writing-task1'), t2: L('writing-task2'), pair: L('writing-task2'), p1: L('speaking-part1'), run: L('speaking-part1'), p2: L('speaking-part2'), sg: L('speaking-guide'), sh: L('speaking-shadowing'),
     dc: L('listening-dictation'), spl: L('listening-spelling'), listen: L('listening-tasks'), fmt: L('listening-tasks'), vocab: { screen: 'vocab' } };
-  const AW = {
-    reading: (k) => (k === 'test' ? 'reading-full' : k === 'types' ? 'types' : k === 'drill' ? 'drills' : 'texts'),
-    listening: (k) => (k === 'dictation' ? 'listening-dictation' : k === 'spelling' ? 'listening-spelling' : 'listening-tasks'),
-    writing: (k) => (k === 'task1' ? 'writing-task1' : 'writing-task2'),
-    speaking: (k) => (k === 'part2' || k === 'part3' ? `speaking-${k}` : 'speaking-part1'),
-  };
   function taskRoute(task) {
     if (task.recommend) return AH[task.key] || { tab: 'learn' };
-    if (task.origin === 'teacher') {
-      const x = task.extra || {};
-      if (task.sec === 'mock' && x.testId) return { screen: 'ielts-mock', ieltsMock: x.testId };
-      const v = x.testId && AW[task.sec]?.(x.testKind);
-      if (v) return { tab: 'learn', view: v, testId: x.testId };
-      if (task.sec === 'vocab') return { screen: 'vocab' };
-      return AB[task.kind] || { tab: 'learn' };
-    }
     if (task.origin === 'weekly_control' || task.kind === 'checkpoint') {
       const c = task.control || 'weekly';
       return c === 'weekly' ? L('texts') : c === 'writing' ? L('writing-task2') : c === 'speaking' ? L('speaking-part2') : { tab: 'mocks' };
@@ -148,6 +121,6 @@
       programme: d?.programme ?? null, journey: d?.journey ?? null, growthZone: d?.growthZone ?? null };
   }
 
-  window.Hub = { SKILL_NAME, cap, fmtDate, fmtUTC, addDays, addMonths, bandStr, minutes, taskTitle, subLabel, originOf, originBadge, teacherNote,
+  window.Hub = { SKILL_NAME, cap, fmtDate, fmtUTC, addDays, addMonths, bandStr, minutes, taskTitle, subLabel,
     taskRoute, routeHref, openTask, goRoute, growthRoute, plate, stChip, pageHead, empty, seg, loadDashboard };
 })();

@@ -29,8 +29,8 @@
     const done = task.status === 'completed';
     return h('li', { class: 'ttask' + (primary ? ' is-primary' : '') },
       Hub.plate(task.sec, 40),
-      h('div', { class: 'grow' }, h('div', { class: 'item__title' }, Hub.taskTitle(task)), Hub.teacherNote(task),
-        h('div', { class: 'item__meta' }, h('span', null, Hub.minutes(task.minutes) + (task.n > 1 ? ` · ${task.got || 0}/${task.n}` : '')), Hub.originBadge(task))),
+      h('div', { class: 'grow' }, h('div', { class: 'item__title' }, Hub.taskTitle(task)),
+        h('div', { class: 'item__meta' }, h('span', null, Hub.minutes(task.minutes) + (task.n > 1 ? ` · ${task.got || 0}/${task.n}` : '')))),
       done ? h('span', { class: 'badge badge--ok' }, icon('check', 'ic12'), t('ieltsPlan.status.completed'))
         : h('div', { class: 'item__side' },
           h('a', { class: 'btn btn--sm ' + (primary ? 'btn--primary' : 'btn--secondary'), href: Hub.routeHref(Hub.taskRoute(task)) }, primary || task.status === 'in_progress' ? t('ieltsPlan.continue') : t('ieltsPlanV.open')),
@@ -160,8 +160,8 @@
             : h('li', { class: 'xs muted' }, t('ieltsPlanV.rest'))));
       })),
       selected && h('section', { class: 'card stack-sm' }, h('h3', null, longDate(selected.date)),
-        h('div', { class: 'row', style: { flexWrap: 'nowrap' } }, Hub.plate(selected.sec, 40), h('div', { class: 'grow' }, h('b', null, Hub.taskTitle(selected)), Hub.teacherNote(selected),
-          h('div', { class: 'item__meta' }, Hub.originBadge(selected) || h('span', { class: 'badge' }, t('ieltsToday.mode.' + (selected.mode || 'self_study'))), h('span', null, t('ieltsPlanV.minutes', { n: selected.minutes }))))),
+        h('div', { class: 'row', style: { flexWrap: 'nowrap' } }, Hub.plate(selected.sec, 40), h('div', { class: 'grow' }, h('b', null, Hub.taskTitle(selected)),
+          h('div', { class: 'item__meta' }, h('span', { class: 'badge' }, t('ieltsToday.mode.' + (selected.mode || 'self_study'))), h('span', null, t('ieltsPlanV.minutes', { n: selected.minutes }))))),
         actions),
       legend());
   }
@@ -181,7 +181,6 @@
     let events = tasks.filter((x) => (x.origin === 'weekly_control' || x.kind === 'checkpoint') && x.date >= today && x.status !== 'completed').slice(0, 3);
     if (!events.length && weekCtl) events = [weekCtl];
     const DOW = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-    const rank = (x) => (Hub.originOf(x) === 'homework' ? 0 : Hub.originOf(x) === 'teacher' ? 1 : 2);
     return h('div', { class: 'stack' },
       h('div', { class: 'row' },
         h('button', { class: 'icon-btn', type: 'button', 'aria-label': t('ieltsPlanV.prevMonth'), onclick: () => setView('month', Hub.addMonths(month, -1)) }, icon('arrowL')),
@@ -194,13 +193,13 @@
             cells.map((c) => {
               const ts = tbd[c.date] || [];
               const ctl = ts.find((x) => x.origin === 'weekly_control' || x.kind === 'checkpoint');
-              const reg = ts.filter((x) => x !== ctl).sort((a, b) => rank(a) - rank(b));
+              const reg = ts.filter((x) => x !== ctl);
               const show = reg.slice(0, ctl ? 1 : 2);
               const more = reg.length - show.length;
               return h('button', { type: 'button', class: 'month__day' + (c.inMonth ? '' : ' is-out') + (c.date === today ? ' is-today' : '') + (c.date === sel ? ' is-sel' : ''), onclick: () => { monthState.sel = c.date; rerender(); } },
                 h('span', { class: 'month__n' }, Number(c.date.slice(8))),
                 ctl && h('span', { class: 'mchip is-control' }, (ctl.control || 'weekly') === 'weekly' ? t('ieltsPlanV.controlN', { n: ctl.calendarWeek }) : t('ieltsPlan.control.' + ctl.control)),
-                show.map((x) => h('span', { class: 'mchip' + (x.status === 'completed' ? ' is-done' : ''), title: Hub.originOf(x) ? Hub.taskTitle(x) : null }, x.sec === 'vocab' ? t('ieltsPlan.sec.vocab') : Hub.cap(x.sec))),
+                show.map((x) => h('span', { class: 'mchip' + (x.status === 'completed' ? ' is-done' : '') }, x.sec === 'vocab' ? t('ieltsPlan.sec.vocab') : Hub.cap(x.sec))),
                 more > 0 && h('span', { class: 'mchip is-more' }, t('ieltsPlanV.more', { n: more })));
             })),
           legend()),
@@ -213,8 +212,7 @@
       const plan = await Api.plan();
       const view = VIEWS.includes(p.ieltsPlanView) ? p.ieltsPlanView : 'roadmap';
       const g = plan.enrollment || {};
-      const live = g.studyMode === 'live';
-      const mode = live ? t('ieltsToday.mode.live') : t('ieltsToday.mode.self');
+      const mode = t('ieltsToday.mode.self');
       const setView = (v, at = null) => Router.patch({ ieltsPlanView: v === 'roadmap' ? null : v, ieltsPlanAt: at }, { keepScroll: true });
       const host = h('div');
       const rerender = () => host.replaceChildren(body());

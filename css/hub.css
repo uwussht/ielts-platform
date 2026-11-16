@@ -2,7 +2,6 @@
 .ic12 { width: 12px; height: 12px; flex: none; }
 .ic16 { width: 16px; height: 16px; flex: none; }
 .plain { list-style: none; margin: 0; padding: 0; }
-.tnote { display: block; margin-top: 4px; font-size: 13px; color: var(--ink-2); border-left: 2px solid var(--accent); padding-left: 8px; }
 
 /* skill plates — neutral and status tones, no purple */
 .plate { display: inline-grid; place-items: center; flex: none; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid var(--border); color: var(--ink); }
@@ -47,7 +46,7 @@
 /* goal hero */
 .goal-hero { display: grid; gap: 14px; }
 .goal-hero__say { margin: 0; color: var(--hero-muted); font-size: 14px; }
-.icon-btn--hero { color: var(--hero-ink); border-color: rgba(255, 255, 255, .18); background: transparent; }
+.icon-btn--hero { color: var(--hero-ink); border-color: var(--hero-line); background: transparent; }
 .gscale { display: grid; gap: 18px; margin-top: 4px; }
 .gscale__stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .gstat { display: grid; align-content: start; gap: 4px; padding: 12px 14px; border-radius: var(--r-md); border: 1px solid var(--hero-border); background: color-mix(in srgb, var(--hero-ink) 4%, transparent); min-width: 0; }
@@ -218,8 +217,7 @@ a.prow:focus-visible { box-shadow: var(--focus); outline: none; }
 .pg-chart svg { width: 100%; height: auto; display: block; overflow: visible; }
 .pg-grid { stroke: var(--border); stroke-width: 1; }
 .pg-goal { stroke: var(--ok); stroke-width: 1.5; stroke-dasharray: 6 5; }
-.pg-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; }
-:root[data-theme="light"] .pg-line { stroke: #C9A400; }
+.pg-line { fill: none; stroke: var(--chart-line); stroke-width: 2.5; stroke-linejoin: round; }
 .pg-dot { fill: var(--accent); stroke: var(--accent); stroke-width: 2; }
 .pg-dot.is-diag { fill: var(--surface); stroke: var(--muted); }
 .pg-tick, .pg-xl, .pg-xd { fill: var(--muted); font-size: 10px; font-family: var(--font-body); }

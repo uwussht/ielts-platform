@@ -38,11 +38,11 @@
 .passage p.is-focus { background: var(--brand-050); box-shadow: inset 3px 0 0 var(--accent); }
 .passage__plabel { color: var(--brand-700); }
 .passage mark { background: none; color: inherit; }
-.passage mark.hl { background: rgba(255, 212, 0, .35); border-radius: 3px; }
-.passage mark.hl--answer { background: rgba(74, 222, 128, .28); border-bottom: 2px solid var(--ok); position: relative; }
+.passage mark.hl { background: var(--hl-mark); border-radius: 3px; }
+.passage mark.hl--answer { background: var(--hl-answer); border-bottom: 2px solid var(--ok); position: relative; }
 .passage mark.hl--answer[data-n]::before { content: attr(data-n); position: relative; top: -.55em; font-size: 10px; font-weight: 800; margin-right: 3px; padding: 0 4px; border-radius: 4px; background: var(--ok); color: var(--bg); }
 .markerbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 10px; border: 1px dashed var(--border-strong); border-radius: var(--r-md); }
-.hlmenu { position: absolute; z-index: 90; display: flex; flex-direction: column; min-width: 180px; padding: 6px; border-radius: var(--r-md); background: var(--surface); border: 1px solid var(--border-strong); box-shadow: 0 12px 32px rgba(0, 0, 0, .35); }
+.hlmenu { position: absolute; z-index: 90; display: flex; flex-direction: column; min-width: 180px; padding: 6px; border-radius: var(--r-md); background: var(--surface); border: 1px solid var(--border-strong); box-shadow: var(--shadow-menu); }
 .hlmenu button { all: unset; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 14px; color: var(--ink); }
 .hlmenu button:hover, .hlmenu button:focus-visible { background: var(--surface-2); }
 .hlmenu__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); display: inline-block; }

@@ -137,6 +137,26 @@ const MIGRATIONS = [
   // 4: AI grading of Writing and Speaking (ai.js): queued, being graded, then done.
   `ALTER TABLE attempts DROP CONSTRAINT IF EXISTS attempts_status_check;
    ALTER TABLE attempts ADD CONSTRAINT attempts_status_check CHECK (status IN ('done', 'pending_review', 'pending_ai', 'grading'))`,
+  // 5: only the AI grades: no teacher role and no teachers' queue. Teachers become curators;
+  // work that waited for a teacher goes to the AI (ai.js grades the queue on start), and a
+  // grading that fails is 'failed' until the student asks again.
+  `UPDATE users SET role = 'curator' WHERE role = 'teacher';
+   ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check;
+   ALTER TABLE users ADD CONSTRAINT users_role_check CHECK (role IN ('student', 'curator', 'manager', 'admin'));
+   ALTER TABLE attempts DROP CONSTRAINT IF EXISTS attempts_status_check;
+   UPDATE attempts SET result = jsonb_set(result, '{status}', '"pending_ai"') - 'aiError'
+    WHERE status = 'pending_review' AND skill IN ('writing', 'speaking');
+   UPDATE attempts SET result = jsonb_set(result, '{writing,status}', '"pending_ai"')
+    WHERE skill = 'diagnostic' AND result->'writing'->>'status' = 'pending_review';
+   UPDATE attempts SET result = jsonb_set(result, '{speaking,status}', CASE WHEN jsonb_typeof(result->'speaking'->'items') = 'array' THEN '"pending_ai"' ELSE '"awaiting_audio"' END::jsonb)
+    WHERE skill = 'diagnostic' AND result->'speaking'->>'status' IN ('pending_review', 'pending_ai');
+   UPDATE attempts SET status = CASE WHEN skill <> 'diagnostic' THEN 'pending_ai'
+                                     WHEN result->'writing'->>'status' = 'pending_ai' OR result->'speaking'->>'status' = 'pending_ai' THEN 'pending_ai'
+                                     ELSE 'done' END
+    WHERE status = 'pending_review';
+   ALTER TABLE attempts ADD CONSTRAINT attempts_status_check CHECK (status IN ('done', 'pending_ai', 'grading', 'failed'));
+   DROP INDEX IF EXISTS attempts_review_idx;
+   DELETE FROM user_plans WHERE plan = 'intensive'`,
 ];
 
 async function tx(fn) {

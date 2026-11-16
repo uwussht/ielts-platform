@@ -405,7 +405,7 @@
     const pct = st.dur ? (st.time / st.dur) * 100 : 0;
     const left = rules.maxPlays ? Math.max(0, rules.maxPlays - st.plays) : null;
     const blocked = (st.plays >= (rules.maxPlays || Infinity) && !st.playing) || (st.playing && !rules.allowPause);
-    const track = h('div', { class: 'player__track', role: 'slider', tabindex: rules.allowSeek ? 0 : -1, 'aria-label': 'Audio', 'aria-valuemin': 0, 'aria-valuemax': Math.round(st.dur), 'aria-valuenow': Math.round(st.time),
+    const track = h('div', { class: 'player__track', role: 'slider', tabindex: rules.allowSeek ? 0 : -1, 'aria-label': t('player.audio'), 'aria-valuemin': 0, 'aria-valuemax': Math.round(st.dur), 'aria-valuenow': Math.round(st.time),
       onkeydown: (e) => { if (e.key === 'ArrowLeft') pl.seek(st.time - 5); if (e.key === 'ArrowRight') pl.seek(st.time + 5); },
       onpointerdown: (e) => { if (!rules.allowSeek || !st.dur) return; const r = e.currentTarget.getBoundingClientRect(); pl.seek(((e.clientX - r.left) / r.width) * st.dur); } },
     h('i', { style: { width: pct + '%' } }));

@@ -1,6 +1,6 @@
 // IELTS Speaking — ai-tutor HZ (task page), Vy (run state machine + recorder ts() + live
 // metrics), H1 (AI review), H2 (guide), H3 (shadowing). Answers are recorded in the browser,
-// converted to 16 kHz mono WAV and sent to the platform's API (/ielts/speaking/assess) for a teacher to grade.
+// converted to 16 kHz mono WAV and sent to the platform's API (/ielts/speaking/assess), where the AI grades them.
 (function () {
   const { h, icon } = DOM;
   const put = (el, ...k) => el.replaceChildren(...k.flat(9).filter((x) => x != null && x !== false && x !== ''));
@@ -56,10 +56,37 @@
     for (let i = 0; i < out.length; i++) { const s = Math.max(-1, Math.min(1, out[i])); view.setInt16(44 + i * 2, s < 0 ? s * 0x8000 : s * 0x7fff, true); }
     return new Blob([view], { type: 'audio/wav' });
   }
+  /** The browser's speech recognition for one take: `text` is what it heard (null without it, as in Firefox). */
+  function makeTranscriber() {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const tr = { finals: [], interim: '', stopped: false, rec: null };
+    if (SR) {
+      try {
+        const rec = new SR(); tr.rec = rec;
+        rec.lang = IELTS_CONFIG.speechLang; rec.continuous = true; rec.interimResults = true;
+        rec.onresult = (e) => {
+          let interim = '';
+          for (let i = e.resultIndex; i < e.results.length; i++) {
+            const said = e.results[i][0].transcript.trim();
+            if (e.results[i].isFinal) { if (said) tr.finals.push(said); } else interim += ' ' + said;
+          }
+          tr.interim = interim.trim();
+        };
+        rec.onerror = (e) => { if (['not-allowed', 'service-not-allowed', 'network', 'audio-capture'].includes(e.error)) tr.stopped = true; };
+        rec.onend = () => { if (!tr.stopped) try { rec.start(); } catch {} };
+        rec.start();
+      } catch { tr.rec = null; }
+    }
+    return {
+      get text() { return [...tr.finals, tr.interim].filter(Boolean).join(' ') || null; },
+      stop() { tr.stopped = true; try { tr.rec?.stop(); } catch {} },
+    };
+  }
   function makeRecorder(onChange) {
     const r = { state: 'idle', error: null, elapsed: 0, stream: null, urls: new Set(), dead: false };
-    let mr = null, iv = null;
-    r.start = async ({ maxSec = 120, onDone } = {}) => {
+    let mr = null, iv = null, tr = null;
+    // transcribe: keep the browser's transcript with the take (for the AI to grade)
+    r.start = async ({ maxSec = 120, onDone, transcribe = false } = {}) => {
       if (!supported()) { r.error = 'unsupported'; onChange(); return false; }
       try {
         if (!r.stream || !r.stream.getAudioTracks().some((x) => x.readyState === 'live')) r.stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
@@ -73,17 +100,20 @@
       const t0 = Date.now();
       mr.onstop = async () => {
         clearInterval(iv);
+        const transcript = tr ? tr.text : undefined;
+        tr?.stop(); tr = null;
         if (r.dead) return;
         r.state = 'processing'; onChange();
         const durationSec = Math.round((Date.now() - t0) / 100) / 10;
         let take = null;
-        try { const wav = await toWav(new Blob(chunks, { type: mr.mimeType || 'audio/webm' })); const url = URL.createObjectURL(wav); r.urls.add(url); take = { wav, url, durationSec }; }
+        try { const wav = await toWav(new Blob(chunks, { type: mr.mimeType || 'audio/webm' })); const url = URL.createObjectURL(wav); r.urls.add(url); take = { wav, url, durationSec, transcript }; }
         catch { r.error = 'failed'; }
         if (r.dead) return;
         r.state = 'idle'; r.elapsed = 0; onChange();
         onDone?.(take);
       };
       mr.start(250);
+      tr = transcribe ? makeTranscriber() : null;
       r.state = 'recording'; r.elapsed = 0;
       iv = setInterval(() => { r.elapsed = (Date.now() - t0) / 1000; if (r.elapsed >= maxSec) r.stop(); onChange(true); }, 250);
       onChange();
@@ -91,7 +121,7 @@
     };
     r.stop = () => { if (mr && mr.state !== 'inactive') mr.stop(); };
     r.drop = (url) => { if (url) { URL.revokeObjectURL(url); r.urls.delete(url); } };
-    r.release = () => { r.dead = true; clearInterval(iv); try { if (mr && mr.state !== 'inactive') mr.stop(); } catch {} r.stream?.getTracks().forEach((x) => x.stop()); r.urls.forEach((u) => URL.revokeObjectURL(u)); r.urls.clear(); };
+    r.release = () => { r.dead = true; clearInterval(iv); tr?.stop(); tr = null; try { if (mr && mr.state !== 'inactive') mr.stop(); } catch {} r.stream?.getTracks().forEach((x) => x.stop()); r.urls.forEach((u) => URL.revokeObjectURL(u)); r.urls.clear(); };
     return r;
   }
 
@@ -139,7 +169,7 @@
     if (SR) {
       try {
         const rec = new SR(); sr.rec = rec;
-        rec.lang = 'en-GB'; rec.continuous = true; rec.interimResults = true;
+        rec.lang = IELTS_CONFIG.speechLang; rec.continuous = true; rec.interimResults = true;
         let started = 0;
         rec.onresult = (e) => {
           let interim = 0, interimText = '';
@@ -523,12 +553,16 @@
         if (gone || !['pending_ai', 'grading'].includes(view.result?.status)) return;
         pollT = setTimeout(async () => { try { view = await Api.attempt(id); } catch {} if (!gone) { paint(); poll(); } }, IELTS_CONFIG.aiPollMs);
       }
+      // the recordings kept on this device if sending failed, else the ones on the server
       async function resend() {
         const pd = st.pending;
         st.busy = true; st.err = null; paint();
         try {
-          const res = await assess({ testId: pd.testId || view.testId, mode: pd.mode || view.attempt?.mode || 'exam', answers: pd.answers, retryAttemptId: id });
-          if (res?.attempt?.id && String(res.attempt.id) !== String(id)) return Router.patch({ ieltsWork: String(res.attempt.id) });
+          if (!pd) await Api.regrade(id);
+          else {
+            const res = await assess({ testId: pd.testId || view.testId, mode: pd.mode || view.attempt?.mode || 'exam', answers: pd.answers, retryAttemptId: id });
+            if (res?.attempt?.id && String(res.attempt.id) !== String(id)) return Router.patch({ ieltsWork: String(res.attempt.id) });
+          }
         } catch (e) { if (e.code !== 'already_graded') st.err = e; }
         st.busy = false;
         if (!st.err) { st.pending = null; view = await Api.attempt(id); await loadPending(); }
@@ -538,9 +572,8 @@
         const doc = view.document || {}, r = view.result || {}, a = view.attempt || {};
         const items = itemsOf(doc).filter((it) => (r.items || []).some((x) => x.itemId === it.id));
         const fr = String(r.failReason || '');
-        const canResend = !!st.pending && !fr.startsWith('no_speech');
+        const canResend = r.status === 'failed' && !fr.startsWith('no_speech');
         const done = r.status === 'done';
-        const review = r.status === 'pending_review';  // waits for a teacher (staff area → Checking)
         const grading = st.busy || r.status === 'grading' || r.status === 'pending_ai';
         const retry = learnHref('speaking-works', { ieltsTest: view.testId });
         put(root,
@@ -552,14 +585,11 @@
             r.criteria && r.criteria.pronunciation == null && h('p', { class: 'wscore__fb small muted' }, icon('about', 'ic16'), ' ', t('ieltsSpeaking.noPron')),
             r.feedback && h('p', { class: 'wscore__fb' }, r.feedback),
             h('div', { class: 'row' }, h('a', { class: 'btn btn--primary', href: retry }, t('ieltsSpeaking.again'))))
-            : review ? h('section', { class: 'card wstatus', role: 'status' },
-              h('span', { class: 'wstatus__ic' }, icon('clock')),
-              h('div', { class: 'grow stack-sm' }, h('b', null, t('review.pendingTitle')), h('p', { class: 'small' }, t('review.pendingSpeaking'))))
             : h('section', { class: 'card wstatus is-bad', role: 'status' },
               h('span', { class: 'wstatus__ic' }, icon('mic')),
               h('div', { class: 'grow stack-sm' },
                 h('b', null, grading ? t('ieltsWriting.gradingTitle') : t('ieltsSpeaking.failedTitle')),
-                h('p', { class: 'small' }, grading ? t('ieltsWriting.gradingText') : canResend ? t('ieltsSpeaking.failedTextResend') : t('ieltsSpeaking.failedText')),
+                h('p', { class: 'small' }, grading ? t('ieltsWriting.gradingText') : canResend ? t(st.pending ? 'ieltsSpeaking.failedTextResend' : 'ieltsSpeaking.failedTextSaved') : t('ieltsSpeaking.failedText')),
                 st.err && h('p', { class: 'error' }, t('ieltsSpeaking.gradeError.' + uiCode(st.err.code))),
                 r.status === 'failed' && errCode(st.err?.code || fr.split(' · ')[0], st.err?.debugId || fr.split(' · ')[1]),
                 h('div', { class: 'row' },
@@ -577,7 +607,7 @@
               return h('div', { class: 'sanswer stack-sm' }, h('b', { lang: 'en' }, it.question),
                 h('div', { class: 'chips' }, h('span', { class: 'badge' }, icon('clock', 'ic12'), ' ', HY(x.durationSec)), x.wpm != null && h('span', { class: 'badge' }, t('ieltsSpeaking.wpm', { n: x.wpm }))),
                 x.transcript ? h('p', { class: 'sanswer__text', lang: 'en' }, x.transcript)
-                  : h('p', { class: 'sanswer__text muted' }, t(x.skipped ? 'ieltsSpeaking.noSpeech' : 'review.recorded')),
+                  : h('p', { class: 'sanswer__text muted' }, t(x.skipped ? 'ieltsSpeaking.noSpeech' : 'ieltsSpeaking.recorded')),
                 x.skipped && h('p', { class: 'small muted' }, t('ieltsSpeaking.skippedAnswer')),
                 m?.text?.length > 0 && h('details', { class: 'sanswer__model' }, h('summary', null, t('ieltsSpeaking.modelAnswer') + (m.band != null ? ` · band ${m.band}` : '')),
                   m.text.map((y) => h('p', { lang: 'en' }, y)),

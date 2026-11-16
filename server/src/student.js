@@ -2,22 +2,21 @@
    The student's data, under /app-api (signed in). Paths and response shapes
    are the ones the app already reads (they follow ai-tutor's /mobile/ielts/*).
 
-     profile     GET/PUT /mobile/ielts/profile, PUT /profile/route, GET /plan/me
+     profile     GET/PUT /mobile/ielts/profile, GET /plan/me
      plan        GET/PUT /mobile/ielts/plan/state   (marks of the plan built in the app)
      overview    GET /mobile/ielts/dashboard, GET /mobile/ielts/progress
      tests       GET /mobile/ielts/tests?skill=     (the bank's list + the student's attempts)
                  POST /mobile/ielts/tests/:id/attempts      reading / listening, checked by the keys
-                 POST /mobile/ielts/tests/:id/writing       an essay, waits for a teacher
-                 POST /ielts/speaking/assess                recorded answers (multipart), wait for a teacher
-                 POST /ielts/writing/assess                 the essay's current state
-     attempts    GET /mobile/ielts/attempts/:id, PUT …/selfcheck, GET /writing/works, /speaking/works
+                 POST /mobile/ielts/tests/:id/writing       an essay, graded by the AI
+                 POST /ielts/speaking/assess                recorded answers (multipart), graded by the AI
+                 POST /ielts/writing/assess                 the essay's current state (grades it again if that failed)
+     attempts    GET /mobile/ielts/attempts/:id, PUT …/selfcheck, POST …/regrade, GET /writing/works, /speaking/works
      diagnostic  GET /mobile/ielts/diagnostic, POST …/path, POST …, GET …/last, POST /ielts/diagnostic/assess
      mocks       GET /mobile/ielts/mocks, POST /mocks/:id/sessions, GET/POST /mocks/sessions/:sid/…
      vocabulary  /mobile/vocab-progress/*, /mobile/lesson-vocab/*, POST /mobile/saved-words
 
-   Writing and speaking are graded by the AI (ai.js) when it is set up: 'pending_ai'
-   → 'grading' → 'done'. Without it, or if it fails, they are 'pending_review'
-   until a teacher grades them in the staff area (staff.js).
+   Writing and speaking are graded by the AI (ai.js): 'pending_ai' → 'grading'
+   → 'done', or 'failed', and then the student can ask for it again (regrade).
    ========================================================================== */
 'use strict';
 
@@ -40,8 +39,8 @@ const isoDay = (d) => new Date(d).toISOString().slice(0, 10);
 const nf = (res, what = 'not-found') => res.status(404).json({ ok: false, reason: what, message: 'Not found' });
 const bad = (res, reason) => res.status(400).json({ ok: false, reason, message: reason });
 const wrap = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
-/** Waiting for a grade: queued for the AI, being graded, or with the teachers. */
-const CHECKING = ['pending_ai', 'grading', 'pending_review'];
+/** Waiting for a grade: queued for the AI or being graded. */
+const CHECKING = ['pending_ai', 'grading'];
 const countWords = (s) => String(s || '').trim().split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
 
 /* ------------------------------------------------------------ storage */
@@ -97,7 +96,7 @@ async function profileOf(u, list) {
   return {
     track: u.track || p.track || 'academic', targetBand: num(u.target_band) ?? p.targetBand ?? null, examDate: u.exam_date ? isoDay(u.exam_date) : p.examDate ?? null,
     purpose: p.purpose ?? null, examWindow: p.examWindow ?? null, dailyMinutes: p.dailyMinutes ?? null, familiarity: p.familiarity ?? null,
-    route: u.route || p.route || null, onboarded: !!p.onboarded, diagnosticDone: !!diag, startBand: diag?.bands?.overall ?? null,
+    onboarded: !!p.onboarded, diagnosticDone: !!diag, startBand: diag?.bands?.overall ?? null,
     bands: bandsFrom(list), name: u.name,
   };
 }
@@ -114,12 +113,6 @@ router.put('/mobile/ielts/profile', wrap(async (req, res) => {
     `UPDATE users SET profile = $2, track = COALESCE($3, track), target_band = COALESCE($4, target_band),
             exam_date = CASE WHEN $6 THEN $5::date ELSE exam_date END WHERE id = $1 RETURNING *`,
     [req.user.id, JSON.stringify(p), ['academic', 'general'].includes(b.track) ? b.track : null, target, exam, 'examDate' in b]);
-  res.json(await profileOf(rows[0]));
-}));
-
-router.put('/mobile/ielts/profile/route', wrap(async (req, res) => {
-  const route = String(req.body?.route || '').slice(0, 40) || null;
-  const { rows } = await pool.query('UPDATE users SET route = $2 WHERE id = $1 RETURNING *', [req.user.id, route]);
   res.json(await profileOf(rows[0]));
 }));
 
@@ -268,6 +261,15 @@ router.get('/mobile/ielts/attempts/:id', wrap(async (req, res) => {
   if (!row) return nf(res);
   res.json(await attemptView(row));
 }));
+/* grading that failed, once more (a diagnostic names its part: writing | speaking) */
+router.post('/mobile/ielts/attempts/:id/regrade', wrap(async (req, res) => {
+  const row = await ownAttempt(req, req.params.id);
+  if (!row) return nf(res);
+  const part = row.skill === 'diagnostic' ? (['writing', 'speaking'].includes(req.body?.part) ? req.body.part : null) : null;
+  if (row.skill === 'diagnostic' && !part) return bad(res, 'bad-part');
+  const ok = await AI.regrade(row.id, part, req.body?.uiLang);
+  res.json({ ok, ...(await attemptView((await ownAttempt(req, row.id)) || row)) });
+}));
 router.put('/mobile/ielts/attempts/:id/selfcheck', wrap(async (req, res) => {
   const r = await pool.query(`UPDATE attempts SET answers = jsonb_set(answers, '{selfCheck}', $3::jsonb) WHERE id = $1 AND user_id = $2`,
     [Number(req.params.id) || 0, req.user.id, JSON.stringify(req.body || {})]);
@@ -282,20 +284,21 @@ router.post('/mobile/ielts/tests/:id/writing', wrap(async (req, res) => {
   const b = req.body || {};
   const text = String(b.text || '').slice(0, 20000);
   const doc = d.document, n = countWords(text), min = doc.minWords || (doc.kind === 'task2' ? 250 : 150);
-  const status = AI.enabled('writing') && n > 0 ? 'pending_ai' : 'pending_review';
+  const status = n > 0 ? 'pending_ai' : 'failed';
   const row = await insertAttempt(pool, { userId: req.user.id, testId: req.params.id, skill: 'writing', kind: doc.kind || d.test?.kind, title: d.test?.title || doc.title,
     mode: b.mode || 'exam', status, timeSec: b.timeSec, answers: { text, selfCheck: {} },
-    result: { status, uiLang: b.uiLang || null, words: n, minWords: min, underLength: n < min, timeLimitSec: doc.timeLimitSec || null, pasteBlocked: b.pasteBlocked || 0 } });
+    result: { status, failReason: n > 0 ? undefined : 'empty', uiLang: b.uiLang || null, words: n, minWords: min, underLength: n < min, timeLimitSec: doc.timeLimitSec || null, pasteBlocked: b.pasteBlocked || 0 } });
   if (status === 'pending_ai') AI.start(row.id);
   res.json({ attempt: attemptOut(row) });
 }));
-/* The app asks to grade an essay: grading starts right after it is sent (ai.js) and this
-   makes sure it is running, then returns the essay as it stands; the app polls the attempt. */
+/* The app asks to grade an essay: grading starts right after it is sent (ai.js); this makes
+   sure it is running (or runs it again if it failed) and returns the essay as it stands; the app polls. */
 router.post('/ielts/writing/assess', wrap(async (req, res) => {
   const row = await ownAttempt(req, req.body?.attemptId);
   if (!row) return res.status(404).json({ error: 'not_found' });
   if (row.status === 'pending_ai') AI.start(row.id, req.body?.uiLang);
-  res.json(await attemptView(row));
+  else if (row.status === 'failed' && countWords(row.answers?.text)) await AI.regrade(row.id, null, req.body?.uiLang);
+  res.json(await attemptView((await ownAttempt(req, row.id)) || row));
 }));
 
 const works = (skill) => wrap(async (req, res) => {
@@ -348,8 +351,8 @@ router.post('/ielts/speaking/assess', wrap(async (req, res) => {
   if (retry && retry.status === 'done') return res.status(409).json({ error: 'already_graded', attemptId: retry.id });
   const d = C.doc(fields.testId);
   if (!d && !retry) return res.status(404).json({ error: 'not_found' });
-  const status = AI.speakingReady(items) && files.some((f) => f.data.length) ? 'pending_ai' : 'pending_review';
-  const result = { status, uiLang: fields.uiLang || null, items: items.map((x, i) => ({ itemId: x.itemId, durationSec: Number(x.durationSec) || 0, wpm: null, transcript: String(x.transcript || '').slice(0, 5000) || null, skipped: !files.some((f) => f.field === 'audio_' + i) })) };
+  const status = 'pending_ai';
+  const result = { status, failReason: null, uiLang: fields.uiLang || null, items: items.map((x, i) => ({ itemId: x.itemId, durationSec: Number(x.durationSec) || 0, wpm: null, transcript: String(x.transcript || '').slice(0, 5000) || null, skipped: !files.some((f) => f.field === 'audio_' + i) })) };
   const row = await tx(async (c) => {
     const r = retry || await insertAttempt(c, { userId: req.user.id, testId: fields.testId, skill: 'speaking', kind: d.document.kind || d.test?.kind, title: d.test?.title || d.document.title,
       mode: fields.mode || 'practice', status, timeSec: items.reduce((s, x) => s + (Number(x.durationSec) || 0), 0), result });
@@ -360,7 +363,7 @@ router.post('/ielts/speaking/assess', wrap(async (req, res) => {
     await saveAudio(c, r.id, items, files);
     return r;
   });
-  if (status === 'pending_ai') AI.start(row.id);
+  AI.start(row.id);
   res.json({ attempt: attemptOut(row) });
 }));
 
@@ -446,32 +449,45 @@ router.post('/mobile/ielts/diagnostic', wrap(async (req, res) => {
   const words = countWords(b.writingText), secs = Object.values(b.speakingSec || {}).map(Number).filter(Boolean);
   const bands = { listening: toBand(rl.correct, rl.total), reading: toBand(rr.correct, rr.total), writing: null, speaking: null, overallPrelim: true };
   bands.overall = bands.listening != null && bands.reading != null ? r5((bands.listening + bands.reading) / 2) : bands.listening ?? bands.reading;
-  const result = { level: b.level || 'standard', module, formId: f.id, bands, raw: { listening: rl, reading: rr },
-    writing: words ? { status: 'pending_review', words, text: String(b.writingText).slice(0, 20000), question: f.writing.question } : null,
-    // speaking waits for its recordings (POST /ielts/diagnostic/assess), then for a teacher
-    speaking: secs.length ? { status: 'pending_ai', answers: secs.length, seconds: secs.reduce((s, x) => s + x, 0) } : null,
+  const result = { level: b.level || 'standard', module, formId: f.id, uiLang: b.uiLang || null, bands, raw: { listening: rl, reading: rr },
+    writing: words ? { status: 'pending_ai', words, text: String(b.writingText).slice(0, 20000), question: f.writing.question } : null,
+    // speaking waits for its recordings (POST /ielts/diagnostic/assess), then the AI grades it
+    speaking: secs.length ? { status: 'awaiting_audio', answers: secs.length, seconds: secs.reduce((s, x) => s + x, 0) } : null,
     weakTypes: Object.entries(byType).filter(([, v]) => v.correct / v.total < 0.6).map(([k]) => k), byType, items };
   const row = await insertAttempt(pool, { userId: req.user.id, testId: f.id, skill: 'diagnostic', kind: 'diagnostic', title: 'Diagnostic', mode: 'exam',
-    status: result.writing || result.speaking ? 'pending_review' : 'done', band: bands.overall, raw: rl.correct + rr.correct, max: rl.total + rr.total, timeSec: b.timeSec,
+    status: result.writing ? 'pending_ai' : 'done', band: bands.overall, raw: rl.correct + rr.correct, max: rl.total + rr.total, timeSec: b.timeSec,
     answers: { answers: b.answers || {}, writingText: b.writingText || '' }, result });
+  if (result.writing) AI.start(row.id, b.uiLang);
   res.json({ attempt: attemptOut(row) });
 }));
-/* writing is already saved with the attempt; speaking brings its recordings here */
+/* Writing is saved and graded with the attempt; Speaking brings its recordings here. Without
+   recordings this grades a part that failed once more. */
 router.post('/ielts/diagnostic/assess', wrap(async (req, res) => {
   const { fields, files } = await readForm(req).catch((e) => { res.status(e.status || 400).json({ error: 'bad_form' }); return {}; });
   if (!fields) return;
   const row = await ownAttempt(req, fields.attemptId);
   if (!row || row.skill !== 'diagnostic') return res.status(404).json({ error: 'not_found' });
-  if (fields.skill === 'speaking' && files.length) {
+  const part = fields.skill === 'speaking' ? 'speaking' : 'writing';
+  if (part === 'speaking' && files.some((f) => f.data.length)) {
     let items = [];
     try { items = JSON.parse(fields.items || '[]'); } catch {}
     await tx(async (c) => {
       await c.query('DELETE FROM attempt_audio WHERE attempt_id = $1', [row.id]);
       await saveAudio(c, row.id, items, files);
-      const sp = { ...(row.result.speaking || {}), status: 'pending_review', items: items.map((x) => ({ itemId: x.itemId, durationSec: Number(x.durationSec) || 0 })) };
-      await c.query(`UPDATE attempts SET result = jsonb_set(result, '{speaking}', $2::jsonb), status = 'pending_review' WHERE id = $1`, [row.id, JSON.stringify(sp)]);
+      const sp = { ...(row.result.speaking || {}), status: 'pending_ai', failReason: null,
+        items: items.map((x) => ({ itemId: x.itemId, durationSec: Number(x.durationSec) || 0, transcript: String(x.transcript || '').slice(0, 5000) || null })) };
+      await c.query(`UPDATE attempts SET result = jsonb_set(result, '{speaking}', $2::jsonb),
+                            status = CASE WHEN status = 'grading' THEN status ELSE 'pending_ai' END WHERE id = $1`, [row.id, JSON.stringify(sp)]);
     });
+    AI.start(row.id, fields.uiLang);
+    return res.json({ ok: true });
   }
+  const st = row.result?.[part]?.status;
+  if (st === 'failed') {
+    if (part === 'speaking' && !row.result.speaking.items?.length) return res.status(409).json({ error: 'lost' });
+    await AI.regrade(row.id, part, fields.uiLang);
+  } else if (st === 'pending_ai') AI.start(row.id, fields.uiLang);
+  else if (st === 'awaiting_audio') return res.status(409).json({ error: 'lost' });
   res.json({ ok: true });
 }));
 

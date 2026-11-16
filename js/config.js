@@ -15,9 +15,9 @@ window.IELTS_CONFIG = {
 
   // Staff API (server/, started with docker compose; server.js forwards this path to it).
   staffApi: '/staff-api',
-  staffRoles: ['student', 'teacher', 'curator', 'manager', 'admin'],
+  staffRoles: ['student', 'curator', 'manager', 'admin'],
 
-  // Manager chat for plans and routes (international format, digits only).
+  // Manager chat for plans and access (international format, digits only).
   whatsapp: '77471634118',
   privacyUrl: 'https://justtostudy.kz/privacy',
 
@@ -31,11 +31,12 @@ window.IELTS_CONFIG = {
   plans: [
     { id: 'self', months: 3, price: null },
     { id: 'coach', months: 3, price: null, popular: true },
-    { id: 'intensive', months: 2, price: null },
   ],
 
   // How often a Writing or Speaking result page looks again while the AI is grading (ms).
   aiPollMs: 4000,
+  // The language the browser's speech recognition listens for (Speaking: speech rate and the transcript the AI grades).
+  speechLang: 'en-GB',
 
   // Phone sign-in and sign-up, as on the SAT platform: the box starts with this code
   // and takes the ten digits after it (+7 700 123 45 67).

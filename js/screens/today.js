@@ -10,9 +10,9 @@
 
   function startStep(profile) {
     if (!profile) return null;
-    const step = !profile.onboarded ? 'onboarding' : profile.bands?.overall == null ? 'diagnostic' : !profile.route ? 'route' : null;
+    const step = !profile.onboarded ? 'onboarding' : profile.bands?.overall == null ? 'diagnostic' : null;
     if (!step) return null;
-    const screen = { onboarding: 'ielts-onboarding', diagnostic: 'ielts-diagnostic', route: 'ielts-route' }[step];
+    const screen = { onboarding: 'ielts-onboarding', diagnostic: 'ielts-diagnostic' }[step];
     return h('section', { class: 'card card--brand row row--between' },
       h('div', { class: 'grow' }, h('b', null, t(`ieltsOb.start.${step}.title`)), h('p', { class: 'small muted' }, t(`ieltsOb.start.${step}.text`))),
       h('a', { class: 'btn btn--primary', href: Router.href({ screen }) }, t(`ieltsOb.start.${step}.cta`), icon('arrowR')));
@@ -82,9 +82,9 @@
     return h('li', { class: 'ttask' + (primary ? ' is-primary' : '') + (done ? ' is-done' : '') },
       Hub.plate(task.sec, 44),
       h('div', { class: 'grow' },
-        h('div', { class: 'item__title' }, Hub.taskTitle(task)), Hub.teacherNote(task),
+        h('div', { class: 'item__title' }, Hub.taskTitle(task)),
         h('div', { class: 'item__meta' }, h('span', null, `${Hub.minutes(task.minutes)} · ${kindLabel}`),
-          task.origin === 'teacher' ? Hub.originBadge(task) : h('span', { class: 'badge' }, t('ieltsToday.mode.' + (task.mode || 'self_study'))),
+          h('span', { class: 'badge' }, t('ieltsToday.mode.' + (task.mode || 'self_study'))),
           task.overdue && !done && h('span', { class: 'badge badge--warn' }, t('ieltsPlan.status.overdue')))),
       done ? h('span', { class: 'badge badge--ok' }, icon('check', 'ic12'), t('ieltsPlan.status.completed'))
         : h('div', { class: 'item__side' },
@@ -101,7 +101,6 @@
   function todayTasks(m, reload) {
     const tasks = m?.tasks || [];
     const noPlan = !m?.enrollment || m.enrollment.status === 'programme_pending';
-    const live = m?.enrollment?.studyMode === 'live';
     const left = tasks.filter((x) => x.status !== 'completed').reduce((s, x) => s + (x.minutes || 0), 0);
     const firstOpen = tasks.findIndex((x) => x.status !== 'completed');
     return h('section', { class: 'card stack', 'aria-labelledby': 'tt-title' },
@@ -110,10 +109,10 @@
           !noPlan && h('p', { class: 'small muted' }, t('ieltsToday.summary', { week: m.currentWeek ?? 1, n: tasks.length, min: 5 * Math.round(left / 5) }))),
         !noPlan && h('a', { class: 'link', href: Router.href({ screen: 'ielts', ieltsTab: 'plan' }) }, t('ieltsToday.allPlan'), ' →')),
       noPlan ? h('p', { class: 'muted' }, t('ieltsPlan.pending.' + (m?.enrollment?.pendingReason || 'no_diagnostic')))
-        : h('ul', { class: 'list plain' }, tasks.map((x, i) => taskRow(x, !live && i === firstOpen, reload)),
+        : h('ul', { class: 'list plain' }, tasks.map((x, i) => taskRow(x, i === firstOpen, reload)),
           !tasks.length && !(m.recommended || []).length && h('li', { class: 'muted' }, t('ieltsPlan.allDone'))),
       !tasks.length && recommended(m?.recommended, noPlan),
-      h('p', { class: 'notice row' }, icon('clock', 'ic16'), live ? t('ieltsToday.hintLive') : t('ieltsToday.hintSelf')));
+      h('p', { class: 'notice row' }, icon('clock', 'ic16'), t('ieltsToday.hintSelf')));
   }
 
   // ---------- [E] growth zone ----------
@@ -152,7 +151,6 @@
     async render(p, ctx) {
       const data = await Hub.loadDashboard();
       const m = data.programme, g = m?.enrollment;
-      const live = g?.studyMode === 'live';
       const rnd = Math.random();
       const reload = () => App.render({ keepScroll: true });
       return h('div', { class: 'stack today' },
@@ -160,7 +158,7 @@
         startStep(data.profile),
         g?.programmeName && h('div', { class: 'progpath' },
           h('span', { class: 'progpath__path' }, g.programmeName.split('→').map((s, i, a) => [h('span', { class: 'progpath__step' }, s.trim()), i < a.length - 1 && h('span', { class: 'progpath__arrow', 'aria-hidden': 'true' }, '→')])),
-          h('span', { class: 'badge badge--brand' }, live ? t('ieltsToday.mode.live') : t('ieltsToday.mode.self'))),
+          h('span', { class: 'badge badge--brand' }, t('ieltsToday.mode.self'))),
         // ai-tutor order: goal hero full width → tasks | growth zone → weekly control full width
         goalCard(data, rnd),
         h('div', { class: 'split' },

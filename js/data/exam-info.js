@@ -162,8 +162,7 @@ window.IELTS_EXAM_INFO={
      "book": "Зарегистрируйтесь, если ещё не сделали: удобные даты заканчиваются.",
      "id": "Проверьте срок действия документа: он должен действовать и в день экзамена.",
      "mock": "Пройдите полный пробный тест на время и найдите самую слабую секцию.",
-     "target": "Уточните, какой нужен балл: overall и минимум по каждой секции.",
-     "feedback": "Решите, кто проверит Writing и Speaking: платформа или преподаватель."
+     "target": "Уточните, какой нужен балл: overall и минимум по каждой секции."
     },
     "week": {
      "title": "За неделю",
@@ -216,10 +215,6 @@ window.IELTS_EXAM_INFO={
     "guide": {
      "title": "Инструкция по платформе",
      "text": "Как устроены разделы, план дня и проверка работ."
-    },
-    "route": {
-     "title": "Маршрут обучения",
-     "text": "Платформа, платформа с преподавателем или преподаватель: срок до цели и выбор."
     },
     "official": "Официальные материалы",
     "wd": "Критерии Writing (band descriptors)",
@@ -388,8 +383,7 @@ window.IELTS_EXAM_INFO={
      "book": "Әлі тіркелмесеңіз, тіркеліңіз: ыңғайлы күндер тез таусылады.",
      "id": "Құжаттың жарамдылық мерзімін тексеріңіз: ол емтихан күні де жарамды болуы керек.",
      "mock": "Уақытпен толық тест тапсырып, ең әлсіз бөлімді анықтаңыз.",
-     "target": "Қандай балл керек екенін нақтылаңыз: overall және әр бөлім бойынша ең төменгісі.",
-     "feedback": "Writing пен Speaking-ті кім тексеретінін шешіңіз: платформа ма, оқытушы ма."
+     "target": "Қандай балл керек екенін нақтылаңыз: overall және әр бөлім бойынша ең төменгісі."
     },
     "week": {
      "title": "Бір апта бұрын",
@@ -442,10 +436,6 @@ window.IELTS_EXAM_INFO={
     "guide": {
      "title": "Платформа бойынша нұсқаулық",
      "text": "Бөлімдер, күн жоспары және жұмыстарды тексеру қалай жұмыс істейді."
-    },
-    "route": {
-     "title": "Оқу маршруты",
-     "text": "Платформа, оқытушысы бар платформа немесе оқытушы: мақсатқа дейінгі мерзім және таңдау."
     },
     "official": "Ресми материалдар",
     "wd": "Writing критерийлері (band descriptors)",
@@ -614,8 +604,7 @@ window.IELTS_EXAM_INFO={
      "book": "Register if you have not yet: convenient dates fill up.",
      "id": "Check your ID document: it must still be valid on test day.",
      "mock": "Take a full timed practice test and find your weakest section.",
-     "target": "Check the score you need: overall and the minimum for each section.",
-     "feedback": "Decide who will check your Writing and Speaking: the platform or a teacher."
+     "target": "Check the score you need: overall and the minimum for each section."
     },
     "week": {
      "title": "A week before",
@@ -668,10 +657,6 @@ window.IELTS_EXAM_INFO={
     "guide": {
      "title": "Platform guide",
      "text": "How the sections, the daily plan and marking work."
-    },
-    "route": {
-     "title": "Study route",
-     "text": "Platform, platform with a teacher, or a teacher: time to your target and your choice."
     },
     "official": "Official materials",
     "wd": "Writing criteria (band descriptors)",

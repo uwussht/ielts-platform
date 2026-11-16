@@ -1,4 +1,4 @@
-// Screen: Staff (?screen=staff) — for teachers, curators, managers and admins, as SAT's #/staff.
+// Screen: Staff (?screen=staff) — for curators, managers and admins, as SAT's #/staff.
 // One table of students, each row everything about one student: who they are, when they started,
 // their route and bands (start → now → goal), the exam date, the official IELTS results they reported
 // with confirm / send back for the ones waiting, course access (none / trial / full until a date), plans and role.
@@ -131,12 +131,11 @@
   }
 
   function routeCell(u) {
-    const route = u.route ? opt('ieltsOb.route.' + u.route, u.route) : null;
     const track = u.track ? I18n.trackName(u.track) : null;
-    if (!route && !u.programme && !track) return h('span', { class: 'muted' }, '—');
+    if (!u.programme && !track) return h('span', { class: 'muted' }, '—');
     return h('div', null,
-      h('div', { class: 'small' }, u.programme || route || '—'),
-      h('div', { class: 'xs muted' }, [u.programme ? route : null, track].filter(Boolean).join(' · ')));
+      h('div', { class: 'small' }, u.programme || track),
+      u.programme && track && h('div', { class: 'xs muted' }, track));
   }
 
   function bandsCell(u) {

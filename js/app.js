@@ -56,7 +56,6 @@
   const STAFF_NAV = [
     { group: 'staff.nav.group' },
     { screen: 'staff', key: 'staff.nav', icon: 'users' },
-    { screen: 'staff-review', key: 'review.nav', icon: 'check' },
     { screen: 'staff-tests', key: 'bank.nav', icon: 'theory' },
   ];
   const can = (perm) => !!State.staff?.perms?.includes(perm);
@@ -142,7 +141,7 @@
     State.staff = r.user;
     const me = State.me || {};
     Api.staff.snapshot({
-      track: State.track, route: prof?.route || null, programme: me.programmeName || null,
+      track: State.track, programme: me.programmeName || null,
       startBand: prof?.startBand ?? null, currentBand: prof?.bands?.overall ?? null,
       targetBand: me.targetBand ?? null, examDate: me.examDate || null,
     });

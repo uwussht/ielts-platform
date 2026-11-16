@@ -105,9 +105,9 @@
             h('span', { class: 'small muted' }, t('ieltsProgressV.shown', { skill: state.skill === 'all' ? t('ieltsProgressV.allSkills') : B_[state.skill], period: periodLabel(state.period) }))),
           history.length ? h('div', { class: 'table-wrap' }, h('table', { class: 'table pg-table' }, h('tbody', null, history.slice(0, state.n).map((r) => h('tr', null,
             h('td', { class: 'pg-d' }, Hub.fmtUTC(r.finishedAt)),
-            h('td', null, h('b', null, r.title)),
+            h('td', null, h('b', null, r.skill === 'diagnostic' ? t('ieltsProgressV.src.diagnostic') : r.title)),
             h('td', null, h('span', { class: 'pg-type is-' + r.source }, t('ieltsProgressV.type.' + r.source))),
-            h('td', { class: 'pg-score num' }, r.band != null ? Number(r.band).toFixed(1) + (r.source === 'work' ? ' · ' + t('review.teacherShort') : '') : ['pending_ai', 'grading', 'pending_review'].includes(r.status) ? t('ieltsGoal.checking') : '—'),
+            h('td', { class: 'pg-score num' }, r.band != null ? Number(r.band).toFixed(1) : ['pending_ai', 'grading'].includes(r.status) ? t('ieltsGoal.checking') : r.status === 'failed' ? t('ieltsMock.result.cell.failed') : '—'),
             h('td', null, h('a', { class: 'link', href: openAttempt(r) }, r.source === 'work' ? t('ieltsProgressV.openVersion') : r.source === 'partial' ? t('ieltsPlanV.open') : t('ieltsProgressV.openReview'), ' →')))))))
             : h('p', { class: 'muted' }, t('ieltsProgressV.noHistory')),
           history.length > state.n && h('button', { class: 'btn btn--secondary', type: 'button', onclick: () => { state.n += 15; rerender(); } },

@@ -12,21 +12,27 @@
    (an OpenAI-compatible /audio/transcriptions API), which is more accurate.
 
    Settings (server .env, see .env.example):
-     ANTHROPIC_API_KEY   turns AI grading on; without it work waits for a teacher
+     ANTHROPIC_API_KEY   turns AI grading on; without it Writing and Speaking cannot be graded
      AI_MODEL            claude-sonnet-5-5
      AI_EFFORT           medium   (low | medium | high)
+     AI_MAX_TOKENS       32000
      TRANSCRIBE_API_KEY  optional: transcribe Speaking on the server instead of using the browser's text
      TRANSCRIBE_URL      https://api.openai.com/v1/audio/transcriptions
      TRANSCRIBE_MODEL    whisper-1
+     TRANSCRIBE_LANG     en
 
-   Lifecycle of an attempt: 'pending_ai' (queued) → 'grading' → 'done'.
-   If grading fails the work goes to the teachers' queue ('pending_review'),
-   so nothing a student sends is ever lost.
+   Lifecycle of an attempt: 'pending_ai' (queued) -> 'grading' -> 'done', or
+   'failed' with result.failReason; the student can ask again (regrade), and
+   nothing they sent is lost. The diagnostic's Writing and Speaking parts go
+   the same way inside result.writing / result.speaking; its Speaking part
+   waits as 'awaiting_audio' until the recordings arrive.
    ========================================================================== */
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const Anthropic = require('@anthropic-ai/sdk').default;
-const { pool } = require('./db');
+const { pool, tx } = require('./db');
 const C = require('./content');
 
 const env = (k, d) => (process.env[k] || '').trim() || d;
@@ -37,14 +43,13 @@ const CFG = {
   sttKey: env('TRANSCRIBE_API_KEY', ''),
   sttUrl: env('TRANSCRIBE_URL', 'https://api.openai.com/v1/audio/transcriptions'),
   sttModel: env('TRANSCRIBE_MODEL', 'whisper-1'),
+  sttLang: env('TRANSCRIBE_LANG', 'en'),
+  maxTokens: Number(env('AI_MAX_TOKENS', '')) || 32000,
 };
 const client = CFG.key ? new Anthropic({ apiKey: CFG.key, maxRetries: 3, timeout: 10 * 60e3 }) : null;
 
-/** Can the AI grade this skill now? Speaking also needs a transcript: the server's
-    speech-to-text, or the browser's (see speakingReady). */
+/** Can the AI grade this skill? */
 const enabled = (skill) => !!client && (skill === 'writing' || skill === 'speaking');
-/** Speaking answers the AI can grade: with the server's speech-to-text, any recording; else the browser's transcripts. */
-const speakingReady = (items) => !!client && (!!CFG.sttKey || (items || []).some((x) => words(x.transcript) >= 3));
 
 const r5 = (x) => Math.round(x * 2) / 2;
 const bandOf = (v) => (Number.isFinite(+v) ? Math.max(0, Math.min(9, r5(+v))) : null);
@@ -129,7 +134,7 @@ Fill the report:
 async function ask(system, user, schema) {
   const stream = client.beta.messages.stream({
     model: CFG.model,
-    max_tokens: 32000,
+    max_tokens: CFG.maxTokens,
     betas: ['server-side-fallback-2026-07-01'],
     fallbacks: 'default',
     output_config: { effort: CFG.effort, format: { type: 'json_schema', schema } },
@@ -156,9 +161,7 @@ function taskText(doc) {
   return parts.filter(Boolean).join('\n\n');
 }
 
-async function gradeWriting(row, lang) {
-  const doc = C.doc(row.test_id)?.document || {};
-  const text = row.answers?.text || '';
+async function gradeWriting(doc, text, lang) {
   const user = `Write the explanations in ${LANG[lang] || 'Russian'}.\n\n${taskText(doc)}\n\nThe student's text (${words(text)} words):\n<essay>\n${text}\n</essay>`;
   const { data: d, model } = await ask(`${EXAMINER}\n\n${WRITING_RULES}`, user, WRITING_SCHEMA);
   const criteria = Object.fromEntries(W_CRIT.map((k) => [k, bandOf(d.criteria?.[k])]));
@@ -188,18 +191,17 @@ async function transcribe(buf, mime) {
   const fd = new FormData();
   fd.append('file', new Blob([buf], { type: mime || 'audio/wav' }), 'answer.wav');
   fd.append('model', CFG.sttModel);
-  fd.append('language', 'en');
+  fd.append('language', CFG.sttLang);
   fd.append('response_format', 'json');
   const res = await fetch(CFG.sttUrl, { method: 'POST', headers: { Authorization: `Bearer ${CFG.sttKey}` }, body: fd, signal: AbortSignal.timeout(120e3) });
   if (!res.ok) throw Object.assign(new Error('transcribe ' + res.status), { code: 'transcribe_failed' });
   return String((await res.json())?.text || '').trim();
 }
 
-async function gradeSpeaking(row, lang) {
-  const doc = C.doc(row.test_id)?.document || {};
-  const qs = Object.fromEntries(itemsOf(doc).map((q) => [q.id, q]));
-  const { rows: audio } = await pool.query('SELECT item_id, duration, mime, data FROM attempt_audio WHERE attempt_id = $1 ORDER BY id', [row.id]);
-  const items = row.result?.items || [];
+/** Grades recorded answers: `items` ({ itemId, durationSec, transcript }) of attempt `attemptId`,
+    `questions` { itemId: { question, bullets } }, `part` such as "Part 1", `title` the set's name. */
+async function gradeSpeaking({ attemptId, items, questions, part, title }, lang) {
+  const { rows: audio } = await pool.query('SELECT item_id, duration, mime, data FROM attempt_audio WHERE attempt_id = $1 ORDER BY id', [attemptId]);
   for (const it of items) {
     const a = audio.find((x) => x.item_id === it.itemId);
     // the server's speech-to-text when set up (the browser's text stays if it fails), else the browser's text
@@ -212,15 +214,83 @@ async function gradeSpeaking(row, lang) {
   }
   if (!items.some((it) => words(it.transcript) >= 3)) throw Object.assign(new Error('no_speech'), { code: 'no_speech' });
   const answers = items.map((it, i) => {
-    const q = qs[it.itemId] || {};
+    const q = questions[it.itemId] || {};
     return `Question ${i + 1}: ${q.question || it.itemId}${q.bullets?.length ? `\nCue card points: ${q.bullets.join('; ')}` : ''}\nSpoke for ${Math.round(it.durationSec || 0)} s\nTranscript: ${it.transcript || '(no answer)'}`;
   }).join('\n\n');
-  const user = `Write the explanations in ${LANG[lang] || 'Russian'}.\n\nIELTS Speaking Part ${String(doc.kind || '').slice(4) || '?'}: ${doc.title || ''}\n\n${answers}`;
+  const user = `Write the explanations in ${LANG[lang] || 'Russian'}.\n\nIELTS Speaking ${part}: ${title || ''}\n\n${answers}`;
   const { data: d, model } = await ask(`${EXAMINER}\n\n${SPEAKING_RULES}`, user, SPEAKING_SCHEMA);
   const criteria = Object.fromEntries(S_CRIT.map((k) => [k, bandOf(d.criteria?.[k])]));
   if (Object.values(criteria).some((v) => v == null)) throw Object.assign(new Error('bad_bands'), { code: 'bad_json' });
   const band = r5(S_CRIT.reduce((s, k) => s + criteria[k], 0) / S_CRIT.length);
   return { band, result: { items, criteria: { ...criteria, pronunciation: null }, feedback: d.feedback, strengths: d.strengths, improvements: d.improvements, gradedBy: 'ai', model } };
+}
+
+/* ------------------------------------------------------------ diagnostic */
+
+const SKILLS4 = ['listening', 'reading', 'writing', 'speaking'];
+const WAITING = ['pending_ai', 'grading'];
+let FORMS = null;
+function formOf(id) {
+  FORMS ||= JSON.parse(fs.readFileSync(path.join(C.DIR, 'diagnostic.json'), 'utf8')).forms;
+  return FORMS.find((f) => f.id === id) || FORMS[0];
+}
+
+/** One part ('writing' | 'speaking') of a diagnostic attempt. */
+async function gradeDiagPart(row, part, lang) {
+  const f = formOf(row.result?.formId || row.test_id);
+  if (part === 'writing') {
+    const w = f.writing || {};
+    const min = f.levels?.[row.result?.level]?.writing?.words || w.minWords;
+    return gradeWriting({ kind: 'task' + (w.task || 2), question: w.question, minWords: min }, row.answers?.writingText || row.result?.writing?.text || '', lang);
+  }
+  const s = f.speaking || {}, cue = s.cueCard;
+  const questions = Object.fromEntries([
+    ...(s.part1 || []).map((q) => [q.id, { question: q.text }]),
+    ...(cue ? [[cue.id, { question: cue.topic, bullets: [...(cue.points || []), cue.explain].filter(Boolean) }]] : []),
+  ]);
+  const items = structuredClone(row.result?.speaking?.items || []);
+  if (!items.length) throw Object.assign(new Error('no audio'), { code: 'no_audio' });
+  return gradeSpeaking({ attemptId: row.id, items, questions, part: 'Part 1 and Part 2', title: f.title }, lang);
+}
+
+/** The diagnostic's bands with its graded parts: the overall from all four once all are in. */
+function diagBands(result) {
+  const b = { ...(result.bands || {}) };
+  for (const p of ['writing', 'speaking']) if (result[p]?.status === 'done' && result[p].band != null) b[p] = result[p].band;
+  const all = SKILLS4.map((s) => b[s]);
+  if (all.every((x) => x != null)) { b.overall = r5(all.reduce((s, x) => s + x, 0) / 4); b.overallPrelim = false; }
+  return b;
+}
+
+async function runDiagnostic(row, lang) {
+  for (const part of ['writing', 'speaking']) {
+    if (!WAITING.includes(row.result?.[part]?.status)) continue;
+    let patch;
+    try {
+      if (!client) throw Object.assign(new Error('disabled'), { code: 'grading_unavailable' });
+      const g = await gradeDiagPart(row, part, lang);
+      patch = { ...g.result, status: 'done', band: g.band, failReason: null, gradedAt: new Date().toISOString() };
+      console.log('[ai] graded diagnostic', part, row.id, '→', g.band);
+    } catch (e) {
+      const code = failCode(e);
+      console.error('[ai] grading failed: diagnostic', part, row.id, code, e.message);
+      patch = { status: 'failed', failReason: code };
+    }
+    // merged into the row as it is now (the recordings may have arrived meanwhile)
+    await tx(async (c) => {
+      const { rows } = await c.query('SELECT result FROM attempts WHERE id = $1 FOR UPDATE', [row.id]);
+      const result = rows[0].result;
+      result[part] = { ...(result[part] || {}), ...patch };
+      result.bands = diagBands(result);
+      await c.query('UPDATE attempts SET result = $2, band = $3 WHERE id = $1', [row.id, JSON.stringify(result), result.bands.overall ?? null]);
+      row.result = result;
+    });
+  }
+  // queued again if a part was sent while this ran
+  await pool.query(`UPDATE attempts SET status = CASE WHEN result->'writing'->>'status' = 'pending_ai' OR result->'speaking'->>'status' = 'pending_ai'
+                    THEN 'pending_ai' ELSE 'done' END WHERE id = $1`, [row.id]);
+  const { rows } = await pool.query(`SELECT status FROM attempts WHERE id = $1`, [row.id]);
+  if (rows[0]?.status === 'pending_ai') setImmediate(() => start(row.id, lang));
 }
 
 /* ----------------------------------------------------------------- jobs */
@@ -231,43 +301,64 @@ const running = new Map();
 function start(id, lang) {
   id = Number(id);
   if (running.has(id)) return true;
-  if (!client) return false;
   const job = run(id, lang).catch((e) => console.error('[ai] job', id, e)).finally(() => running.delete(id));
   running.set(id, job);
   return true;
 }
 
+const failCode = (e) => e.code || (e instanceof Anthropic.APIError ? 'api_' + (e.status || 'error') : 'failed');
+
 async function run(id, lang) {
   const { rows } = await pool.query(
-    `UPDATE attempts SET status = 'grading', result = jsonb_set(result, '{status}', '"grading"')
+    `UPDATE attempts SET status = 'grading',
+            result = CASE WHEN skill = 'diagnostic' THEN result ELSE jsonb_set(result, '{status}', '"grading"') END
       WHERE id = $1 AND status = 'pending_ai' RETURNING *`, [id]);
   const row = rows[0];
   if (!row) return;
   lang = lang || row.result?.uiLang || 'ru';
+  if (row.skill === 'diagnostic') return runDiagnostic(row, lang);
   try {
     if (!enabled(row.skill)) throw Object.assign(new Error('disabled'), { code: 'grading_unavailable' });
-    const g = row.skill === 'writing' ? await gradeWriting(row, lang) : await gradeSpeaking(row, lang);
-    await pool.query('UPDATE attempts SET status = $2, band = $3, result = result || $4::jsonb WHERE id = $1',
+    const doc = C.doc(row.test_id)?.document || {};
+    const g = row.skill === 'writing'
+      ? await gradeWriting(doc, row.answers?.text || '', lang)
+      : await gradeSpeaking({ attemptId: row.id, items: row.result?.items || [], questions: Object.fromEntries(itemsOf(doc).map((q) => [q.id, q])),
+        part: `Part ${String(doc.kind || '').slice(4) || '?'}`, title: doc.title }, lang);
+    await pool.query(`UPDATE attempts SET status = $2, band = $3, result = (result - 'failReason') || $4::jsonb WHERE id = $1`,
       [id, 'done', g.band, JSON.stringify({ ...g.result, status: 'done', gradedAt: new Date().toISOString() })]);
     console.log('[ai] graded', row.skill, id, '→', g.band);
   } catch (e) {
-    const code = e.code || (e instanceof Anthropic.APIError ? 'api_' + (e.status || 'error') : 'failed');
+    const code = failCode(e);
     console.error('[ai] grading failed', row.skill, id, code, e.message);
-    // a teacher grades it instead
     await pool.query('UPDATE attempts SET status = $2, result = result || $3::jsonb WHERE id = $1',
-      [id, 'pending_review', JSON.stringify({ status: 'pending_review', aiError: code })]);
+      [id, 'failed', JSON.stringify({ status: 'failed', failReason: code })]);
   }
 }
 
-/** After a restart: re-queue work cut off mid-grading, and grade the queue (or hand it to teachers if AI is off). */
+/** Queues a failed attempt (or a diagnostic's failed `part`) again and starts it; false if there is nothing to grade again. */
+async function regrade(id, part, lang) {
+  id = Number(id);
+  const q = part
+    ? await pool.query(`UPDATE attempts SET status = 'pending_ai', result = jsonb_set(result, ARRAY[$2::text, 'status'], '"pending_ai"')
+                         WHERE id = $1 AND skill = 'diagnostic' AND result->$2->>'status' = 'failed' RETURNING id`, [id, part])
+    : await pool.query(`UPDATE attempts SET status = 'pending_ai', result = jsonb_set(result, '{status}', '"pending_ai"')
+                         WHERE id = $1 AND status = 'failed' AND skill <> 'diagnostic' RETURNING id`, [id]);
+  if (q.rowCount) start(id, lang);
+  return q.rowCount > 0;
+}
+
+/** After a restart: re-queue work cut off mid-grading, then grade the queue. */
 async function resume() {
-  await pool.query(`UPDATE attempts SET status = 'pending_ai', result = jsonb_set(result, '{status}', '"pending_ai"') WHERE status = 'grading'`);
-  const { rows } = await pool.query(`SELECT id, skill FROM attempts WHERE status = 'pending_ai' ORDER BY id`);
-  for (const r of rows) {
-    if (enabled(r.skill)) start(r.id);
-    else await pool.query(`UPDATE attempts SET status = 'pending_review', result = jsonb_set(result, '{status}', '"pending_review"') WHERE id = $1`, [r.id]);
+  await pool.query(`UPDATE attempts SET status = 'pending_ai',
+                           result = CASE WHEN skill = 'diagnostic' THEN result ELSE jsonb_set(result, '{status}', '"pending_ai"') END
+                     WHERE status = 'grading'`);
+  for (const p of ['writing', 'speaking']) {
+    await pool.query(`UPDATE attempts SET result = jsonb_set(result, ARRAY[$1::text, 'status'], '"pending_ai"')
+                       WHERE skill = 'diagnostic' AND result->$1->>'status' = 'grading'`, [p]);
   }
-  console.log('[ai]', client ? `on (${CFG.model}; speaking from ${CFG.sttKey ? 'server speech-to-text' : "the browser's transcripts"})` : 'off: no ANTHROPIC_API_KEY, writing and speaking go to teachers', rows.length ? `· ${rows.length} queued` : '');
+  const { rows } = await pool.query(`SELECT id FROM attempts WHERE status = 'pending_ai' ORDER BY id`);
+  for (const r of rows) start(r.id);
+  console.log('[ai]', client ? `on (${CFG.model}; speaking from ${CFG.sttKey ? 'server speech-to-text' : "the browser's transcripts"})` : 'off: no ANTHROPIC_API_KEY, Writing and Speaking cannot be graded', rows.length ? `· ${rows.length} queued` : '');
 }
 
-module.exports = { enabled, speakingReady, start, resume, isRunning: (id) => running.has(Number(id)) };
+module.exports = { enabled, start, regrade, resume, words, isRunning: (id) => running.has(Number(id)) };

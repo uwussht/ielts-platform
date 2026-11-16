@@ -124,15 +124,6 @@
       remove: (id) => sreq('DELETE', `/staff/users/${id}`),
       decide: (id, status, comment) => sreq('POST', `/staff/scores/${id}`, { status, comment }),
       userAttempts: (id) => sreq('GET', `/staff/users/${id}/attempts`),
-      reviews: (done) => sreq('GET', '/staff/reviews' + (done ? '?status=done' : '')),
-      attempt: (id) => sreq('GET', `/staff/attempts/${id}`),
-      grade: (id, body) => sreq('POST', `/staff/attempts/${id}/grade`, body),
-      // a recording as an object URL (the request needs the token)
-      audio: async (id) => {
-        const r = await fetch(IELTS_CONFIG.staffApi + `/staff/audio/${id}`, { headers: { Authorization: `Bearer ${Auth.token}` } });
-        if (!r.ok) throw new Error(t('err.server', { status: r.status }));
-        return URL.createObjectURL(await r.blob());
-      },
       tests: (skill, q = '') => sreq('GET', `/staff/tests?skill=${enc(skill)}&q=${enc(q)}`),
       test: (id) => sreq('GET', `/staff/tests/${enc(id)}`),
     },
@@ -165,7 +156,6 @@
     markPlanTask: (id, done) => mut(put(`/mobile/ielts/plan/tasks/${id}/done`, { done })),
     profile: () => get('/mobile/ielts/profile'),
     saveProfile: (body) => mut(put('/mobile/ielts/profile', body)),
-    setRoute: (route) => mut(put('/mobile/ielts/profile/route', { route })),
     progress: () => get('/mobile/ielts/progress'),
     // the bank's list with this student's attempts on each test
     tests: (skill = 'reading') => cached('tests|' + skill, 3e4, () => get(`/mobile/ielts/tests?skill=${enc(skill)}`)),
@@ -195,12 +185,14 @@
     startMockSection: (sid, sec) => post(`/mobile/ielts/mocks/sessions/${sid}/sections/${sec}/start`, {}),
     saveMockDraft: (sid, sec, body, keepalive = false) => put(`/mobile/ielts/mocks/sessions/${sid}/sections/${sec}/draft`, body, { keepalive }),
     finishMockSection: (sid, sec, attemptIds) => mut(post(`/mobile/ielts/mocks/sessions/${sid}/sections/${sec}/finish`, { attemptIds })),
+    // grading that failed, once more; a diagnostic names its part (writing | speaking)
+    regrade: (id, part) => mut(post(`/mobile/ielts/attempts/${id}/regrade`, { part, uiLang: I18n.lang })),
     abortMock: (sid) => mut(post(`/mobile/ielts/mocks/sessions/${sid}/abort`, {})),
 
     saveWord: (body) => mut(post('/mobile/saved-words', { language: 'ru', ...body })),
     translate: (q, tl = 'ru') => get(`/translate?tl=${tl}&q=${enc(q)}`),
 
-    // ---- writing and speaking: saved for a teacher to grade (status 'pending_review') ----
+    // ---- writing and speaking: graded by the AI in the background (status 'pending_ai' → 'grading' → 'done' | 'failed') ----
     // returns the essay's attempt as it stands; errors carry {error:"<code>"}
     assessIeltsWriting: (attemptId, uiLang) => Api.local('/api/ielts/writing/assess', { json: { attemptId, uiLang } }).catch((e) => { e.code = e.data?.error || e.code; throw e; }),
   };

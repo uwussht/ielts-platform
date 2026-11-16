@@ -348,8 +348,8 @@ router.post('/ielts/speaking/assess', wrap(async (req, res) => {
   if (retry && retry.status === 'done') return res.status(409).json({ error: 'already_graded', attemptId: retry.id });
   const d = C.doc(fields.testId);
   if (!d && !retry) return res.status(404).json({ error: 'not_found' });
-  const status = AI.enabled('speaking') && files.some((f) => f.data.length) ? 'pending_ai' : 'pending_review';
-  const result = { status, uiLang: fields.uiLang || null, items: items.map((x, i) => ({ itemId: x.itemId, durationSec: Number(x.durationSec) || 0, wpm: null, transcript: null, skipped: !files.some((f) => f.field === 'audio_' + i) })) };
+  const status = AI.speakingReady(items) && files.some((f) => f.data.length) ? 'pending_ai' : 'pending_review';
+  const result = { status, uiLang: fields.uiLang || null, items: items.map((x, i) => ({ itemId: x.itemId, durationSec: Number(x.durationSec) || 0, wpm: null, transcript: String(x.transcript || '').slice(0, 5000) || null, skipped: !files.some((f) => f.field === 'audio_' + i) })) };
   const row = await tx(async (c) => {
     const r = retry || await insertAttempt(c, { userId: req.user.id, testId: fields.testId, skill: 'speaking', kind: d.document.kind || d.test?.kind, title: d.test?.title || d.document.title,
       mode: fields.mode || 'practice', status, timeSec: items.reduce((s, x) => s + (Number(x.durationSec) || 0), 0), result });

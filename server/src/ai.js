@@ -5,14 +5,17 @@
    essay (Writing) and a transcript with speaking rate (Speaking).
 
    Claude (Sonnet by default) is the examiner; it answers in a fixed JSON
-   shape (structured outputs). Speaking is first turned into text by a
-   speech-to-text service (an OpenAI-compatible /audio/transcriptions API).
+   shape (structured outputs). Claude does not take audio, so Speaking is
+   graded from a transcript: the one the student's browser made while they
+   spoke (speech recognition in Chrome, Edge, Safari), or, when
+   TRANSCRIBE_API_KEY is set, a server-side speech-to-text service
+   (an OpenAI-compatible /audio/transcriptions API), which is more accurate.
 
    Settings (server .env, see .env.example):
      ANTHROPIC_API_KEY   turns AI grading on; without it work waits for a teacher
      AI_MODEL            claude-sonnet-5-5
      AI_EFFORT           medium   (low | medium | high)
-     TRANSCRIBE_API_KEY  turns AI grading of Speaking on
+     TRANSCRIBE_API_KEY  optional: transcribe Speaking on the server instead of using the browser's text
      TRANSCRIBE_URL      https://api.openai.com/v1/audio/transcriptions
      TRANSCRIBE_MODEL    whisper-1
 
@@ -37,8 +40,11 @@ const CFG = {
 };
 const client = CFG.key ? new Anthropic({ apiKey: CFG.key, maxRetries: 3, timeout: 10 * 60e3 }) : null;
 
-/** Can the AI grade this skill now? */
-const enabled = (skill) => !!client && (skill === 'writing' || (skill === 'speaking' && !!CFG.sttKey));
+/** Can the AI grade this skill now? Speaking also needs a transcript: the server's
+    speech-to-text, or the browser's (see speakingReady). */
+const enabled = (skill) => !!client && (skill === 'writing' || skill === 'speaking');
+/** Speaking answers the AI can grade: with the server's speech-to-text, any recording; else the browser's transcripts. */
+const speakingReady = (items) => !!client && (!!CFG.sttKey || (items || []).some((x) => words(x.transcript) >= 3));
 
 const r5 = (x) => Math.round(x * 2) / 2;
 const bandOf = (v) => (Number.isFinite(+v) ? Math.max(0, Math.min(9, r5(+v))) : null);
@@ -196,7 +202,11 @@ async function gradeSpeaking(row, lang) {
   const items = row.result?.items || [];
   for (const it of items) {
     const a = audio.find((x) => x.item_id === it.itemId);
-    it.transcript = a ? await transcribe(a.data, a.mime) : null;
+    // the server's speech-to-text when set up (the browser's text stays if it fails), else the browser's text
+    if (CFG.sttKey && a) {
+      try { it.transcript = await transcribe(a.data, a.mime); it.transcriptBy = 'server'; }
+      catch (e) { if (!words(it.transcript)) throw e; it.transcriptBy = 'browser'; }
+    } else it.transcriptBy = it.transcript ? 'browser' : null;
     const n = words(it.transcript);
     it.wpm = n && it.durationSec ? Math.round(n / (it.durationSec / 60)) : null;
   }
@@ -257,7 +267,7 @@ async function resume() {
     if (enabled(r.skill)) start(r.id);
     else await pool.query(`UPDATE attempts SET status = 'pending_review', result = jsonb_set(result, '{status}', '"pending_review"') WHERE id = $1`, [r.id]);
   }
-  console.log('[ai]', client ? `on (${CFG.model}; speaking ${CFG.sttKey ? 'on' : 'off: no TRANSCRIBE_API_KEY'})` : 'off: no ANTHROPIC_API_KEY, writing and speaking go to teachers', rows.length ? `· ${rows.length} queued` : '');
+  console.log('[ai]', client ? `on (${CFG.model}; speaking from ${CFG.sttKey ? 'server speech-to-text' : "the browser's transcripts"})` : 'off: no ANTHROPIC_API_KEY, writing and speaking go to teachers', rows.length ? `· ${rows.length} queued` : '');
 }
 
-module.exports = { enabled, start, resume, isRunning: (id) => running.has(Number(id)) };
+module.exports = { enabled, speakingReady, start, resume, isRunning: (id) => running.has(Number(id)) };

@@ -132,8 +132,9 @@
       }
       if (sr.words != null && firstVoice && now - firstVoice >= 10000) m.wpm = Math.round(sr.words / ((now - firstVoice) / 60000));
     }, 100);
-    // WPM from the browser's speech recognition (absent → "—")
-    const sr = { words: null, rec: null, short: 0, stopped: false, finals: 0, interim: 0 };
+    // WPM and the transcript from the browser's speech recognition (absent → "—", and no transcript);
+    // the transcript is what the AI grades when the server has no speech-to-text of its own
+    const sr = { words: null, rec: null, short: 0, stopped: false, finals: 0, interim: 0, text: [], interimText: '' };
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SR) {
       try {
@@ -141,12 +142,13 @@
         rec.lang = 'en-GB'; rec.continuous = true; rec.interimResults = true;
         let started = 0;
         rec.onresult = (e) => {
-          let interim = 0;
+          let interim = 0, interimText = '';
           for (let i = e.resultIndex; i < e.results.length; i++) {
-            const n = e.results[i][0].transcript.trim().split(/\s+/).filter(Boolean).length;
-            if (e.results[i].isFinal) sr.finals += n; else interim += n;
+            const said = e.results[i][0].transcript.trim();
+            const n = said.split(/\s+/).filter(Boolean).length;
+            if (e.results[i].isFinal) { sr.finals += n; if (said) sr.text.push(said); } else { interim += n; interimText += ' ' + said; }
           }
-          sr.interim = interim; sr.words = sr.finals + sr.interim;
+          sr.interim = interim; sr.interimText = interimText.trim(); sr.words = sr.finals + sr.interim;
         };
         rec.onerror = (e) => { if (['not-allowed', 'service-not-allowed', 'network', 'audio-capture'].includes(e.error)) { sr.stopped = true; sr.words = null; m.wpm = null; } };
         rec.onstart = () => { started = Date.now(); };
@@ -160,6 +162,7 @@
         sr.words = 0;
       } catch { sr.words = null; }
     }
+    Object.defineProperty(m, 'transcript', { get: () => [...sr.text, sr.interimText].filter(Boolean).join(' ') || null });
     m.stop = () => { clearInterval(iv); sr.stopped = true; try { sr.rec?.stop(); } catch {} ac.close?.(); };
     return m;
   }
@@ -195,7 +198,7 @@
     const fd = new FormData();
     fd.append('testId', testId); fd.append('mode', mode); fd.append('uiLang', I18n.lang);
     if (retryAttemptId) fd.append('retryAttemptId', retryAttemptId);
-    fd.append('items', JSON.stringify(answers.map((a) => ({ itemId: a.itemId, durationSec: a.durationSec }))));
+    fd.append('items', JSON.stringify(answers.map((a) => ({ itemId: a.itemId, durationSec: a.durationSec, transcript: a.transcript || null }))));
     answers.forEach((a, i) => fd.append('audio_' + i, a.wav, `${a.itemId}.wav`));
     try {
       const res = await Api.local('/api/ielts/speaking/assess', { form: fd });
@@ -299,7 +302,7 @@
           meter?.stop(); const m = meter; meter = null;
           if (take) {
             if (S.takes[itemId]) rec.drop(S.takes[itemId].url);
-            S.takes[itemId] = { ...take, wpm: m?.wpm ?? null };
+            S.takes[itemId] = { ...take, wpm: m?.wpm ?? null, transcript: m?.transcript ?? null };
             S.lastDur = take.durationSec; try { localStorage.setItem(LS, String(take.durationSec)); } catch {}
             S.metrics = m && { share: m.share, pauses: m.pauses, wpm: m.wpm };
           }
@@ -353,7 +356,7 @@
         if (M) {
           if (sent) return;
           sent = true;
-          const answers = W.filter((it) => S.takes[it.id]).map((it) => ({ itemId: it.id, durationSec: S.takes[it.id].durationSec, wav: S.takes[it.id].wav }));
+          const answers = W.filter((it) => S.takes[it.id]).map((it) => ({ itemId: it.id, durationSec: S.takes[it.id].durationSec, wav: S.takes[it.id].wav, transcript: S.takes[it.id].transcript }));
           setTimeout(() => M.onRecorded(answers), 700);
           return;
         }
@@ -362,7 +365,7 @@
         Api.writingModel(test.id).then((m) => { S.model = m || {}; paint(); }).catch(() => { S.model = {}; });
       }
       async function grade() {
-        const answers = W.filter((it) => S.takes[it.id]).map((it) => ({ itemId: it.id, durationSec: S.takes[it.id].durationSec, wav: S.takes[it.id].wav }));
+        const answers = W.filter((it) => S.takes[it.id]).map((it) => ({ itemId: it.id, durationSec: S.takes[it.id].durationSec, wav: S.takes[it.id].wav, transcript: S.takes[it.id].transcript }));
         if (!answers.length) return;
         S.busy = true; S.err = null; paint();
         try {

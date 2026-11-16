@@ -43,7 +43,7 @@
     { tab: 'progress', key: 'app.nav.progress', icon: 'progress' },
     { tab: 'vocab', key: 'app.nav.vocab', icon: 'vocab' },
     { tab: 'info', key: 'app.nav.about', icon: 'about' },
-    { screen: 'programmes', key: 'app.nav.programmes', icon: 'plan' },
+    { screen: 'programmes', key: 'app.nav.programmes', icon: 'plan', admin: true }, // admins only
   ];
   const TABBAR = [
     { tab: 'today', key: 'app.nav.today', icon: 'today' },
@@ -60,6 +60,8 @@
     { screen: 'staff-tests', key: 'bank.nav', icon: 'theory' },
   ];
   const can = (perm) => !!State.staff?.perms?.includes(perm);
+  // the account's own role (State.staff loads later, after the first render)
+  const isAdmin = () => State.user?.role === 'admin';
   const TITLES = { today: 'app.nav.today', plan: 'app.nav.plan', learn: 'app.nav.practice', mocks: 'app.nav.mocks', progress: 'ieltsProgressV.title', vocab: 'app.nav.vocab', info: 'app.nav.about' };
 
   // ---------- DOM roots ----------
@@ -78,7 +80,7 @@
     const me = State.me || {};
     const tabNow = p.screen === 'ielts' ? p.ieltsTab : null;
     const name = State.user?.name || me.name || State.user?.email || '';
-    const items = can('staff') ? [...NAV, ...STAFF_NAV] : NAV;
+    const items = (can('staff') ? [...NAV, ...STAFF_NAV] : NAV).filter((n) => !n.admin || isAdmin());
     const nav = h('nav', { class: 'nav', 'aria-label': t('app.menu') },
       items.map((n) => n.group
         ? h('div', { class: 'nav__group', role: 'presentation' }, t(n.group))
@@ -208,6 +210,9 @@
     if (authed && State.me && State.me.ieltsAccount && !State.me.onboarded && p.screen === 'ielts' && Screens['ielts-onboarding']) {
       return Router.go({ screen: 'ielts-onboarding' }, { replace: true });
     }
+
+    // admin-only screens: a student opening the link lands on Today
+    if (authed && p.screen === 'programmes' && !isAdmin()) return Router.go({ screen: 'ielts', ieltsTab: 'today' }, { replace: true });
 
     // no access yet (onboarding/diagnostic not done): the hub shows the locked card, as on ai-tutor
     const key = State.me?.noAccess ? 'no-access'

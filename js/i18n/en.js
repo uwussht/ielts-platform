@@ -2258,7 +2258,7 @@ window.I18N.en={
  "ieltsWriting.gradeError.other": "Marking failed. Your response is saved — try again.",
  "ieltsWriting.gradeNow": "Mark with AI",
  "ieltsWriting.gradingTitle": "AI is marking your response",
- "ieltsWriting.gradingText": "This usually takes 20–40 seconds. Meanwhile, compare your text with the model answer.",
+ "ieltsWriting.gradingText": "This usually takes about a minute. You can leave this page; the result will be saved here.",
  "ieltsWriting.pendingText": "The band for the four criteria appears after AI marking. Meanwhile, compare your text with the model answer.",
  "ieltsWriting.guideHint": "Answer structure, ready phrases and common mistakes for this kind of task.",
  "ieltsWriting.openGuide": "Open “How to write”",

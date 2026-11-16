@@ -24,6 +24,9 @@ jobs:
       # SAT platform: phones (and optionally emails) that become admins, comma-separated.
       ADMIN_PHONES: ${{ vars.IELTS_ADMIN_PHONES || vars.ADMIN_PHONES }}
       ADMIN_EMAILS: ${{ vars.IELTS_ADMIN_EMAILS || vars.ADMIN_EMAILS }}
+      # Repository secrets for AI grading (Settings → Secrets and variables → Actions → Secrets).
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      TRANSCRIBE_API_KEY: ${{ secrets.TRANSCRIBE_API_KEY }}
     steps:
       - name: Check configuration
         id: cfg
@@ -41,6 +44,11 @@ jobs:
           if [[ ! "$ADMIN_EMAILS" =~ $emails_re ]]; then
             echo "::error::IELTS_ADMIN_EMAILS may hold only emails separated by commas."; exit 1
           fi
+          keys_re='^[A-Za-z0-9_-]*$'
+          if [[ ! "$ANTHROPIC_API_KEY" =~ $keys_re ]] || [[ ! "$TRANSCRIBE_API_KEY" =~ $keys_re ]]; then
+            echo "::error::ANTHROPIC_API_KEY / TRANSCRIBE_API_KEY may hold only letters, digits, - and _."; exit 1
+          fi
+          [ -n "$ANTHROPIC_API_KEY" ] || echo "::notice::ANTHROPIC_API_KEY is not set: AI grading stays as the server's .env has it."
           [ -n "$ADMIN_PHONES" ] || echo "::notice::IELTS_ADMIN_PHONES is not set: admins stay as the server's .env has them."
 
       - name: Set up SSH
@@ -55,7 +63,7 @@ jobs:
         run: |
           ssh -i ~/.ssh/deploy -p "$PORT" "$USER@$HOST" \
             APP_DIR="$APP_DIR" SHA="$GITHUB_SHA" REPO="https://github.com/${GITHUB_REPOSITORY}.git" \
-            ADMIN_PHONES="'$ADMIN_PHONES'" ADMIN_EMAILS="'$ADMIN_EMAILS'" \
+            ADMIN_PHONES="'$ADMIN_PHONES'" ADMIN_EMAILS="'$ADMIN_EMAILS'"             ANTHROPIC_API_KEY="'$ANTHROPIC_API_KEY'" TRANSCRIBE_API_KEY="'$TRANSCRIBE_API_KEY'" \
             'bash -s' <<'EOF'
           set -euo pipefail
           if [ ! -d "$APP_DIR/.git" ]; then
@@ -76,10 +84,12 @@ jobs:
             { grep -v "^$1=" .env || true; printf '%s=%s\n' "$1" "$2"; } > .env.next
             mv .env.next .env
             chmod 600 .env
-            echo "$1 set from the repository variable"
+            echo "$1 set from the repository settings"
           }
           set_env ADMIN_PHONES "$ADMIN_PHONES"
           set_env ADMIN_EMAILS "$ADMIN_EMAILS"
+          set_env ANTHROPIC_API_KEY "$ANTHROPIC_API_KEY"
+          set_env TRANSCRIBE_API_KEY "$TRANSCRIBE_API_KEY"
           git fetch --prune origin main
           git reset --hard "$SHA"
           docker compose up -d --build --remove-orphans db api web

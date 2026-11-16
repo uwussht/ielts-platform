@@ -36,6 +36,13 @@ services:
       # Plan ids (as in js/config.js) and the ones a new student starts with.
       PLANS: ${PLANS:-self,coach,intensive}
       DEFAULT_PLANS: ${DEFAULT_PLANS:-self}
+      # AI grading of Writing and Speaking (server/src/ai.js); empty key: teachers grade.
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      AI_MODEL: ${AI_MODEL:-claude-sonnet-5-5}
+      AI_EFFORT: ${AI_EFFORT:-medium}
+      TRANSCRIBE_API_KEY: ${TRANSCRIBE_API_KEY:-}
+      TRANSCRIBE_URL: ${TRANSCRIBE_URL:-https://api.openai.com/v1/audio/transcriptions}
+      TRANSCRIBE_MODEL: ${TRANSCRIBE_MODEL:-whisper-1}
     depends_on:
       db:
         condition: service_healthy

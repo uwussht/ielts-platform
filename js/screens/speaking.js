@@ -512,6 +512,14 @@
       const root = h('div', { class: 'stack wwork' });
       async function loadPending() { st.pending = view.result?.status === 'failed' ? await Pending.load('attempt:' + id) : null; }
       await loadPending();
+      // the AI grades in the background (server/src/ai.js): look again until it is done
+      let pollT = null, gone = false;
+      App.onLeave(() => { gone = true; clearTimeout(pollT); });
+      function poll() {
+        clearTimeout(pollT);
+        if (gone || !['pending_ai', 'grading'].includes(view.result?.status)) return;
+        pollT = setTimeout(async () => { try { view = await Api.attempt(id); } catch {} if (!gone) { paint(); poll(); } }, IELTS_CONFIG.aiPollMs);
+      }
       async function resend() {
         const pd = st.pending;
         st.busy = true; st.err = null; paint();
@@ -521,7 +529,7 @@
         } catch (e) { if (e.code !== 'already_graded') st.err = e; }
         st.busy = false;
         if (!st.err) { st.pending = null; view = await Api.attempt(id); await loadPending(); }
-        paint();
+        paint(); poll();
       }
       function paint() {
         const doc = view.document || {}, r = view.result || {}, a = view.attempt || {};
@@ -574,7 +582,7 @@
                   (an.paragraphs || []).map((pa) => h('p', { class: 'wmine__note small' }, icon('about', 'ic16'), h('span', null, `${t('ieltsSpeaking.p.role.' + pa.role) || pa.role}: ${loc(pa.note)}`)))));
             })));
       }
-      paint();
+      paint(); poll();
       return root;
     },
   };

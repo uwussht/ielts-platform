@@ -15,7 +15,8 @@
      mocks       GET /mobile/ielts/mocks, POST /mocks/:id/sessions, GET/POST /mocks/sessions/:sid/…
      vocabulary  /mobile/vocab-progress/*, /mobile/lesson-vocab/*, POST /mobile/saved-words
 
-   Writing and speaking have no automatic grading: they are 'pending_review'
+   Writing and speaking are graded by the AI (ai.js) when it is set up: 'pending_ai'
+   → 'grading' → 'done'. Without it, or if it fails, they are 'pending_review'
    until a teacher grades them in the staff area (staff.js).
    ========================================================================== */
 'use strict';
@@ -27,6 +28,7 @@ const Busboy = require('busboy');
 const { pool, tx } = require('./db');
 const { requireUser, requireAccess } = require('./auth');
 const C = require('./content');
+const AI = require('./ai');
 
 const router = express.Router();
 router.use(requireUser, requireAccess);
@@ -38,6 +40,8 @@ const isoDay = (d) => new Date(d).toISOString().slice(0, 10);
 const nf = (res, what = 'not-found') => res.status(404).json({ ok: false, reason: what, message: 'Not found' });
 const bad = (res, reason) => res.status(400).json({ ok: false, reason, message: reason });
 const wrap = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+/** Waiting for a grade: queued for the AI, being graded, or with the teachers. */
+const CHECKING = ['pending_ai', 'grading', 'pending_review'];
 const countWords = (s) => String(s || '').trim().split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
 
 /* ------------------------------------------------------------ storage */
@@ -170,7 +174,7 @@ router.get('/mobile/ielts/dashboard', wrap(async (req, res) => {
   const bands = prof.bands;
   const graded = list.filter((a) => a.band != null && a.skill !== 'diagnostic');
   const weak = typeStats(list)[0];
-  const checking = list.some((a) => a.status === 'pending_review');
+  const checking = list.some((a) => CHECKING.includes(a.status));
   res.json({
     xp, xpToday, level: Math.floor(xp / 400) + 1, levelXp: xp % 400, levelSize: 400, streak: streakOf(list),
     targetBand: prof.targetBand, examDate: prof.examDate,
@@ -194,9 +198,9 @@ router.get('/mobile/ielts/progress', wrap(async (req, res) => {
   for (const s of SKILLS) {
     const xs = list.filter((a) => a.skill === s && a.band != null);
     const diag = list.find((a) => a.skill === 'diagnostic');
-    skills[s] = xs[0] ? { source: sourceOf(xs[0]), date: isoDay(xs[0].finished_at), band: num(xs[0].band), delta: xs[1] ? r5(num(xs[0].band) - num(xs[1].band)) : null, checking: list.some((a) => a.skill === s && a.status === 'pending_review') }
+    skills[s] = xs[0] ? { source: sourceOf(xs[0]), date: isoDay(xs[0].finished_at), band: num(xs[0].band), delta: xs[1] ? r5(num(xs[0].band) - num(xs[1].band)) : null, checking: list.some((a) => a.skill === s && CHECKING.includes(a.status)) }
       : diag?.bands?.[s] != null ? { source: 'diagnostic', date: isoDay(diag.finished_at), band: diag.bands[s], estimate: true, delta: null, checking: false }
-        : { source: null, date: null, band: null, delta: null, checking: list.some((a) => a.skill === s && a.status === 'pending_review') };
+        : { source: null, date: null, band: null, delta: null, checking: list.some((a) => a.skill === s && CHECKING.includes(a.status)) };
   }
   // overall after each graded result, oldest first
   const series = [];
@@ -278,15 +282,19 @@ router.post('/mobile/ielts/tests/:id/writing', wrap(async (req, res) => {
   const b = req.body || {};
   const text = String(b.text || '').slice(0, 20000);
   const doc = d.document, n = countWords(text), min = doc.minWords || (doc.kind === 'task2' ? 250 : 150);
+  const status = AI.enabled('writing') && n > 0 ? 'pending_ai' : 'pending_review';
   const row = await insertAttempt(pool, { userId: req.user.id, testId: req.params.id, skill: 'writing', kind: doc.kind || d.test?.kind, title: d.test?.title || doc.title,
-    mode: b.mode || 'exam', status: 'pending_review', timeSec: b.timeSec, answers: { text, selfCheck: {} },
-    result: { status: 'pending_review', words: n, minWords: min, underLength: n < min, timeLimitSec: doc.timeLimitSec || null, pasteBlocked: b.pasteBlocked || 0 } });
+    mode: b.mode || 'exam', status, timeSec: b.timeSec, answers: { text, selfCheck: {} },
+    result: { status, uiLang: b.uiLang || null, words: n, minWords: min, underLength: n < min, timeLimitSec: doc.timeLimitSec || null, pasteBlocked: b.pasteBlocked || 0 } });
+  if (status === 'pending_ai') AI.start(row.id);
   res.json({ attempt: attemptOut(row) });
 }));
-/* The app asks to grade an essay; there is no automatic grading, so it gets the essay as it stands. */
+/* The app asks to grade an essay: grading starts right after it is sent (ai.js) and this
+   makes sure it is running, then returns the essay as it stands; the app polls the attempt. */
 router.post('/ielts/writing/assess', wrap(async (req, res) => {
   const row = await ownAttempt(req, req.body?.attemptId);
   if (!row) return res.status(404).json({ error: 'not_found' });
+  if (row.status === 'pending_ai') AI.start(row.id, req.body?.uiLang);
   res.json(await attemptView(row));
 }));
 
@@ -340,14 +348,19 @@ router.post('/ielts/speaking/assess', wrap(async (req, res) => {
   if (retry && retry.status === 'done') return res.status(409).json({ error: 'already_graded', attemptId: retry.id });
   const d = C.doc(fields.testId);
   if (!d && !retry) return res.status(404).json({ error: 'not_found' });
-  const result = { status: 'pending_review', items: items.map((x, i) => ({ itemId: x.itemId, durationSec: Number(x.durationSec) || 0, wpm: null, transcript: null, skipped: !files.some((f) => f.field === 'audio_' + i) })) };
+  const status = AI.enabled('speaking') && files.some((f) => f.data.length) ? 'pending_ai' : 'pending_review';
+  const result = { status, uiLang: fields.uiLang || null, items: items.map((x, i) => ({ itemId: x.itemId, durationSec: Number(x.durationSec) || 0, wpm: null, transcript: null, skipped: !files.some((f) => f.field === 'audio_' + i) })) };
   const row = await tx(async (c) => {
     const r = retry || await insertAttempt(c, { userId: req.user.id, testId: fields.testId, skill: 'speaking', kind: d.document.kind || d.test?.kind, title: d.test?.title || d.document.title,
-      mode: fields.mode || 'practice', status: 'pending_review', timeSec: items.reduce((s, x) => s + (Number(x.durationSec) || 0), 0), result });
-    if (retry) await c.query('DELETE FROM attempt_audio WHERE attempt_id = $1', [retry.id]);
+      mode: fields.mode || 'practice', status, timeSec: items.reduce((s, x) => s + (Number(x.durationSec) || 0), 0), result });
+    if (retry) {
+      await c.query('DELETE FROM attempt_audio WHERE attempt_id = $1', [retry.id]);
+      await c.query('UPDATE attempts SET status = $2, result = result || $3::jsonb WHERE id = $1', [retry.id, status, JSON.stringify(result)]);
+    }
     await saveAudio(c, r.id, items, files);
     return r;
   });
+  if (status === 'pending_ai') AI.start(row.id);
   res.json({ attempt: attemptOut(row) });
 }));
 

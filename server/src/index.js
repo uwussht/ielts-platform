@@ -10,6 +10,7 @@ const { migrate } = require('./db');
 const staff = require('./staff');
 const account = require('./account');
 const student = require('./student');
+const ai = require('./ai');
 
 const PORT = Number(process.env.PORT) || 3000;
 const app = express();
@@ -31,5 +32,8 @@ app.use((err, req, res, next) => {
 });
 
 migrate()
-  .then(() => app.listen(PORT, () => console.log('[api] listening on', PORT)))
+  .then(() => app.listen(PORT, () => {
+    console.log('[api] listening on', PORT);
+    ai.resume().catch((e) => console.error('[ai] resume failed', e));
+  }))
   .catch((e) => { console.error('[db] migration failed', e); process.exit(1); });

@@ -134,6 +134,9 @@ const MIGRATIONS = [
    UPDATE users SET first_name = split_part(name, ' ', 1),
                     last_name = NULLIF(substr(name, length(split_part(name, ' ', 1)) + 2), '')
     WHERE name IS NOT NULL`,
+  // 4: AI grading of Writing and Speaking (ai.js): queued, being graded, then done.
+  `ALTER TABLE attempts DROP CONSTRAINT IF EXISTS attempts_status_check;
+   ALTER TABLE attempts ADD CONSTRAINT attempts_status_check CHECK (status IN ('done', 'pending_review', 'pending_ai', 'grading'))`,
 ];
 
 async function tx(fn) {

@@ -296,7 +296,7 @@
       async function submit(close) {
         submitting = true; clearTimeout(saveT);
         try {
-          const res = await Api.submitWriting(test.id, { text: st.text, mode: st.mode, timeSec: elapsed(), startedAt: st.startedAt, device: innerWidth < 760 ? 'mobile' : 'desktop', pasteBlocked: st.pasteBlocked });
+          const res = await Api.submitWriting(test.id, { text: st.text, mode: st.mode, uiLang: I18n.lang, timeSec: elapsed(), startedAt: st.startedAt, device: innerWidth < 760 ? 'mobile' : 'desktop', pasteBlocked: st.pasteBlocked });
           const id = String(res?.attempt?.id ?? res?.id);
           if (M) { sv.cancel(); close(); return await M.onSubmitted([id]); }
           Draft.drop(test.id); close();
@@ -381,16 +381,25 @@
         Api.test('WR-SELFCHECK').then((r) => r.document).catch(() => null),
       ]);
       const root = h('div', { class: 'stack wwork' });
+      // the AI grades in the background (server/src/ai.js): look again until it is done
+      let pollT = null, gone = false;
+      App.onLeave(() => { gone = true; clearTimeout(pollT); });
+      const waiting = () => ['pending_ai', 'grading'].includes(view.result?.status);
+      function poll() {
+        clearTimeout(pollT);
+        if (gone || !waiting()) return;
+        pollT = setTimeout(async () => { try { view = await Api.attempt(id); } catch {} if (!gone) { paint(); poll(); } }, IELTS_CONFIG.aiPollMs);
+      }
       async function grade() {
         st.busy = true; st.err = null; paint();
         try { view = await Api.assessIeltsWriting(id, I18n.lang); }
         catch (e) { st.err = e?.code || 'failed'; try { view = await Api.attempt(id); } catch {} }
-        st.busy = false; paint();
+        st.busy = false; paint(); poll();
       }
       function paint() {
         const doc = view.document || {}, r = view.result || {}, a = view.attempt || {}, d = r.details || {};
         const k = kindKey(doc);
-        const O = st.busy ? 'grading' : r.status;
+        const O = st.busy || waiting() ? 'grading' : r.status;
         const done = O === 'done';
         const text = view.answers?.text || '';
         const P = paragraphs(text);
@@ -477,7 +486,7 @@
           P.map((txt, i) => {
             const meta = (d.paragraphs || []).find((x) => x.index === i + 1);
             return h('div', { class: 'wmine__p' },
-              h('span', { class: 'xs muted' }, t('ieltsWriting.p.work.paragraph', { n: i + 1, words: t('ieltsWriting.wordsN', { n: countWords(txt) }) }) + (meta?.role ? ' · ' + meta.role : '')),
+              h('span', { class: 'xs muted' }, t('ieltsWriting.p.work.paragraph', { n: i + 1, words: t('ieltsWriting.wordsN', { n: countWords(txt) }) }) + (meta?.role ? ' · ' + (t('ieltsWriting.p.role.' + meta.role) || meta.role) : '')),
               h('p', { lang: 'en' }, markErrors(txt, done ? r.errors : null)),
               meta?.comment && h('p', { class: 'wmine__note small' }, icon('about', 'ic16'), h('span', null, meta.comment)));
           }),
@@ -517,7 +526,7 @@
           h('p', { class: 'small muted' }, t('ieltsWriting.p.sc.noBand')));
       }
       paint();
-      if (AUTO.has(String(id)) && view.result?.status === 'pending_ai') { AUTO.delete(String(id)); grade(); }
+      if (AUTO.has(String(id)) && view.result?.status === 'pending_ai') { AUTO.delete(String(id)); grade(); } else poll();
       return root;
     },
   };

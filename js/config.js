@@ -34,6 +34,9 @@ window.IELTS_CONFIG = {
     { id: 'intensive', months: 2, price: null },
   ],
 
+  // How often a Writing or Speaking result page looks again while the AI is grading (ms).
+  aiPollMs: 4000,
+
   // Phone sign-in and sign-up, as on the SAT platform: the box starts with this code
   // and takes the ten digits after it (+7 700 123 45 67).
   phoneDial: '7',

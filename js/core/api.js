@@ -121,6 +121,7 @@
       setPlans: (id, plans) => sreq('PUT', `/staff/users/${id}/plans`, { plans }),
       setRole: (id, role) => sreq('PUT', `/staff/users/${id}/role`, { role }),
       setAccess: (id, type, until) => sreq('PUT', `/staff/users/${id}/access`, { type, until }),
+      setAiLimit: (id, limit) => sreq('PUT', `/staff/users/${id}/ai-limit`, { limit }),
       remove: (id) => sreq('DELETE', `/staff/users/${id}`),
       decide: (id, status, comment) => sreq('POST', `/staff/scores/${id}`, { status, comment }),
       userAttempts: (id) => sreq('GET', `/staff/users/${id}/attempts`),
@@ -170,6 +171,8 @@
     selfCheck: (id, body) => put(`/mobile/ielts/attempts/${enc(id)}/selfcheck`, body),
     writingWorks: () => get('/mobile/ielts/writing/works'),
     speakingWorks: () => get('/mobile/ielts/speaking/works'),
+    // AI checks left: { used, limit, left, period } (limit and left are null for staff)
+    aiUsage: () => get('/mobile/ielts/ai-usage'),
     diagnostic: ({ level, module } = {}) => { const q = new URLSearchParams(); if (level) q.set('level', level); if (module) q.set('module', module); const s = q.toString(); return get('/mobile/ielts/diagnostic' + (s ? '?' + s : '')); },
     submitDiagnostic: (body) => mut(post('/mobile/ielts/diagnostic', body)),
     lastDiagnostic: () => get('/mobile/ielts/diagnostic/last'),

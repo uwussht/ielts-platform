@@ -121,6 +121,19 @@
       programme: d?.programme ?? null, journey: d?.journey ?? null, growthZone: d?.growthZone ?? null };
   }
 
-  window.Hub = { SKILL_NAME, cap, fmtDate, fmtUTC, addDays, addMonths, bandStr, minutes, taskTitle, subLabel,
+  // How many AI checks (Writing, Speaking) the student has left; nothing for staff, who have no limit.
+  function aiLeft() {
+    const box = h('div', { class: 'notice ai-left', role: 'status', hidden: true });
+    Api.aiUsage().then((u) => {
+      if (!u || u.limit == null) return;
+      box.classList.toggle('notice--danger', u.left <= 0);
+      box.replaceChildren(icon('spark', 'ic16'), h('span', null,
+        u.left > 0 ? t('aiLimit.left.' + u.period, { n: u.left, limit: u.limit }) : t('aiLimit.none.' + u.period, { limit: u.limit })));
+      box.hidden = false;
+    }).catch(() => {});
+    return box;
+  }
+
+  window.Hub = { aiLeft, SKILL_NAME, cap, fmtDate, fmtUTC, addDays, addMonths, bandStr, minutes, taskTitle, subLabel,
     taskRoute, routeHref, openTask, goRoute, growthRoute, plate, stChip, pageHead, empty, seg, loadDashboard };
 })();

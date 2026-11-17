@@ -93,6 +93,7 @@ html[data-theme="light"] .auth .eyebrow { color: var(--eyebrow); }
 .staff-count { margin-left: auto; }
 .staff-table { min-width: 1080px; }
 .staff-table td { vertical-align: top; }
+.staff-ai { width: 84px; }
 .staff-who { display: flex; gap: 10px; align-items: flex-start; min-width: 180px; }
 .staff-who .avatar { width: 32px; height: 32px; font-size: 12px; }
 .staff-bands { display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }

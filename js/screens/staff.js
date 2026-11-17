@@ -109,6 +109,25 @@
     return node;
   }
 
+  /** AI checks: used of the limit, and an admin's own number for this student (empty: the default). */
+  function aiCell(u) {
+    const ai = u.ai;
+    if (!ai || ai.limit == null) return h('span', { class: 'small muted' }, t('staff.ai.unlimited'));
+    const used = h('div', { class: 'small' });
+    const input = h('input', { class: 'input input--sm staff-ai', type: 'number', min: '0', max: '1000', step: '1', inputmode: 'numeric',
+      value: ai.own ?? '', placeholder: String(ai.defaultLimit), 'aria-label': t('staff.ai.limit'), title: t('staff.ai.hint', { n: ai.defaultLimit }), disabled: !App.can('access') });
+    const paint = (a) => { used.textContent = t('staff.ai.used', { used: a.used, limit: a.limit }); used.classList.toggle('error', a.left <= 0); };
+    paint(ai);
+    input.addEventListener('change', async () => {
+      const v = input.value.trim(), n = Number(v);
+      if (v !== '' && !(Number.isInteger(n) && n >= 0 && n <= 1000)) { input.value = u.ai.own ?? ''; return DOM.toast(t('staff.ai.bad')); }
+      const r = await S().setAiLimit(u.id, v === '' ? null : n);
+      if (!r.ok) { input.value = u.ai.own ?? ''; return failToast(r); }
+      u.ai = r.ai; paint(r.ai); DOM.toast(t('staff.saved'));
+    });
+    return h('div', { class: 'stack-sm' }, used, input);
+  }
+
   function roleCell(u) {
     if (!App.can('roles')) return h('span', { class: 'small' }, t('staff.role.' + u.role));
     const self = State.staff?.id === u.id;
@@ -171,7 +190,7 @@
         const waiting = res.users.reduce((n, u) => n + u.scores.filter((sc) => sc.status === 'pending').length, 0);
         count.textContent = t('staff.count', { n: users.length }) + (waiting ? ' · ' + t('staff.waiting', { n: waiting }) : '');
         if (!users.length) { table.replaceChildren(Hub.empty ? Hub.empty({ icon: 'users', title: t(onlyPending ? 'staff.noScores' : 'staff.noStudents') }) : h('p', { class: 'empty' }, t(onlyPending ? 'staff.noScores' : 'staff.noStudents'))); return; }
-        const cols = ['name', 'start', 'route', 'bands', 'exam', 'results', 'access', 'plans', 'role'];
+        const cols = ['name', 'start', 'route', 'bands', 'exam', 'results', 'access', 'ai', 'plans', 'role'];
         table.replaceChildren(h('table', { class: 'table staff-table' },
           h('thead', null, h('tr', null, cols.map((k) => h('th', { scope: 'col' }, t('staff.col.' + k))))),
           h('tbody', null, users.map((u) => {
@@ -187,6 +206,7 @@
               h('td', { 'data-label': t('staff.col.exam') }, examCell(u)),
               h('td', { 'data-label': t('staff.col.results') }, shown.length ? h('div', { class: 'stack-sm' }, shown.map((sc) => scoreLine(sc, load))) : h('span', { class: 'muted' }, '—')),
               h('td', { 'data-label': t('staff.col.access') }, accessCell(u)),
+              h('td', { 'data-label': t('staff.col.ai') }, aiCell(u)),
               h('td', { 'data-label': t('staff.col.plans') }, u.role === 'student' ? plansCell(u) : h('span', { class: 'muted small' }, t('staff.staffMember'))),
               h('td', { 'data-label': t('staff.col.role') }, h('div', { class: 'stack-sm' }, roleCell(u), deleteButton(u, load))));
           }))));

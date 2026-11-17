@@ -157,6 +157,23 @@ const MIGRATIONS = [
    ALTER TABLE attempts ADD CONSTRAINT attempts_status_check CHECK (status IN ('done', 'pending_ai', 'grading', 'failed'));
    DROP INDEX IF EXISTS attempts_review_idx;
    DELETE FROM user_plans WHERE plan = 'intensive'`,
+  // 6: a limit on AI checks per student (ai.js). Each finished check is a row in ai_usage;
+  // users.ai_limit is an admin's own number for one student (NULL: the AI_LIMIT default).
+  // Checks made before the limit existed count too.
+  `ALTER TABLE users ADD COLUMN ai_limit INTEGER CHECK (ai_limit >= 0);
+   CREATE TABLE ai_usage (
+     id         SERIAL PRIMARY KEY,
+     user_id    INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+     attempt_id INTEGER REFERENCES attempts (id) ON DELETE SET NULL,
+     part       TEXT NOT NULL,
+     created_at TIMESTAMPTZ NOT NULL DEFAULT now());
+   CREATE INDEX ai_usage_user_idx ON ai_usage (user_id, created_at);
+   INSERT INTO ai_usage (user_id, attempt_id, part, created_at)
+     SELECT user_id, id, skill, finished_at FROM attempts
+      WHERE skill IN ('writing', 'speaking') AND status = 'done' AND result->>'gradedBy' = 'ai';
+   INSERT INTO ai_usage (user_id, attempt_id, part, created_at)
+     SELECT a.user_id, a.id, p.part, a.finished_at FROM attempts a, unnest(ARRAY['writing', 'speaking']) AS p (part)
+      WHERE a.skill = 'diagnostic' AND a.result->p.part->>'status' = 'done' AND a.result->p.part->>'gradedBy' = 'ai'`,
 ];
 
 async function tx(fn) {

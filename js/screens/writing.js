@@ -200,7 +200,7 @@
             h('h3', null, t('ieltsReading.modeLabel')),
             draft && h('div', { class: 'notice row row--between', role: 'status' }, h('span', null, t('ieltsWriting.draftNote', { n: draft.words ?? countWords(draft.text) })),
               h('button', { class: 'btn btn--ghost btn--sm', type: 'button', onclick: () => { Draft.drop(test.id); App.render({ keepScroll: true }); } }, t('ieltsReading.draftDrop'))),
-            modeBox, cta),
+            modeBox, cta, Hub.aiLeft()),
           h('section', { class: 'card card--brand stack-sm' }, h('h3', null, t('ieltsWriting.p.guide.title')),
             h('p', { class: 'small row', style: { alignItems: 'flex-start', flexWrap: 'nowrap' } }, icon('bulb', 'ic16'), h('span', null, t('ieltsWriting.guideHint'))),
             h('div', null, h('a', { class: 'btn btn--secondary btn--sm', href: learnHref('writing-guide') }, t('ieltsWriting.openGuide')))),
@@ -534,7 +534,7 @@
     const W = skill === 'writing';
     const title = W ? t('ieltsLearn.writing.works') : t('ieltsSpeaking.works');
     const head = [Practice.crumbs({ label: t('ieltsHub.tab.learn'), href: learnHref() }, { label: W ? 'Writing' : 'Speaking', href: learnHref('skill-' + skill) }, { label: title }),
-      Hub.pageHead({ title, sub: t('ieltsWriting.worksText') })];
+      Hub.pageHead({ title, sub: t('ieltsWriting.worksText') }), Hub.aiLeft()];
     let rows, cat;
     try { [rows, cat] = await Promise.all([W ? Api.writingWorks() : Api.speakingWorks(), W ? Api.tests('writing').catch(() => []) : []]); }
     catch (e) {

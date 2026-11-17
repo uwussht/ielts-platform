@@ -261,6 +261,8 @@ router.get('/mobile/ielts/attempts/:id', wrap(async (req, res) => {
   if (!row) return nf(res);
   res.json(await attemptView(row));
 }));
+/* how many AI checks this student has left (ai.js: the limit) */
+router.get('/mobile/ielts/ai-usage', wrap(async (req, res) => res.json(await AI.usage(req.user.id))));
 /* grading that failed, once more (a diagnostic names its part: writing | speaking) */
 router.post('/mobile/ielts/attempts/:id/regrade', wrap(async (req, res) => {
   const row = await ownAttempt(req, req.params.id);

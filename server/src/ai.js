@@ -20,6 +20,8 @@
      TRANSCRIBE_URL      https://api.openai.com/v1/audio/transcriptions
      TRANSCRIBE_MODEL    whisper-1
      TRANSCRIBE_LANG     en
+     AI_LIMIT            15     AI checks per student (an admin can set another number for one student)
+     AI_LIMIT_PERIOD     total  (total: in all | month: per calendar month)
 
    Lifecycle of an attempt: 'pending_ai' (queued) -> 'grading' -> 'done', or
    'failed' with result.failReason; the student can ask again (regrade), and
@@ -45,6 +47,8 @@ const CFG = {
   sttModel: env('TRANSCRIBE_MODEL', 'whisper-1'),
   sttLang: env('TRANSCRIBE_LANG', 'en'),
   maxTokens: Number(env('AI_MAX_TOKENS', '')) || 32000,
+  limit: Number.isInteger(+env('AI_LIMIT', '')) && +env('AI_LIMIT', '') >= 0 ? +env('AI_LIMIT', '') : 15,
+  period: env('AI_LIMIT_PERIOD', 'total') === 'month' ? 'month' : 'total',
 };
 const client = CFG.key ? new Anthropic({ apiKey: CFG.key, maxRetries: 3, timeout: 10 * 60e3 }) : null;
 
@@ -265,13 +269,15 @@ function diagBands(result) {
 async function runDiagnostic(row, lang) {
   for (const part of ['writing', 'speaking']) {
     if (!WAITING.includes(row.result?.[part]?.status)) continue;
-    let patch;
+    let patch, slot = null;
     try {
       if (!client) throw Object.assign(new Error('disabled'), { code: 'grading_unavailable' });
+      slot = await reserve(row.user_id, row.id, part);
       const g = await gradeDiagPart(row, part, lang);
       patch = { ...g.result, status: 'done', band: g.band, failReason: null, gradedAt: new Date().toISOString() };
       console.log('[ai] graded diagnostic', part, row.id, '→', g.band);
     } catch (e) {
+      await release(slot);
       const code = failCode(e);
       console.error('[ai] grading failed: diagnostic', part, row.id, code, e.message);
       patch = { status: 'failed', failReason: code };
@@ -292,6 +298,44 @@ async function runDiagnostic(row, lang) {
   const { rows } = await pool.query(`SELECT status FROM attempts WHERE id = $1`, [row.id]);
   if (rows[0]?.status === 'pending_ai') setImmediate(() => start(row.id, lang));
 }
+
+/* ------------------------------------------------------------ the limit */
+/* Each student has CFG.limit AI checks (in all, or per calendar month), or the number an admin
+   set for them (users.ai_limit); staff have no limit. A check takes its place in ai_usage when it
+   starts and gives it back if it fails, so only finished checks count. One that finds no place
+   left fails with failReason 'quota': the work is kept and can be checked once the limit is raised. */
+
+const SINCE = CFG.period === 'month' ? "date_trunc('month', now())" : "'-infinity'::timestamptz";
+const limitOf = (role, own) => (role !== 'student' ? null : own ?? CFG.limit);
+const usageView = (role, own, used) => {
+  const limit = limitOf(role, own);
+  return { used, limit, left: limit == null ? null : Math.max(0, limit - used), own: own ?? null, defaultLimit: CFG.limit, period: CFG.period };
+};
+
+/** AI checks used by these students in the current period: { userId: n }. */
+async function usedBy(ids, q = pool) {
+  const { rows } = await q.query(`SELECT user_id, count(*)::int AS n FROM ai_usage WHERE user_id = ANY($1) AND created_at >= ${SINCE} GROUP BY user_id`, [ids]);
+  return Object.fromEntries(rows.map((r) => [r.user_id, r.n]));
+}
+
+/** A student's checks: { used, limit, left, own, defaultLimit, period }; limit and left are null for staff. */
+async function usage(userId, q = pool) {
+  const { rows } = await q.query('SELECT role, ai_limit FROM users WHERE id = $1', [userId]);
+  if (!rows[0]) return null;
+  return usageView(rows[0].role, rows[0].ai_limit, (await usedBy([userId], q))[userId] || 0);
+}
+
+/** Takes a place for one check, or throws code 'quota'; returns the place's id (for release). */
+function reserve(userId, attemptId, part) {
+  return tx(async (c) => {
+    await c.query('SELECT id FROM users WHERE id = $1 FOR UPDATE', [userId]); // one check at a time per student
+    const u = await usage(userId, c);
+    if (u && u.limit != null && u.used >= u.limit) throw Object.assign(new Error('AI limit reached'), { code: 'quota' });
+    const { rows } = await c.query('INSERT INTO ai_usage (user_id, attempt_id, part) VALUES ($1, $2, $3) RETURNING id', [userId, attemptId, part]);
+    return rows[0].id;
+  });
+}
+const release = (slot) => slot && pool.query('DELETE FROM ai_usage WHERE id = $1', [slot]).catch((e) => console.error('[ai] release', slot, e.message));
 
 /* ----------------------------------------------------------------- jobs */
 
@@ -317,8 +361,10 @@ async function run(id, lang) {
   if (!row) return;
   lang = lang || row.result?.uiLang || 'ru';
   if (row.skill === 'diagnostic') return runDiagnostic(row, lang);
+  let slot = null;
   try {
     if (!enabled(row.skill)) throw Object.assign(new Error('disabled'), { code: 'grading_unavailable' });
+    slot = await reserve(row.user_id, id, row.skill);
     const doc = C.doc(row.test_id)?.document || {};
     const g = row.skill === 'writing'
       ? await gradeWriting(doc, row.answers?.text || '', lang)
@@ -328,6 +374,7 @@ async function run(id, lang) {
       [id, 'done', g.band, JSON.stringify({ ...g.result, status: 'done', gradedAt: new Date().toISOString() })]);
     console.log('[ai] graded', row.skill, id, '→', g.band);
   } catch (e) {
+    await release(slot);
     const code = failCode(e);
     console.error('[ai] grading failed', row.skill, id, code, e.message);
     await pool.query('UPDATE attempts SET status = $2, result = result || $3::jsonb WHERE id = $1',
@@ -358,7 +405,7 @@ async function resume() {
   }
   const { rows } = await pool.query(`SELECT id FROM attempts WHERE status = 'pending_ai' ORDER BY id`);
   for (const r of rows) start(r.id);
-  console.log('[ai]', client ? `on (${CFG.model}; speaking from ${CFG.sttKey ? 'server speech-to-text' : "the browser's transcripts"})` : 'off: no ANTHROPIC_API_KEY, Writing and Speaking cannot be graded', rows.length ? `· ${rows.length} queued` : '');
+  console.log('[ai]', client ? `on (${CFG.model}; speaking from ${CFG.sttKey ? 'server speech-to-text' : "the browser's transcripts"}; ${CFG.limit} checks per student${CFG.period === 'month' ? ' a month' : ''})` : 'off: no ANTHROPIC_API_KEY, Writing and Speaking cannot be graded', rows.length ? `· ${rows.length} queued` : '');
 }
 
-module.exports = { enabled, start, regrade, resume, words, isRunning: (id) => running.has(Number(id)) };
+module.exports = { enabled, start, regrade, resume, words, usage, usedBy, usageView, isRunning: (id) => running.has(Number(id)) };

@@ -23,6 +23,7 @@ const express = require('express');
 const { pool, tx } = require('./db');
 const { requireUser, requirePerm, permsOf, ROLES, PLANS, accessOf, accessOfUser, today } = require('./auth');
 const C = require('./content');
+const AI = require('./ai');
 
 const router = express.Router();
 router.use(requireUser);
@@ -125,12 +126,14 @@ staff.get('/users', async (req, res, next) => {
       const sc = await pool.query('SELECT * FROM score_reports WHERE user_id = ANY($1) ORDER BY taken_on DESC, id DESC', [ids]);
       sc.rows.forEach((r) => (scores[r.user_id] = scores[r.user_id] || []).push(scoreRow(r)));
     }
+    const aiUsed = ids.length ? await AI.usedBy(ids) : {};
     res.json({
       ok: true,
       users: rows.map((r) => ({
         id: r.id, name: r.name, phone: r.phone, email: r.email, role: r.role, plans: r.plans,
         createdAt: r.created_at, lastSeenAt: r.last_seen_at, lastLoginAt: r.last_login_at,
         access: accessOfUser(r),
+        ai: AI.usageView(r.role, r.ai_limit, aiUsed[r.id] || 0),
         track: r.track, programme: r.programme,
         startBand: num(r.start_band), currentBand: num(r.current_band), targetBand: num(r.target_band),
         examDate: iso(r.exam_date),
@@ -174,6 +177,18 @@ staff.put('/users/:id/access', requirePerm('access'), async (req, res, next) => 
         WHERE id = $1 RETURNING role, access_type, access_until`, [id, type, until, req.user.id]);
     if (!rows.length) return res.status(404).json({ ok: false, reason: 'not-found' });
     res.json({ ok: true, access: accessOf(rows[0].role, rows[0].access_type, rows[0].access_until) });
+  } catch (e) { next(e); }
+});
+
+/** The number of AI checks for one student; null goes back to the AI_LIMIT default. */
+staff.put('/users/:id/ai-limit', requirePerm('access'), async (req, res, next) => {
+  const id = Number(req.params.id);
+  const limit = req.body?.limit;
+  if (limit !== null && !(Number.isInteger(limit) && limit >= 0 && limit <= 1000)) return res.status(400).json({ ok: false, reason: 'bad-limit' });
+  try {
+    const r = await pool.query('UPDATE users SET ai_limit = $2 WHERE id = $1', [id, limit]);
+    if (!r.rowCount) return res.status(404).json({ ok: false, reason: 'not-found' });
+    res.json({ ok: true, ai: await AI.usage(id) });
   } catch (e) { next(e); }
 });
 

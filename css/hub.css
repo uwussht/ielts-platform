@@ -198,6 +198,10 @@ a.prow:focus-visible { box-shadow: var(--focus); outline: none; }
 .pg-filters { display: flex; align-items: center; gap: 10px 16px; flex-wrap: wrap; }
 .pg-select { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
 .input--sm { height: 36px; padding: 0 10px; width: auto; }
+/* AI checks left (Hub.aiLeft) */
+.ai-left { display: flex; align-items: flex-start; gap: 8px; }
+.ai-left[hidden] { display: none; }
+.ai-left .ic16 { flex: none; margin-top: 1px; }
 .pg-cards { display: grid; grid-template-columns: 1.4fr repeat(4, minmax(0, 1fr)); gap: 12px; }
 .pg-overall { display: grid; gap: 8px; align-content: start; }
 .pg-big { font-family: var(--font-display); font-size: 44px; line-height: 1; color: var(--hero-ink); }

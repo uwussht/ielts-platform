@@ -35,6 +35,9 @@ window.IELTS_CONFIG = {
 
   // How often a Writing or Speaking result page looks again while the AI is grading (ms).
   aiPollMs: 4000,
+  // Page tips (js/core/tips.js): how long a page settles before its first tour, and the hover delay (ms).
+  tipsDelayMs: 700,
+  tipsHoverMs: 350,
   // The language the browser's speech recognition listens for (Speaking: speech rate and the transcript the AI grades).
   speechLang: 'en-GB',
 

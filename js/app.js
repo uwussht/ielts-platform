@@ -84,6 +84,7 @@
       items.map((n) => n.group
         ? h('div', { class: 'nav__group', role: 'presentation' }, t(n.group))
         : h('a', { class: 'nav__item', href: Router.href(n.screen ? { screen: n.screen } : { screen: 'ielts', ieltsTab: n.tab }),
+          'data-tip': I18n.has('tips.nav.' + (n.screen || n.tab)) ? t('tips.nav.' + (n.screen || n.tab)) : null,
           'aria-current': (n.screen ? p.screen === n.screen : tabNow === n.tab) ? 'page' : null, onclick: closeDrawer }, icon(n.icon), h('span', null, t(n.key)))));
     return h('aside', { class: 'sidebar' + (drawerOpen ? ' is-open' : ''), id: 'sidebar', 'aria-label': 'IELTS' },
       h('a', { class: 'brand', href: Router.href({ screen: 'ielts', ieltsTab: 'today' }), onclick: closeDrawer },
@@ -118,8 +119,11 @@
         h('a', { href: Router.href({ screen: 'ielts', ieltsTab: 'today' }) }, IELTS_CONFIG.brand),
         title && h('span', { class: 'crumbs-top__sep', 'aria-hidden': 'true' }, '/'),
         title && h('b', { 'aria-current': 'page' }, title)),
-      h('div', { class: 'topbar__actions', id: 'topbar-actions' }));
+      h('div', { class: 'topbar__actions', id: 'topbar-actions' }, Tips.helpButton(pageKey(p))));
   }
+  // the key a page is known by: 'tab:today' for the hub's tabs, else its screen
+  const pageKey = (p) => (p.screen === 'ielts' ? 'tab:' + (p.ieltsTab || 'today') : p.screen);
+
   // Group label over a hub page's title (ПОДГОТОВКА / МАТЕРИАЛЫ), as the SAT page head.
   function navGroup(tab) {
     let g = null;
@@ -230,7 +234,10 @@
       shellEl = h('div', { class: 'app' }, sidebar(p), mainEl, tabbar(p));
       root.replaceChildren(shellEl);
       await mount(contentEl, scr, p);
+      // the page's tips: the first time it is opened (the «?» in the top bar shows them again)
+      if (key === pageKey(p)) Tips.maybeStart(key);
     }
+    current.leave.push(() => Tips.close(false));
     if (!keepScroll) window.scrollTo(0, 0);
     const title = scr?.title ? scr.title(p) : t(TITLES[p.ieltsTab] || '');
     document.title = (title ? title + ' · ' : '') + IELTS_CONFIG.brand;

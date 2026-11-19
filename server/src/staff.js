@@ -24,6 +24,7 @@ const { pool, tx } = require('./db');
 const { requireUser, requirePerm, permsOf, ROLES, PLANS, accessOf, accessOfUser, today } = require('./auth');
 const C = require('./content');
 const AI = require('./ai');
+const Sync = require('./sync');
 
 const router = express.Router();
 router.use(requireUser);
@@ -247,6 +248,14 @@ staff.get('/users/:id/attempts', async (req, res, next) => {
 });
 
 /* ------------------------------------------------------------- test bank */
+
+/* The sync from the admin bank (sync.js): its state, and a run now (admins). */
+staff.get('/sync', (req, res) => res.json({ ok: true, sync: Sync.status() }));
+staff.post('/sync', requirePerm('roles'), async (req, res) => {
+  // waits for the run, but answers within 25 s either way (the page asks again)
+  await Promise.race([Sync.run(), new Promise((r) => setTimeout(r, 25e3))]);
+  res.json({ ok: true, sync: Sync.status() });
+});
 
 staff.get('/tests', async (req, res, next) => {
   const skill = ['reading', 'listening', 'writing', 'speaking', 'vocab', 'mock'].includes(req.query.skill) ? req.query.skill : 'reading';

@@ -48,6 +48,16 @@ services:
       TRANSCRIBE_URL: ${TRANSCRIBE_URL:-https://api.openai.com/v1/audio/transcriptions}
       TRANSCRIBE_MODEL: ${TRANSCRIBE_MODEL:-whisper-1}
       TRANSCRIBE_LANG: ${TRANSCRIBE_LANG:-en}
+      # The test bank follows the JTS admin panel (server/src/sync.js): an ADMIN account there.
+      # Without it the bank stays as built into the image.
+      SOURCE_URL: ${SOURCE_URL:-https://dev-server.justtostudy.kz}
+      SOURCE_LOGIN: ${SOURCE_LOGIN:-}
+      SOURCE_PASSWORD_B64: ${SOURCE_PASSWORD_B64:-}
+      SYNC_EVERY_MIN: ${SYNC_EVERY_MIN:-10}
+    volumes:
+      # what the sync brings (the site reads it too) and new recordings and pictures
+      - content-live:/app/content-live
+      - media:/app/content/media
     depends_on:
       db:
         condition: service_healthy
@@ -62,6 +72,7 @@ services:
       MEDIA_FALLBACK: ${MEDIA_FALLBACK-https://files.justtostudy.kz}
     volumes:
       - media:/app/content/media
+      - content-live:/app/content-live:ro
     ports:
       # Localhost only: on the server Caddy proxies the domain to this port.
       - "127.0.0.1:${WEB_PORT:-5173}:5173"
@@ -80,3 +91,4 @@ services:
 volumes:
   db-data:
   media:
+  content-live:

@@ -11,6 +11,7 @@ const staff = require('./staff');
 const account = require('./account');
 const student = require('./student');
 const ai = require('./ai');
+const sync = require('./sync');
 
 const PORT = Number(process.env.PORT) || 3000;
 const app = express();
@@ -35,5 +36,7 @@ migrate()
   .then(() => app.listen(PORT, () => {
     console.log('[api] listening on', PORT);
     ai.resume().catch((e) => console.error('[ai] resume failed', e));
+    // keeps the test bank up to date with the admin panel's (sync.js)
+    sync.start();
   }))
   .catch((e) => { console.error('[db] migration failed', e); process.exit(1); });

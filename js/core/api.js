@@ -126,6 +126,8 @@
       decide: (id, status, comment) => sreq('POST', `/staff/scores/${id}`, { status, comment }),
       userAttempts: (id) => sreq('GET', `/staff/users/${id}/attempts`),
       tests: (skill, q = '') => sreq('GET', `/staff/tests?skill=${enc(skill)}&q=${enc(q)}`),
+      sync: () => sreq('GET', '/staff/sync'),
+      syncNow: () => sreq('POST', '/staff/sync'),
       test: (id) => sreq('GET', `/staff/tests/${enc(id)}`),
     },
 

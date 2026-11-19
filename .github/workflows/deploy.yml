@@ -27,6 +27,9 @@ jobs:
       # Repository secrets for AI grading (Settings → Secrets and variables → Actions → Secrets).
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       TRANSCRIBE_API_KEY: ${{ secrets.TRANSCRIBE_API_KEY }}
+      # The JTS admin panel account the test bank syncs from (server/src/sync.js): an ADMIN there.
+      SOURCE_LOGIN: ${{ secrets.SOURCE_LOGIN }}
+      SOURCE_PASSWORD: ${{ secrets.SOURCE_PASSWORD }}
     steps:
       - name: Check configuration
         id: cfg
@@ -50,6 +53,11 @@ jobs:
           fi
           [ -n "$ANTHROPIC_API_KEY" ] || echo "::notice::ANTHROPIC_API_KEY is not set: AI grading stays as the server's .env has it."
           [ -n "$ADMIN_PHONES" ] || echo "::notice::IELTS_ADMIN_PHONES is not set: admins stay as the server's .env has them."
+          login_re='^[A-Za-z0-9@._+() -]*$'
+          if [[ ! "$SOURCE_LOGIN" =~ $login_re ]]; then
+            echo "::error::SOURCE_LOGIN may hold only a phone number or an email."; exit 1
+          fi
+          [ -n "$SOURCE_LOGIN" ] || echo "::notice::SOURCE_LOGIN is not set: the test bank does not sync from the admin panel."
 
       - name: Set up SSH
         if: steps.cfg.outputs.skip != 'true'
@@ -61,9 +69,11 @@ jobs:
       - name: Deploy
         if: steps.cfg.outputs.skip != 'true'
         run: |
+          # the password goes base64-encoded, so no character in it can break the shell or .env
+          SOURCE_PASSWORD_B64=$(printf '%s' "$SOURCE_PASSWORD" | base64 -w0)
           ssh -i ~/.ssh/deploy -p "$PORT" "$USER@$HOST" \
             APP_DIR="$APP_DIR" SHA="$GITHUB_SHA" REPO="https://github.com/${GITHUB_REPOSITORY}.git" \
-            ADMIN_PHONES="'$ADMIN_PHONES'" ADMIN_EMAILS="'$ADMIN_EMAILS'"             ANTHROPIC_API_KEY="'$ANTHROPIC_API_KEY'" TRANSCRIBE_API_KEY="'$TRANSCRIBE_API_KEY'" \
+            ADMIN_PHONES="'$ADMIN_PHONES'" ADMIN_EMAILS="'$ADMIN_EMAILS'"             ANTHROPIC_API_KEY="'$ANTHROPIC_API_KEY'" TRANSCRIBE_API_KEY="'$TRANSCRIBE_API_KEY'"             SOURCE_LOGIN="'$SOURCE_LOGIN'" SOURCE_PASSWORD_B64="'$SOURCE_PASSWORD_B64'" \
             'bash -s' <<'EOF'
           set -euo pipefail
           if [ ! -d "$APP_DIR/.git" ]; then
@@ -90,6 +100,8 @@ jobs:
           set_env ADMIN_EMAILS "$ADMIN_EMAILS"
           set_env ANTHROPIC_API_KEY "$ANTHROPIC_API_KEY"
           set_env TRANSCRIBE_API_KEY "$TRANSCRIBE_API_KEY"
+          set_env SOURCE_LOGIN "$SOURCE_LOGIN"
+          set_env SOURCE_PASSWORD_B64 "$SOURCE_PASSWORD_B64"
           git fetch --prune origin main
           git reset --hard "$SHA"
           docker compose up -d --build --remove-orphans db api web

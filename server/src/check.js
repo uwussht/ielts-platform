@@ -15,11 +15,15 @@ const path = require('path');
 
 function create(contentDir) {
   const safeId = (id) => String(id).replace(/[^A-Za-z0-9._-]/g, '_');
+  // the image's copy plus what the sync brought since (live.js)
+  const live = require('./live').create(contentDir);
   const KEYS = new Map();
+  live.onChange(() => KEYS.clear());
   function keysOf(id) {
+    live.fresh();
     if (!KEYS.has(id)) {
       let k = null;
-      try { k = JSON.parse(fs.readFileSync(path.join(contentDir, 'keys', safeId(id) + '.json'), 'utf8')); } catch {}
+      try { k = JSON.parse(fs.readFileSync(live.file('keys', safeId(id) + '.json'), 'utf8')); } catch {}
       KEYS.set(id, k);
     }
     return KEYS.get(id);
@@ -66,7 +70,7 @@ function create(contentDir) {
     return { itemId, correct, spellingOnly, trap: correct ? null : k.trap || null, reveal };
   }
 
-  return { keysOf, checkItem, isWords, safeId, norm };
+  return { keysOf, checkItem, isWords, safeId, norm, live };
 }
 
 module.exports = { create };

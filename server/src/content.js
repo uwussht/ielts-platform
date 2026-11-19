@@ -15,11 +15,16 @@ const check = require('./check').create(DIR);
 const MEDIA_HOST = 'https://files.justtostudy.kz/';
 const SKILLS = ['reading', 'listening', 'writing', 'speaking', 'vocab'];
 
+// the image's copy plus what the sync brought since (live.js, sync.js)
+const live = check.live;
 let INDEX = null;
 let META = null;
+const DOCS = new Map();
+live.onChange(() => { INDEX = null; META = null; DOCS.clear(); });
 function index() {
+  live.fresh();
   if (!INDEX) {
-    INDEX = JSON.parse(fs.readFileSync(path.join(DIR, 'index.json'), 'utf8'));
+    INDEX = JSON.parse(fs.readFileSync(live.file('index.json'), 'utf8'));
     META = new Map();
     for (const skill of SKILLS) for (const m of INDEX.lists[skill] || []) META.set(m.id, { ...m, skill });
     for (const m of INDEX.mocks || []) META.set(m.id, { ...m, skill: 'mock', kind: 'mock' });
@@ -31,12 +36,12 @@ function meta(id) { index(); return META.get(id) || null; }
 function list(skill) { return index().lists[skill] || []; }
 function mocks() { return index().mocks || []; }
 
-const DOCS = new Map();
 /** { test, document } as the app reads it, media on /media/. */
 function doc(id) {
+  live.fresh();
   if (!DOCS.has(id)) {
     let d = null;
-    try { d = JSON.parse(fs.readFileSync(path.join(DIR, 'tests', check.safeId(id) + '.json'), 'utf8').split(MEDIA_HOST).join('/media/')); } catch {}
+    try { d = JSON.parse(fs.readFileSync(live.file('tests', check.safeId(id) + '.json'), 'utf8').split(MEDIA_HOST).join('/media/')); } catch {}
     if (DOCS.size > 300) DOCS.delete(DOCS.keys().next().value);
     DOCS.set(id, d);
   }
@@ -85,4 +90,4 @@ function grade(testId, answers = {}) {
     items, raw, max, band: byWords.length ? null : bandOf(skill, module, raw, max) };
 }
 
-module.exports = { DIR, check, index, meta, list, mocks, doc, itemsOf, groupsOf, withKeys, grade, bandOf };
+module.exports = { DIR, live, check, index, meta, list, mocks, doc, itemsOf, groupsOf, withKeys, grade, bandOf };

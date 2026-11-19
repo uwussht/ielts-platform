@@ -84,6 +84,34 @@
     },
   };
 
+  /** The sync from the admin panel: when it last ran, what it brought; admins can run it now. */
+  function syncCard() {
+    const box = h('section', { class: 'card stack-sm bank-sync', hidden: true });
+    const when = (iso) => (iso ? new Date(iso).toLocaleString(DOM.locale(), { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—');
+    function paint(s) {
+      if (!s) return;
+      const last = s.last || {};
+      const n = (k) => (last[k] || []).length;
+      const btn = App.can('roles') && s.enabled && h('button', { class: 'btn btn--secondary btn--sm', type: 'button', disabled: s.running, onclick: async () => {
+        btn.disabled = true; btn.textContent = t('bank.sync.running');
+        const r = await S().syncNow();
+        if (!r.ok) { DOM.toast(errText(r.reason)); btn.disabled = false; btn.textContent = t('bank.sync.now'); return; }
+        paint(r.sync); load?.(); // the list as it is now
+      } }, t(s.running ? 'bank.sync.running' : 'bank.sync.now'));
+      box.replaceChildren(...[
+        h('div', { class: 'row row--between' }, h('b', null, t('bank.sync.title')), btn),
+        ...(!s.enabled ? [h('p', { class: 'small muted' }, t('bank.sync.off'))]
+          : [h('p', { class: 'small' }, t('bank.sync.status', { when: when(s.lastOk), every: s.everyMin })),
+            s.lastOk && h('p', { class: 'small muted' }, t('bank.sync.last', { added: n('added'), updated: n('updated'), removed: n('removed'), media: last.media || 0 })),
+            s.lastError && (!s.lastOk || s.lastError.at > s.lastOk) && h('p', { class: 'small error' }, t('bank.sync.error', { when: when(s.lastError.at) }), ' ', h('code', null, s.lastError.message))]),
+      ].filter(Boolean));
+      box.hidden = false;
+    }
+    let load = null;
+    S().sync().then((r) => r.ok && paint(r.sync)).catch(() => {});
+    return Object.assign(box, { onReload: (f) => { load = f; } });
+  }
+
   Screens['staff-tests'] = {
     title: () => t('bank.title'),
     async render(p) {
@@ -126,7 +154,9 @@
             h('td', null, x.hasKey ? icon('check', 'ic16') : h('span', { class: 'muted' }, '—'))))))));
       }
       load();
-      return h('div', { class: 'stack' }, head,
+      const sync = syncCard();
+      sync.onReload(load);
+      return h('div', { class: 'stack' }, head, sync,
         Hub.seg(SKILLS.map((s) => [s, skillName(s)]), skill, (v) => Router.patch({ skill: v })),
         h('div', { class: 'row staff-tools' }, search, count), list);
     },

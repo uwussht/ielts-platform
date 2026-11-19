@@ -68,8 +68,12 @@ function serveStatic(req, res) {
 }
 
 // ---- content API: the same paths and shapes as the backend's /mobile/ielts/* ----
+// ---- answer check from content/keys (built by scripts/build-content.py), shared with the API ----
+const { checkItem, live } = require('./server/src/check').create(CONTENT);
+// content/ in the image plus what the API's sync brought from the admin bank (CONTENT_LIVE)
 let INDEX = null;
-const index = () => (INDEX ||= JSON.parse(fs.readFileSync(path.join(CONTENT, 'index.json'), 'utf8')));
+live.onChange(() => { INDEX = null; });
+const index = () => { live.fresh(); return (INDEX ||= JSON.parse(fs.readFileSync(live.file('index.json'), 'utf8'))); };
 const safeId = (id) => id.replace(/[^A-Za-z0-9._-]/g, '_');
 const localMedia = (txt) => txt.split(MEDIA_HOST + '/').join('/media/');
 
@@ -78,13 +82,12 @@ function sendJson(res, status, body) {
   res.end(typeof body === 'string' ? body : JSON.stringify(body));
 }
 function sendFile(res, dir, id) {
-  fs.readFile(path.join(CONTENT, dir, safeId(id) + '.json'), 'utf8', (err, txt) => {
+  live.fresh();
+  fs.readFile(live.file(dir, safeId(id) + '.json'), 'utf8', (err, txt) => {
     if (err) return sendJson(res, 404, { message: 'Not found' });
     sendJson(res, 200, localMedia(txt));
   });
 }
-// ---- answer check from content/keys (built by scripts/build-content.py), shared with the API ----
-const { checkItem } = require('./server/src/check').create(CONTENT);
 function readBody(req) {
   return new Promise((resolve) => {
     let s = '';
@@ -111,7 +114,8 @@ async function content(req, res, rest) {
     if (seg[0] === 'tests' && seg[2] === 'transcript') return sendFile(res, 'transcripts', seg[1]);
     if (seg[0] === 'tests' && seg[2] === 'model') return sendFile(res, 'models', seg[1]);
     if (seg[0] === 'programmes' && seg.length === 1) {
-      return fs.readFile(path.join(CONTENT, 'programmes.json'), 'utf8', (err, txt) => (err ? sendJson(res, 404, { message: 'Not found' }) : sendJson(res, 200, txt)));
+      live.fresh();
+      return fs.readFile(live.file('programmes.json'), 'utf8', (err, txt) => (err ? sendJson(res, 404, { message: 'Not found' }) : sendJson(res, 200, txt)));
     }
     if (seg[0] === 'mocks' && seg.length === 1) {
       const mod = url.searchParams.get('module');

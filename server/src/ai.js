@@ -20,8 +20,9 @@
      TRANSCRIBE_URL      https://api.openai.com/v1/audio/transcriptions
      TRANSCRIBE_MODEL    whisper-1
      TRANSCRIBE_LANG     en
-     AI_LIMIT            15     AI checks per student (an admin can set another number for one student)
-     AI_LIMIT_PERIOD     total  (total: in all | month: per calendar month)
+     AI_LIMIT            10     AI checks per student (an admin can set another number for one student)
+     AI_LIMIT_PERIOD     day    (day: per day | month: per calendar month | total: in all);
+                                days and months start at midnight in APP_TZ (Asia/Almaty)
 
    Lifecycle of an attempt: 'pending_ai' (queued) -> 'grading' -> 'done', or
    'failed' with result.failReason; the student can ask again (regrade), and
@@ -47,8 +48,9 @@ const CFG = {
   sttModel: env('TRANSCRIBE_MODEL', 'whisper-1'),
   sttLang: env('TRANSCRIBE_LANG', 'en'),
   maxTokens: Number(env('AI_MAX_TOKENS', '')) || 32000,
-  limit: Number.isInteger(+env('AI_LIMIT', '')) && +env('AI_LIMIT', '') >= 0 ? +env('AI_LIMIT', '') : 15,
-  period: env('AI_LIMIT_PERIOD', 'total') === 'month' ? 'month' : 'total',
+  limit: /^\d+$/.test(env('AI_LIMIT', '')) ? Number(env('AI_LIMIT', '')) : 10, // unset or not a whole number: 10
+  period: ['day', 'month', 'total'].includes(env('AI_LIMIT_PERIOD', '')) ? env('AI_LIMIT_PERIOD', '') : 'day',
+  tz: /^[A-Za-z0-9_+\-/]+$/.test(env('APP_TZ', '')) ? env('APP_TZ', '') : 'Asia/Almaty',
 };
 const client = CFG.key ? new Anthropic({ apiKey: CFG.key, maxRetries: 3, timeout: 10 * 60e3 }) : null;
 
@@ -300,12 +302,14 @@ async function runDiagnostic(row, lang) {
 }
 
 /* ------------------------------------------------------------ the limit */
-/* Each student has CFG.limit AI checks (in all, or per calendar month), or the number an admin
+/* Each student has CFG.limit AI checks (a day, a month or in all), or the number an admin
    set for them (users.ai_limit); staff have no limit. A check takes its place in ai_usage when it
    starts and gives it back if it fails, so only finished checks count. One that finds no place
    left fails with failReason 'quota': the work is kept and can be checked once the limit is raised. */
 
-const SINCE = CFG.period === 'month' ? "date_trunc('month', now())" : "'-infinity'::timestamptz";
+// the start of the current day or month on the local clock (CFG.tz)
+const SINCE = CFG.period === 'total' ? "'-infinity'::timestamptz"
+  : `(date_trunc('${CFG.period}', now() AT TIME ZONE '${CFG.tz}') AT TIME ZONE '${CFG.tz}')`;
 const limitOf = (role, own) => (role !== 'student' ? null : own ?? CFG.limit);
 const usageView = (role, own, used) => {
   const limit = limitOf(role, own);
@@ -405,7 +409,7 @@ async function resume() {
   }
   const { rows } = await pool.query(`SELECT id FROM attempts WHERE status = 'pending_ai' ORDER BY id`);
   for (const r of rows) start(r.id);
-  console.log('[ai]', client ? `on (${CFG.model}; speaking from ${CFG.sttKey ? 'server speech-to-text' : "the browser's transcripts"}; ${CFG.limit} checks per student${CFG.period === 'month' ? ' a month' : ''})` : 'off: no ANTHROPIC_API_KEY, Writing and Speaking cannot be graded', rows.length ? `· ${rows.length} queued` : '');
+  console.log('[ai]', client ? `on (${CFG.model}; speaking from ${CFG.sttKey ? 'server speech-to-text' : "the browser's transcripts"}; ${CFG.limit} checks per student${CFG.period === 'total' ? '' : ' a ' + CFG.period})` : 'off: no ANTHROPIC_API_KEY, Writing and Speaking cannot be graded', rows.length ? `· ${rows.length} queued` : '');
 }
 
 module.exports = { enabled, start, regrade, resume, words, usage, usedBy, usageView, isRunning: (id) => running.has(Number(id)) };

@@ -115,8 +115,8 @@
     if (!ai || ai.limit == null) return h('span', { class: 'small muted' }, t('staff.ai.unlimited'));
     const used = h('div', { class: 'small' });
     const input = h('input', { class: 'input input--sm staff-ai', type: 'number', min: '0', max: '1000', step: '1', inputmode: 'numeric',
-      value: ai.own ?? '', placeholder: String(ai.defaultLimit), 'aria-label': t('staff.ai.limit'), title: t('staff.ai.hint', { n: ai.defaultLimit }), disabled: !App.can('access') });
-    const paint = (a) => { used.textContent = t('staff.ai.used', { used: a.used, limit: a.limit }); used.classList.toggle('error', a.left <= 0); };
+      value: ai.own ?? '', placeholder: String(ai.defaultLimit), 'aria-label': t('staff.ai.limit'), title: t('staff.ai.hint.' + ai.period, { n: ai.defaultLimit }), disabled: !App.can('access') });
+    const paint = (a) => { used.textContent = t('staff.ai.used.' + a.period, { used: a.used, limit: a.limit }); used.classList.toggle('error', a.left <= 0); };
     paint(ai);
     input.addEventListener('change', async () => {
       const v = input.value.trim(), n = Number(v);

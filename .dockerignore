@@ -6,4 +6,6 @@
 **/node_modules
 content/media
 content/source
+# ...except the list the sync (server/src/sync.js) compares against
+!content/source/list.json
 *.log
